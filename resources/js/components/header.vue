@@ -65,7 +65,7 @@
                     </li>
                 </ul>
 
-                <!-- <div class="ml-3 relative ">
+                <div class="ml-3 relative " v-if="$page.props.auth.user != null">
                     <Dropdown align="right" width="48">
                         <template #trigger>
                             <span class="inline-flex rounded-md">
@@ -90,7 +90,7 @@
                             </DropdownLink>
                         </template>
                     </Dropdown>
-                </div> -->
+                </div>
             </nav>
         </div>
 
