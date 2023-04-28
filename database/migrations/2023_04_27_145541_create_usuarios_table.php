@@ -22,6 +22,7 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('telefono');
             $table->string('tipo', 255);
+            $table->timestamp('email_verified_at')->nullable();
         });
     }
 

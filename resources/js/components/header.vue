@@ -64,7 +64,8 @@
                         </NavLink>
                     </li>
                 </ul>
-                <!-- <div class="ml-3 relative">
+
+                <!-- <div class="ml-3 relative ">
                     <Dropdown align="right" width="48">
                         <template #trigger>
                             <span class="inline-flex rounded-md">
@@ -119,6 +120,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 
 const showingNavigationDropdown = ref(false);
+
 </script>
 
 

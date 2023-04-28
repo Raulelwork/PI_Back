@@ -25,13 +25,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/inicio', function () {
-    return Inertia::render('Inicio');
-});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Inicio');
-})->middleware(['auth', 'verified'])->name('prueba');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
