@@ -1,3 +1,6 @@
+<script setup>
+    import Layout from '@/components/Layout.vue';
+</script>
 <template>
     <section class="fondolog bg-fixed bg-no-repeat bg-center bg-cover">
         <Layout>

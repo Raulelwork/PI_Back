@@ -1,3 +1,6 @@
+<script setup>
+    import Layout from '@/components/Layout.vue';
+</script>
 <template>
     <Layout>
         <div class="grid place-items-center  border-t-4 border-t-black" id="entradas">

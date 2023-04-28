@@ -1,5 +1,4 @@
 <script>
-
 import { Link } from "@inertiajs/vue3";
 import NavLink from "@/components/NavLink.vue";
 
@@ -13,6 +12,9 @@ export default {
     },
 };
 
+</script>
+<script setup>
+    import Layout from '@/components/Layout.vue';
 </script>
 <template>
     <div id="fondo ">
