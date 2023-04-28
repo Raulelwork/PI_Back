@@ -1,56 +1,20 @@
+<script setup>
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import { Link } from '@inertiajs/vue3';
+</script>
+
 <template>
-    <header>
-        <navegador />
-    </header>
-    <section id="cuerpo">
+    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
         <div>
+            <Link href="/">
+                <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" />
+            </Link>
+        </div>
+
+        <div
+            class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg"
+        >
             <slot />
         </div>
-        <div>
-            <pie />
-        </div>
-    </section>
+    </div>
 </template>
-<script>
-
-
-import navegador from "@/Auth/AuthenticatedLayout.vue";
-import pie from "@/components/footer.vue";
-import { Head } from "@inertiajs/vue3";
-export default {
-    components: { navegador, Head, pie },
-
-    // props: { username: String }
-
-    computed: {
-        username() {
-            return this.$page.props.auth.user.username;
-        }
-    }
-}
-
-</script>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-
-
-* {
-    font-family: 'Righteous';
-}
-
-::-webkit-scrollbar {
-    display: none;
-}
-
-#cuerpo {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.fondolog{
-    background-image: url(../../img/fondlo.jpg);
-    @apply bg-no-repeat bg-center	bg-cover bg-fixed
-}
-</style>

@@ -47,13 +47,6 @@ Route::get('/reservas', function () {
     return Inertia::render('reservas');
 });
 
-Route::get('/login', function () {
-    return Inertia::render('login');
-});
-
-Route::get('/registro', function () {
-    return Inertia::render('registro');
-});
 
 Route::get('/perfil', function () {
     return Inertia::render('perfil');
