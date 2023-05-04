@@ -21,6 +21,7 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
-        "breeze": "^1.2.2"
+        "breeze": "^1.2.2",
+        "swiper": "^9.2.4"
     }
 }

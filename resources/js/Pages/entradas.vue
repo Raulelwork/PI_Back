@@ -1,20 +1,21 @@
-<!-- <script>
+
+<script>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
-
 // Import Swiper styles
 import "swiper/css";
 
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
+    import Layout from '@/components/Layout.vue';
 
 export default {
     components: {
         Swiper,
         SwiperSlide,
+        Layout,
     },
     setup() {
         return {
@@ -22,10 +23,8 @@ export default {
         };
     },
 };
-</script> -->
-<script setup>
-    import Layout from '@/components/Layout.vue';
 </script>
+
 <template>
     <Layout>
         <section>

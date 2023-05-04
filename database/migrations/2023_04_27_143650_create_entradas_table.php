@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_fiesta');
             $table->integer('precio');
+            $table->integer('consumiciones');
             $table->string('tipo',255);
             $table->foreign('id_fiesta')->references('id')->on('fiestas');
 
