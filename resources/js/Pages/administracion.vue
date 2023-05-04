@@ -14,6 +14,8 @@ export default {
 </script>
 <script setup>
 import Layout from '@/components/Layout.vue';
+import DataTable from 'datatables.net-dt';
+let table = new DataTable('#myTable');
 </script>
 <template>
     <section class="fondolog">
@@ -22,8 +24,8 @@ import Layout from '@/components/Layout.vue';
                 <h1 class="text-4xl text-center mt-12 text-white">ADMINISTRACION</h1>
             </div>
             <div class="flex justify-center mt-4 ">
-                <NavLink href="/crearent" class="text-white hover:text-gray-300 m-4">Añadir Empresa</NavLink>
-                <NavLink href="/crearent" class="text-white hover:text-gray-300 m-4">Crear Fiesta</NavLink>
+                <NavLink href="/crearempresa" class="text-white hover:text-gray-300 m-4">Añadir Empresa</NavLink>
+                <NavLink href="/crearfiesta" class="text-white hover:text-gray-300 m-4">Crear Fiesta</NavLink>
                 <NavLink href="/crearent" class="text-white hover:text-gray-300 m-4">Crear Entrada</NavLink>
 
             </div>

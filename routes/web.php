@@ -57,4 +57,12 @@ Route::get('/crearent', function () {
     return Inertia::render('crearentrada');
 });
 
+Route::get('/crearfiesta', function () {
+    return Inertia::render('crearfiesta');
+});
+
+Route::get('/crearempresa', function () {
+    return Inertia::render('crearempresa');
+});
+
 require __DIR__.'/auth.php';
