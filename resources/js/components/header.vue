@@ -47,7 +47,7 @@
                         ">
 
                     <li class=" text-cyan-600 text-lg hover:text-black">
-                        <NavLink href="/entradas" :active="$page.component === 'Entradas'">Entradas</NavLink>
+                        <NavLink href="/fiestas" :active="$page.component === 'fiestas'">Fiestas</NavLink>
                     </li>
                     <li class=" text-cyan-600 text-lg hover:text-black">
                         <NavLink href="/reservas" :active="$page.component === 'Mis reservas'">Mis reservas</NavLink>

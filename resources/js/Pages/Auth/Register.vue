@@ -12,7 +12,7 @@ const form = useForm({
     email: '',
     password: '',
     telefono: '',
-    tipo: '',
+    tipo: 'Cliente',
     password_confirmation: '',
 });
 
@@ -32,10 +32,10 @@ const submit = () => {
 
             <div>
                 <InputLabel for="tipo" value="Tipo de cuenta" />
-                <Select v-model="form.tipo">
+                <select v-model="form.tipo">
                     <option value="cliente">Cliente</option>
                     <option value="empresa">Empresa</option>
-                </Select>
+                </select>
 
             </div>
             <div>
