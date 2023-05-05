@@ -49,7 +49,6 @@
                                 Crear Entrada
                             </button>
                         </div>
-
                     </form>
 
 

@@ -65,4 +65,14 @@ Route::get('/crearempresa', function () {
     return Inertia::render('crearempresa');
 });
 
+Route::post('/crearempresa', function (Request $request) {
+    if ($request->hasFile('foto')) {
+        $foto = $request->file('foto');
+        $ruta = $foto->store('public/fotos');
+        return response()->json(['ruta' => $ruta]);
+    }
+    return response()->json(['error' => 'No se encontró la foto'], 400);
+});
+
+
 require __DIR__.'/auth.php';
