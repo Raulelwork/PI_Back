@@ -4,20 +4,20 @@
             <section class="flex justify-center mt-14">
                 <div class=" max-w-md justify-center text-white text-center mt-8 bg-gray-800/90 rounded-md p-12">
                     <h1 class="text-3xl text-white">Crear Entrada</h1>
-                    <h1>{{ $page.props.auth.user.id }}</h1>
                     <form @submit.prevent="submit">
                         <div>
                             <label for="nombre">Nombre</label>
-                            <input type="text" v-model="nombre">
+                            <input class="text-black" type="text" v-model="nombre">
                         </div>
                         <div>
                             <label for="cif">Cif</label>
-                            <input type="text" v-model="cif">
+                            <input class="text-black" type="text" v-model="cif">
                         </div>
                         <div>
                             <label for="foto">Foto:</label>
                             <input type="file" id="foto" ref="fotoInput" @change="cargarFoto" accept="image/*">
                         </div>
+                        <button @click.prevent="enviar">Enviar</button>
 
 
 
@@ -47,23 +47,20 @@ export default {
             showMenu: false,
             nombree: '',
             cif: '',
-            foto:''
+            foto: null,
         };
     },
     methods: {
-        cargarFoto(event) {
-            const archivo = event.target.files[0];
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                this.foto = e.target.result;
-            };
-            reader.readAsDataURL(archivo);
+        cargarFoto() {
+        this.foto = this.$refs.fotoInput.files[0];
+
         },
         enviar() {
             const formData = new FormData();
             formData.append('foto', this.foto);
             formData.append('nombre', this.nombre);
             formData.append('cif', this.cif);
+            console.log(formData)
             axios.post('/crearempresa', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
