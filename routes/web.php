@@ -68,5 +68,7 @@ Route::get('/crearempresa', function () {
 
 Route::post('/crearempresa',[EmpresaController::class,'store']);
 
+Route::get('/listarempresas',[EmpresaController::class,'getall']);
+
 
 require __DIR__.'/auth.php';

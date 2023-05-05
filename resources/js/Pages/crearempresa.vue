@@ -7,17 +7,30 @@
                     <form @submit.prevent="submit">
                         <div>
                             <label for="nombre">Nombre</label>
-                            <input class="text-black" type="text" v-model="nombre">
+                            <br>
+                            <input  class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200" type="text" v-model="nombre">
                         </div>
                         <div>
                             <label for="cif">Cif</label>
-                            <input class="text-black" type="text" v-model="cif">
+                            <br>
+                            <input class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200" type="text" v-model="cif">
+                        </div>
+                        <div>
+                            <label for="ubicacion">Ubicacion</label>
+                            <br>
+                            <input class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200" type="text" v-model="ubicacion">
+                        </div>
+                        <div>
+                            <label for="lugar">Lugar</label>
+                            <br>
+                            <input class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200" type="text" v-model="lugar">
                         </div>
                         <div>
                             <label for="foto">Foto:</label>
-                            <input type="file" id="foto" ref="fotoInput" @change="cargarFoto" accept="image/*">
+                            <br>
+                            <input type="file"  class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="foto" ref="fotoInput" @change="cargarFoto" accept="image/*">
                         </div>
-                        <button @click.prevent="enviar">Enviar</button>
+                        <button  class="decoration-0 m-4 px-3 py-2 border-2 rounded-md bg-pink-900/80 hover:bg-pink-800/80 text-white hover:scale-110 duration-200" @click.prevent="enviar">Enviar</button>
 
 
 
@@ -47,6 +60,8 @@ export default {
             showMenu: false,
             nombree: '',
             cif: '',
+            ubicacion: '',
+            lugar: '',
             foto: null,
         };
     },
@@ -60,6 +75,8 @@ export default {
             formData.append('foto', this.foto);
             formData.append('nombre', this.nombre);
             formData.append('cif', this.cif);
+            formData.append('ubicacion', this.ubicacion);
+            formData.append('lugar', this.lugar);
             console.log(formData)
             axios.post('/crearempresa', formData, {
                 headers: {

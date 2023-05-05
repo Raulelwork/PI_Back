@@ -1,5 +1,5 @@
 <script setup>
-    import Layout from '@/components/Layout.vue';
+import Layout from '@/components/Layout.vue';
 </script>
 <template>
     <section class="fondolog">
@@ -30,7 +30,7 @@
                             <label for="musica">Musica</label>
                             <br>
                             <select name="musica" id="musica" class="p-1 text-gray-300 rounded-md bg-gray-700">
-                                <option value="">Variada</option>
+                                <option value="variada">Variada</option>
                                 <option value="pop">Pop</option>
                                 <option value="regateon">Regateon</option>
                                 <option value="rock">Rock</option>
@@ -39,9 +39,19 @@
                             </select>
                         </div>
                         <div class="mt-8">
-                            <label for="precio">Precio</label>
+                            <label for="musica">Entradas</label>
                             <br>
-                            <input type="number" id="precio" class="text-gray-300 rounded-md bg-gray-700 text-center">
+                            <select class="p-1 text-gray-300 rounded-md bg-gray-700">
+                                <option v-for="e in empresas" :key="e.id"> {{ e.nombre }} </option>
+
+                            </select>
+                        </div>
+                        <div>
+                            <label for="foto">Foto:</label>
+                            <br>
+                            <input type="file"
+                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                id="foto" ref="fotoInput" @change="cargarFoto" accept="image/*">
                         </div>
                         <div class="mt-6">
                             <button
@@ -49,10 +59,7 @@
                                 Crear Entrada
                             </button>
                         </div>
-
                     </form>
-
-
                 </div>
             </section>
         </Layout>
@@ -68,6 +75,7 @@ input::placeholder {
 <script>
 import { Link } from "@inertiajs/vue3";
 import NavLink from "../components/NavLink.vue";
+import axios from 'axios';
 
 
 export default {
@@ -75,7 +83,19 @@ export default {
     data() {
         return {
             showMenu: false,
+            empresas: [],
         };
     },
+    mounted() {
+        axios.get('/listarempresas')
+            .then(response => {
+                this.empresas = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 };
+
+
 </script>

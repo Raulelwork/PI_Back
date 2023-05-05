@@ -17,15 +17,11 @@ return new class extends Migration
             $table->unsignedBigInteger('id_tematica');
             $table->unsignedBigInteger('id_musica');
             $table->unsignedBigInteger('id_empresa');
-            $table->string('ubicacion',255);
-            $table->string('lugar',255);
             $table->dateTime('fecha');
             $table->string('foto',255);
-
             $table->foreign('id_tematica')->references('id')->on('tematicas');
             $table->foreign('id_musica')->references('id')->on('musicas');
             $table->foreign('id_empresa')->references('id')->on('empresas');
-
         });
     }
 
