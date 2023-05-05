@@ -37,13 +37,12 @@ class EmpresaController extends Controller
         $empresa->nombre = $request->input('nombre');
         $empresa->cif = $request->input('cif');
         // $empresa->foto = 'aaaa';
-        $empresa ->foto = $request->file('foto')->getClientOriginalName().'--'.$empresa->nombre.'--'.str(now());
+        $empresa->foto = $empresa->nombre.'--'.str(now()->tz('Europe/Madrid')->format("Y-m-d-H-i-s")).'--'.$request->file('foto')->getClientOriginalName();
         $empresa->save();
         if ($request->hasFile('foto')) {
             $foto = $request->file('foto');
-            // $ruta = $foto->move(public_path('imagenes'), $empresa->foto);
-            Storage::putFileAs('storage/empresas', $foto, $empresa->foto);
-            // Storage::disk('empresas')->put('', $foto);
+            Storage::build(storage_path("/empresas"))->put($empresa->foto, file_get_contents($foto));
+
             return 'Guardado';
         }
         return response()->json(['error' => 'No se encontró la foto'], 400);    }
