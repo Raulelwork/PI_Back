@@ -17,12 +17,17 @@ import Layout from '@/components/Layout.vue';
                         <div class="mt-8">
                             <label for="Selecciona la fiesta:">Selecciona la fiesta:</label>
                             <br>
-                            <select class="p-1 text-gray-300 rounded-md bg-gray-700" v-model="id_empresa">
-                                <optgroup v-for="e in empresas" :key="e.id" label="primera-opcion">
+
+                            <select name="lenguajes" class="text-black" id="lang">
+                                <optgroup v-for="e in empresas" :key="e.id" :label="e.nombre">
+                                        <option v-for="f in fiestas.filter(f=>f.id_empresa==e.id)" class="text-black" :key="f.id">  {{ formatdate(f.fecha) }}</option>
+
                                 </optgroup>
-
-
+                                
                             </select>
+
+
+
                         </div>
 
                         <div class="mt-6">
@@ -78,5 +83,16 @@ export default {
                 console.log(error);
             });
     },
+    methods:{
+        formatdataae(data){
+            return data.toISOString().slice(0, 10);
+        },
+        formatdate(dateTimeString) {
+            return dateTimeString.slice(0, 10);
+        }
+    }
 };
+
+
+
 </script>
