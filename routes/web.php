@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\FiestaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -69,6 +70,10 @@ Route::get('/crearempresa', function () {
 Route::post('/crearempresa',[EmpresaController::class,'store']);
 
 Route::get('/listarempresas',[EmpresaController::class,'getall']);
+
+Route::get('/listarfiestas',[FiestaController::class,'getall']);
+
+Route::post('/crearfiestas',[FiestaController::class,'store']);
 
 
 require __DIR__.'/auth.php';
