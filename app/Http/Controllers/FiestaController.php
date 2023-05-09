@@ -82,12 +82,6 @@ class FiestaController extends Controller
     }
     public function getall()
     {
-        // $empresas = new Empresa;
-        // $empresas =  Empresa::where('id_usuario', Auth::id())->get();
-        // $fiestas = [];
-        // foreach($empresas as $e){
-        //     array_push($fiestas,Fiesta::where('id_empresa',$e->id)->get());
-        // }
         return Fiesta::all();
     }
 }

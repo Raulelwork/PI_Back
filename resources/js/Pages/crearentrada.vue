@@ -45,12 +45,10 @@ import Layout from '@/components/Layout.vue';
                                 <option value="especial">Especial</option>
                             </select>
                         </div>
-                        <div class="mt-6">
-                            <button
-                                class="m-4 p-2 border-2 rounded-md bg-pink-900/80 text-white hover:bg-pink-800/80 hover:scale-110 duration-200">
-                                Crear Entrada
-                            </button>
-                        </div>
+                        <button
+                            class="decoration-0 m-4 px-3 py-2 border-2 rounded-md bg-pink-900/80 hover:bg-pink-800/80 text-white hover:scale-110 duration-200"
+                            @click.prevent="enviar">Crear Entrada</button>
+
                     </form>
                 </div>
             </section>
@@ -117,7 +115,24 @@ export default {
                     return this.musica[this.m].nombre
                 }
             }
-        }
+        },
+        enviar() {
+            const formData = new FormData();
+            formData.append('fiesta_elegida', this.fiesta_elegida);
+            formData.append('precio', this.precio);
+            formData.append('consumiciones', this.consumiciones);
+            formData.append('tipo', this.tipo_entrada);
+            console.log(formData)
+            axios.post('/crearentradas', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(response => {
+                console.log(response);
+            }).catch(error => {
+                console.log(error);
+            });
+        },
     }
 };
 
