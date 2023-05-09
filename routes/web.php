@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\FiestaController;
+use App\Http\Controllers\MusicaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -74,6 +75,8 @@ Route::get('/listarempresas',[EmpresaController::class,'getall']);
 Route::get('/listarfiestas',[FiestaController::class,'getall']);
 
 Route::post('/crearfiestas',[FiestaController::class,'store']);
+
+Route::get('/listarmusica',[MusicaController::class,'mostrar']);
 
 
 require __DIR__.'/auth.php';

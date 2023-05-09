@@ -32,8 +32,9 @@ class FiestaController extends Controller
      */
     public function store(Request $request)
     {
+        $fechahora = substr( $request->input('fecha'),0,10).' 23:00:00';
         $fiesta = new Fiesta;
-        $fiesta->fecha = $request->input('fecha');
+        $fiesta->fecha = $fechahora;
         $fiesta->id_tematica = 2;
         $fiesta->id_musica = 2;
         $fiesta->id_empresa = $request->input('id_empresa');
