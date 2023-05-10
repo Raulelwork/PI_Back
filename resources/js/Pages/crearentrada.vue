@@ -38,11 +38,11 @@ import Layout from '@/components/Layout.vue';
                             <label for="musica">Tipo</label>
                             <br>
                             <select name="musica" v-model="tipo_entrada" id="musica" class="p-1 text-gray-300 rounded-md bg-gray-700">
-                                <option value="basica">Basica</option>
-                                <option value="normal">Normal</option>
-                                <option value="premium">Premium</option>
-                                <option value="reservado">Reservado</option>
-                                <option value="especial">Especial</option>
+                                <option value="Basica">Basica</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Premium">Premium</option>
+                                <option value="Reservado">Reservado</option>
+                                <option value="Especial">Especial</option>
                             </select>
                         </div>
                         <button

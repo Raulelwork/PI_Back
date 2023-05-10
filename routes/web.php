@@ -49,9 +49,7 @@ Route::get('/reservas', function () {
 });
 
 
-Route::get('/perfil', function () {
-    return Inertia::render('perfil');
-});
+Route::get('/perfil/{id}',[EmpresaController::class,'cargaperfil']);
 
 Route::get('/administracion', function () {
     return Inertia::render('administracion');
@@ -71,7 +69,9 @@ Route::get('/crearempresa', function () {
 
 Route::post('/crearempresa',[EmpresaController::class,'store']);
 
-Route::get('/listarempresas',[EmpresaController::class,'getall']);
+Route::get('/listarempresas',[EmpresaController::class,'getallid']);
+
+Route::get('/listarallempresas',[EmpresaController::class,'getall']);
 
 Route::get('/listarfiestas',[FiestaController::class,'getall']);
 

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use App\Models\Empresa;
+use App\Models\Fiesta;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class EmpresaController extends Controller
 {
@@ -82,8 +84,22 @@ class EmpresaController extends Controller
         //
     }
 
-    public function getall()
+    public function getallid()
     {
         return Empresa::where('id_usuario', Auth::id())->get();
     }
+    
+    public function getall()
+    {
+        return Empresa::all();
+    }
+    public function cargaperfil($id){
+
+        return Inertia::render('perfil', [
+            'empresa' => Empresa::where('id',$id)->first(),
+            'fiestas'=>Fiesta::where('fecha','>',now()->format('Y-m-d'))->where('id_empresa','=',$id)->with(['Empresa','Musica','Tematica','Entrada'])->get()
+
+        ]);
+    }
+
 }

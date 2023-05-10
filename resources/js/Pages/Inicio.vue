@@ -27,7 +27,7 @@ export default {
                 </div>
 
                 <div>
-                    <NavLink href="/fiestas" :active="$page.component === 'Entradas'"
+                    <NavLink href="/fiestas"
                         class="no-underline hover:no-underline">
                         <button
                             class="mt-10 mb-20 border-2 rounded-md bg-pink-900/80 hover:bg-pink-800/80 text-white hover:scale-110 duration-200 p-1"

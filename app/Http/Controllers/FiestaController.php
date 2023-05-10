@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use App\Models\Fiesta;
-use App\Models\Empresa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +37,7 @@ class FiestaController extends Controller
         $fiesta->id_tematica = 2;
         $fiesta->id_musica = 2;
         $fiesta->id_empresa = $request->input('id_empresa');
-        $fiesta->foto = '--' . str(now()->tz('Europe/Madrid')->format("Y-m-d-H-i-s")) . '--' . $request->file('foto')->getClientOriginalName();
+        $fiesta->foto = $request->input('id_empresa') .'--' . str(now()->tz('Europe/Madrid')->format("Y-m-d-H-i-s")) . '--' . $request->file('foto')->getClientOriginalName();
         $fiesta->save();
         if ($request->hasFile('foto')) {
             $foto = $request->file('foto');
@@ -82,6 +81,14 @@ class FiestaController extends Controller
     }
     public function getall()
     {
-        return Fiesta::all();
+        $fiestas =  Fiesta::where('fecha','>',now()->format('Y-m-d'))->with(['Empresa','Musica','Tematica','Entrada'])->get();
+        // PortalPlaylistElement::with('AirtimePlaylists.AirtimePlaylistContents')->get();
+        // foreach ($fiestas as $f){
+        //     $f->empresa;
+        //     $f->musica;
+        //     $f->tematica;
+        // }
+        return $fiestas;
     }
+
 }

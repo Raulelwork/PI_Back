@@ -4,10 +4,11 @@
 <template>
     <section class="fondolog bg-fixed bg-no-repeat bg-center bg-cover">
         <Layout>
-            <h1 class="text-7xl text-center text-white mt-14 mb-12">Mae West</h1>
+            <h1 class="text-7xl text-center text-white mt-14 mb-12">{{ empresa.nombre }}</h1>
             <div class="flex flex-wrap justify-center items-center text-center text-white">
                 <div class="max-w-xl bg-gray-800/80 rounded-md m-12">
-                    <img src="../../img/locales/MaeWest.jpg" class="max-w-xs p-12" alt="foto perfil">
+                    <img v-bind:src="'http://[::1]:5173/storage/empresas/'+ empresa.foto" class="max-w-sm max-h-sm object-cover p-12" alt="foto perfil">
+
                 </div>
                 <div class="w-96 h-80 bg-gray-800/90 rounded-md ">
                     <h2 class="text-2xl mt-2 mb-3">Comentarios</h2>
@@ -23,12 +24,7 @@
                         <p> También puede cambiar la apariencia del texto, mover rápidamente frases y párrafos, así como
                             copiar y pegar texto en el documento y entre documentos. </p>
                     </div>
-                    <!-- <form action="">
-                        <div class="flex flex-col border-t-2 border-white/50">
-                            <input type="text" class="bg-gray-50/0 text-center pt-4" placeholder="Escribir aqui... ">
-                            <button class="my-3">Enviar</button>
-                        </div>
-                    </form> -->
+
                     <form action="">
                         <div class="flex flex-col border-t-2 border-white/50">
                             <input type="text" class="bg-gray-50/0 text-center pt-4" placeholder="Escribir aqui... ">
@@ -291,5 +287,9 @@ export default {
             showMenu: false,
         };
     },
+    props: {
+    empresa: Object,
+    fiestas : []
+  },
 };
 </script>
