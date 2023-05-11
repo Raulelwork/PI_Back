@@ -7,7 +7,7 @@ import Layout from '@/components/Layout.vue';
             <section class="flex justify-center mt-14">
                 <div class=" max-w-md justify-center text-white text-center mt-8 bg-gray-800/90 rounded-md p-12">
                     <h1 class="text-3xl text-white">Crear Fiestas</h1>
-                    <form action="">
+                    <form >
                         <div class="mt-8">
                             <label for="fecha">Fecha</label>
                             <br>

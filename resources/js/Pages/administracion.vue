@@ -14,8 +14,6 @@ export default {
 </script>
 <script setup>
 import Layout from '@/components/Layout.vue';
-import DataTable from 'datatables.net-dt';
-let table = new DataTable('#myTable');
 </script>
 <template>
     <section class="fondolog">
