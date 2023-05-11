@@ -34,8 +34,9 @@ class FiestaController extends Controller
         $fechahora = substr( $request->input('fecha'),0,10).' 23:00:00';
         $fiesta = new Fiesta;
         $fiesta->fecha = $fechahora;
-        $fiesta->id_tematica = 2;
-        $fiesta->id_musica = 2;
+        // dd($request->input('id_musica'));
+        $fiesta->id_tematica = $request->input('id_tematica');
+        $fiesta->id_musica = $request->input('id_musica');
         $fiesta->id_empresa = $request->input('id_empresa');
         $fiesta->foto = $request->input('id_empresa') .'--' . str(now()->tz('Europe/Madrid')->format("Y-m-d-H-i-s")) . '--' . $request->file('foto')->getClientOriginalName();
         $fiesta->save();

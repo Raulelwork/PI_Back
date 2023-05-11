@@ -17,14 +17,9 @@ import Layout from '@/components/Layout.vue';
                         <div class="mt-8">
                             <label for="tematica">Tematica</label>
                             <br>
-                            <select name="tematica" v-model="id_tematica" class="p-1 text-gray-300 rounded-md bg-gray-700"
+                            <select name="tematica" v-model="id_tematica"  class="p-1 text-gray-300 rounded-md bg-gray-700"
                                 id="tematica">
-                                <option value="no">No</option>
-                                <option value="carnaval">Carnaval</option>
-                                <option value="80s">80s</option>
-                                <option value="halloween">Halloween</option>
-                                <option value="hawai">Hawai</option>
-                                <option value="navidad">Navidad</option>
+                                <option v-for="tematica in tematicas" :key="tematica.id" :value="tematica.id">{{tematica.nombre}}</option>
                             </select>
                         </div>
                         <div class="mt-8">
@@ -32,12 +27,8 @@ import Layout from '@/components/Layout.vue';
                             <br>
                             <select name="musica" v-model="id_musica" id="musica"
                                 class="p-1 text-gray-300 rounded-md bg-gray-700">
-                                <option value="variada">Variada</option>
-                                <option value="pop">Pop</option>
-                                <option value="regateon">Regateon</option>
-                                <option value="rock">Rock</option>
-                                <option value="salsa">Salsa</option>
-                                <option value="tecno">Tecno</option>
+                                <option v-for="musica in musicas" :key="musica.id" :value="musica.id">{{musica.nombre}}</option>
+
                             </select>
                         </div>
                         <div class="mt-8">
@@ -83,6 +74,8 @@ export default {
         return {
             showMenu: false,
             empresas: [],
+            tematicas: [],
+            musicas: [],
             fecha: '',
             id_tematica: '',
             id_musica: '',
@@ -95,6 +88,20 @@ export default {
         axios.get('/listarempresas')
             .then(response => {
                 this.empresas = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        axios.get('/listarmusica')
+            .then(response => {
+                this.musicas = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        axios.get('/listartematica')
+            .then(response => {
+                this.tematicas = response.data;
             })
             .catch(error => {
                 console.log(error);

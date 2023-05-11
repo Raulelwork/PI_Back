@@ -5,6 +5,7 @@ use App\Http\Controllers\EntradaController;
 use App\Http\Controllers\FiestaController;
 use App\Http\Controllers\MusicaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TematicaController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -80,6 +81,8 @@ Route::post('/crearfiestas',[FiestaController::class,'store']);
 Route::post('/crearentradas',[EntradaController::class,'store']);
 
 Route::get('/listarmusica',[MusicaController::class,'mostrar']);
+
+Route::get('/listartematica',[TematicaController::class,'mostrar']);
 
 
 require __DIR__.'/auth.php';

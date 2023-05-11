@@ -17,6 +17,7 @@
 import navegador from "./header.vue";
 import pie from "./footer.vue";
 import { Head } from "@inertiajs/vue3";
+
 export default {
     components: { navegador, Head, pie },
 

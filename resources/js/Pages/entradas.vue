@@ -2,14 +2,14 @@
 <script>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Autoplay, Pagination, Navigation } from "swiper";
 // Import Swiper styles
 import "swiper/css";
 import { Link } from "@inertiajs/vue3";
 import NavLink from "@/components/NavLink.vue";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 // import required modules
-import { Autoplay, Pagination, Navigation } from "swiper";
 import Layout from '@/components/Layout.vue';
 
 export default {
@@ -24,6 +24,7 @@ export default {
         return {
             showMenu: false,
             fiestas: [],
+            empresas: [],
         };
     }, methods: {
         formatdate(dateTimeString) {
@@ -51,6 +52,13 @@ export default {
                 console.log(error);
             });
 
+        axios.get('/listarallempresas')
+            .then(response => {
+                this.empresas = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
     },
 
 };
@@ -73,89 +81,43 @@ export default {
                 }" :pagination="{
     clickable: true,
 }" :navigation="false" :modules="modules" class="mySwiper">
-                    <swiper-slide class="mySwiper">
-                        <nav-link href="perfil/2">
+                    <swiper-slide class="mySwiper" v-for="empresa in empresas" :key="empresa.id">
+                        <nav-link :href="'perfil/'+empresa.id">
                             <div
                                 class="bg-black/60 max-w-sm rounded-sm overflow-hidden shadow-lg  m-7 p-4 transition duration-500 hover:scale-110">
-                                <h2 class="text-white text-4xl m-3 text-center">Mae West</h2>
-
-                                <img src="../../img/locales/MaeWest.jpg" class="mb-4 object-cover h-72 w-72 " alt="">
+                                <h2 class="text-white text-4xl m-3 text-center">{{ empresa.nombre }}</h2>
+                                <img v-bind:src="'http://[::1]:5173/storage/empresas/' + empresa.foto" class="mb-4 object-cover h-72 w-72 " alt="">
                             </div>
                         </nav-link>
-
                     </swiper-slide>
-
-                    <swiper-slide class="mySwiper">
-                        <a href="">
-                            <div
-                                class="bg-black/60 max-w-sm rounded-sm overflow-hidden shadow-lg  m-7 p-4 transition duration-500 hover:scale-110">
-                                <h2 class="text-white text-4xl m-3 text-center">G10</h2>
-                                <img src="../../img/locales/g10.jpg" class="mb-4 w-72" alt="">
-                            </div>
-
-                        </a>
-
-                    </swiper-slide>
-
-
-                    <swiper-slide class="mySwiper">
-                        <a href="">
-                            <div
-                                class="bg-black/60 max-w-sm rounded-sm overflow-hidden shadow-lg  m-7 p-4 transition duration-500 hover:scale-110">
-                                <h2 class="text-white text-4xl m-3 text-center">Basaba</h2>
-                                <img src="../../img/locales/basabaa.jpg" class="mb-4 object-cover h-72 w-72 " alt="">
-                            </div>
-                        </a>
-
-                    </swiper-slide>
-
-
-                    <swiper-slide class="mySwiper">
-                        <a href="">
-                            <div
-                                class="bg-black/60 max-w-sm rounded-sm overflow-hidden shadow-lg  m-7 p-4 transition duration-500 hover:scale-110">
-                                <h2 class="text-white text-4xl m-3 text-center">Parabarap</h2>
-                                <img src="../../img/locales/parabara.jpg" class="mb-4 w-72 h-72" alt="">
-                            </div>
-                        </a>
-
-                    </swiper-slide>
-
                 </swiper>
 
             </div>
             <div class=" min-[450px]:grid place-items-center  border-t-4 border-t-black" id="entradas">
-                <!-- <h1 class="text-white bg-black/90 p-3 rounded-sm text-3xl mt-4 text-center  max-[450px]:text-xl">ENTRADAS RECIENTES
-                </h1> -->
-
                 <div class=" flex flex-wrap justify-center min-[1400px]:grid min-[1400px]:grid-cols-4">
                     <div class="bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg  m-7  max-[450px]:scale-75"
                         v-for="fiesta in fiestas" :key="fiesta.id">
-                        <!-- <h2 class="text-black text-4xl m-3 text-center">Mae West</h2> -->
                         <img v-bind:src="'http://[::1]:5173/storage/fiestas/' + fiesta.foto"
                             class="mb-4 w-full h-80 object-cover" alt="">
-
-
                         <h1 class="text-lg text-center">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha) }}</h1>
                         <div class=" grid grid-cols-2 text-left text-black justify-items-center items-center">
                             <p>Musica:</p>
                             <p>{{ fiesta.musica.nombre }}</p>
-
                             <p>Tematica:</p>
                             <p>{{ fiesta.tematica.nombre }}</p>
-
                         </div>
                         <div class="m-2">
                             <h1 class="text-base text-center">ENTRADAS</h1>
+                            <p class="flex justify-center items-center mt-3" v-if="!$page.props.auth.user">Se requiere  <nav-link class="hover:text-blue-500 no-underline hover:scale-105 text-pink-600 mx-3" href="/login">Inicia Sesion</nav-link> para reservar</p>
                             <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
                                 delay: 4500,
                                 disableOnInteraction: false,
                             }" :pagination="false" :navigation="false" :modules="modules"
-                                v-if="fiesta.entrada.length > 0">
+                                v-else-if="fiesta.entrada.length > 0">
 
                                 <swiper-slide v-for="e in fiesta.entrada"
                                     class="mySwiper max-[400px]:flex max-[400px]:flex-col" :key="e.id">
-                                    <p class="m-2 text-blue-500 text-lg">{{ e.tipo }}</p>
+                                    <p class="m-2 text-pink-600 text-lg">{{ e.tipo }}</p>
                                     <p class="m-2"> {{ e.consumiciones }} Copas </p>
                                     <p class="m-2"> {{ e.precio }}€ </p>
                                     <div
@@ -176,15 +138,6 @@ export default {
 </template>
 
 <style>
-/* body {
-    background-image: url(../../img/fondo.jpg);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    justify-content: space-between;
-} */
-
 #discotecas {
     background-image: url(../../img/fondodisc2.jpg);
     background-repeat: no-repeat;
@@ -234,4 +187,5 @@ export default {
 
 .tar-button {
     @apply float-right px-3 m-2 border-2 rounded-xl border-blue-600 hover: bg-blue-700/80 duration-300 hover:scale-105 text-white bg-blue-500/80 text-lg
-} */</style>
+} */
+</style>

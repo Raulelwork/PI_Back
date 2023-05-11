@@ -63,4 +63,8 @@ class TematicaController extends Controller
     {
         //
     }
+    public function mostrar()
+    {
+        return Tematica::all();
+    }
 }
