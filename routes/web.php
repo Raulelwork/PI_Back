@@ -93,4 +93,6 @@ Route::get('/listartematica',[TematicaController::class,'mostrar']);
 
 Route::post('/hacerreserva',[ReservaController::class,'store']);
 
+Route::post('/eliminarentrada',[EntradaController::class,'eliminar']);
+
 require __DIR__.'/auth.php';

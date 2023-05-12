@@ -74,4 +74,10 @@ class EntradaController extends Controller
     {
         return Entrada::all();
     }
+    public function eliminar(Request $request){
+        $id=$request->input('id_entrada');
+        $entrada = Entrada::find($id);
+        $entrada->eliminado = 1;
+        $entrada->save();
+    }
 }
