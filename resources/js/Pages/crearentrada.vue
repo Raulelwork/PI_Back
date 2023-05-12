@@ -16,7 +16,7 @@ import Layout from '@/components/Layout.vue';
                                 <optgroup v-for="e in empresas" :key="e.id" class="text-pink-300" :label="e.nombre">
                                     <option
                                         v-for="f in fiestas.filter(f => f.id_empresa == e.id && new Date(f.fecha) >= new Date())"
-                                        class="text-white m-40" :key="f.id" v-bind:value="f.id"> {{ formatdate(f.fecha) }} -> {{namemusica(f.id_musica)}}</option>
+                                        class="text-white m-40" :key="f.id" v-bind:value="f.id"> {{ formatdate(f.fecha) }} -> {{f.musica.nombre}}</option>
                                 </optgroup>
                             </select>
                         </div>
@@ -35,9 +35,9 @@ import Layout from '@/components/Layout.vue';
                                 type="number" v-model="consumiciones">
                         </div>
                         <div class="mt-8">
-                            <label for="musica">Tipo</label>
+                            <label for="tipo_entrada">Tipo</label>
                             <br>
-                            <select name="musica" v-model="tipo_entrada" id="musica" class="p-1 text-gray-300 rounded-md bg-gray-700">
+                            <select name="tipo_entrada" v-model="tipo_entrada" id="tipo_entrada" class="p-1 text-gray-300 rounded-md bg-gray-700">
                                 <option value="Basica">Basica</option>
                                 <option value="Normal">Normal</option>
                                 <option value="Premium">Premium</option>
@@ -74,8 +74,6 @@ export default {
             showMenu: false,
             fiestas: [],
             empresas: [],
-            musica: [],
-            m: '',
             fiesta_elegida:'',
             precio:'',
             consumiciones:'',
@@ -97,24 +95,11 @@ export default {
             .catch(error => {
                 console.log(error);
             });
-        axios.get('/listarmusica')
-            .then(response => {
-                this.musica = response.data;
-            })
-            .catch(error => {
-                console.log(error);
-            });
+
     },
     methods: {
         formatdate(dateTimeString) {
             return dateTimeString.slice(0, 10);
-        },
-        namemusica(id_musica){
-            for(this.m=0;this.m < this.musica.length ; this.m++){
-                if (this.musica[this.m].id == id_musica){
-                    return this.musica[this.m].nombre
-                }
-            }
         },
         enviar() {
             const formData = new FormData();

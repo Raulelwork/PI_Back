@@ -69,6 +69,10 @@ Route::get('/crearempresa', function () {
     return Inertia::render('crearempresa');
 });
 
+Route::get('/editaent', function () {
+    return Inertia::render('editarentrada');
+});
+
 Route::post('/crearempresa',[EmpresaController::class,'store']);
 
 Route::get('/listarempresas',[EmpresaController::class,'getallid']);
@@ -80,6 +84,8 @@ Route::get('/listarfiestas',[FiestaController::class,'getall']);
 Route::post('/crearfiestas',[FiestaController::class,'store']);
 
 Route::post('/crearentradas',[EntradaController::class,'store']);
+
+Route::get('/listarentradas',[EntradaController::class,'mostrar']);
 
 Route::get('/listarmusica',[MusicaController::class,'mostrar']);
 

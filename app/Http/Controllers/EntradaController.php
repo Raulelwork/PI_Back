@@ -34,6 +34,7 @@ class EntradaController extends Controller
         $Entrada->precio = $request->input('precio');
         $Entrada->consumiciones = $request->input('consumiciones');
         $Entrada->tipo = $request->input('tipo');
+        $Entrada->eliminado = false;
        
         $Entrada->save();
     }
@@ -68,5 +69,9 @@ class EntradaController extends Controller
     public function destroy(Entrada $entrada)
     {
         //
+    }
+    public function mostrar()
+    {
+        return Entrada::all();
     }
 }

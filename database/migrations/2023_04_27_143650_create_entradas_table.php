@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_fiesta');
             $table->integer('precio');
             $table->integer('consumiciones');
+            $table->boolean('eliminado');
             $table->string('tipo',255);
             $table->foreign('id_fiesta')->references('id')->on('fiestas');
 
