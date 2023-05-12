@@ -82,7 +82,7 @@ class FiestaController extends Controller
     }
     public function getall()
     {
-        $fiestas =  Fiesta::where('fecha','>',now()->format('Y-m-d'))->with(['Empresa','Musica','Tematica','Entrada'])->get();
+        $fiestas =  Fiesta::where('fecha','>',now()->format('Y-m-d'))->where('eliminado','==',0)->with(['Empresa','Musica','Tematica','Entrada'])->get();
         // PortalPlaylistElement::with('AirtimePlaylists.AirtimePlaylistContents')->get();
         // foreach ($fiestas as $f){
         //     $f->empresa;
@@ -90,6 +90,13 @@ class FiestaController extends Controller
         //     $f->tematica;
         // }
         return $fiestas;
+    }
+
+    public function eliminar(Request $request){
+        $id=$request->input('id_fiesta');
+        $fiesta = Fiesta::find($id);
+        $fiesta->eliminado = 1;
+        $fiesta->save();
     }
 
 }

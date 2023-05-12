@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_empresa');
             $table->dateTime('fecha');
             $table->string('foto',255);
+            $table->boolean('eliminado');
             $table->foreign('id_tematica')->references('id')->on('tematicas');
             $table->foreign('id_musica')->references('id')->on('musicas');
             $table->foreign('id_empresa')->references('id')->on('empresas');

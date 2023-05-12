@@ -43,9 +43,18 @@ export default {
 
     },
     methods: {
-        eliminar(id_entrada) {
-            axios.post('/eliminarentrada',{
-                'id_entrada':id_entrada
+        eliminarentrada(id_entrada) {
+            axios.post('/eliminarentrada', {
+                'id_entrada': id_entrada
+            }).then(response => {
+                console.log(response);
+            }).catch(error => {
+                console.log(error);
+            });
+        },
+        eliminarfiesta(id_fiesta) {
+            axios.post('/eliminarfiesta', {
+                'id_fiesta': id_fiesta
             }).then(response => {
                 console.log(response);
             }).catch(error => {
@@ -90,12 +99,14 @@ export default {
                         <tr class="">
                             <td class="td"><span class="span">Nombre</span> {{ f.empresa.nombre }}</td>
                             <td class="td"><span class="span">Fecha</span>{{ f.fecha }}</td>
-                            <td class="td"><span class="span">Eliminar</span><img src="../../img/icon/borrar.png"
-                                    class="w-6 m-auto" alt=""></td>
+                            <button @click="eliminarfiesta(f.id)">
+                                <img src="../../img/icon/borrar.png" class="w-6 m-auto" alt="">
+                            </button>
                         </tr>
                     </tbody>
 
                 </table>
+
             </div>
             <div class=" my-12 flex justify-center items-center flex-col  text-center text-black min-[600px]:mx-48">
                 <h1>Entradas</h1>
@@ -112,12 +123,11 @@ export default {
                     </thead>
                     <tbody class="block md:table-row-group"
                         v-for="f in fiestas.filter(f => f.empresa.id_usuario == $page.props.auth.user.id)" :key="f.id">
-                        <tr class="" v-for="entr in f.entrada.filter(entr=> entr.eliminado == 0)" :key="entr.id">
+                        <tr class="" v-for="entr in f.entrada.filter(entr => entr.eliminado == 0)" :key="entr.id">
                             <td class="td"><span class="span">Email</span> {{ entr.tipo }}</td>
                             <td class="td"><span class="span">Fecha</span>{{ f.fecha }}</td>
                             <td class="td"><span class="span">Empresa</span>{{ f.empresa.nombre }}</td>
-                            <p>{{ entr.id }}</p>
-                            <button @click="eliminar(entr.id)">
+                            <button @click="eliminarentrada(entr.id)">
                                 <img src="../../img/icon/borrar.png" class="w-6 m-auto" alt="">
                             </button>
                         </tr>

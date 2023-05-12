@@ -69,9 +69,11 @@ Route::get('/crearempresa', function () {
     return Inertia::render('crearempresa');
 });
 
-Route::get('/editaent', function () {
-    return Inertia::render('editarentrada');
+Route::get('/editafiesta', function () {
+    return Inertia::render('editarfiesta');
 });
+
+
 
 Route::post('/crearempresa',[EmpresaController::class,'store']);
 
@@ -94,5 +96,9 @@ Route::get('/listartematica',[TematicaController::class,'mostrar']);
 Route::post('/hacerreserva',[ReservaController::class,'store']);
 
 Route::post('/eliminarentrada',[EntradaController::class,'eliminar']);
+
+Route::post('/eliminarfiesta',[FiestaController::class,'eliminar']);
+
+Route::post('/actualizafiesta',[FiestaController::class,'actualizar']);
 
 require __DIR__.'/auth.php';
