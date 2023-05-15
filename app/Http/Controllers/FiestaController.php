@@ -81,7 +81,9 @@ class FiestaController extends Controller
     {
         //
     }
+
     public function getall()
+    // Se devuelven todas las fiestas filtradas por el usuario(empresa) sirve para la vista administracion.
     {
         $fiestas =  Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '==', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get();
         // PortalPlaylistElement::with('AirtimePlaylists.AirtimePlaylistContents')->get();
@@ -90,8 +92,18 @@ class FiestaController extends Controller
         //     $f->musica;
         //     $f->tematica;
         // }
-        return $fiestas;
+        $fiestasfiltradas  = [];
+        foreach ($fiestas as $f){
+            if($f->empresa->id_usuario == Auth::id()){
+                // if ($f->entrada->eliminado === 0){
+                    array_push($fiestasfiltradas,$f);
+                // }
+            }
+        }
+        return $fiestasfiltradas;
     }
+
+  
 
     public function eliminar(Request $request)
     {
