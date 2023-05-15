@@ -93,6 +93,8 @@ Route::get('/listarmusica',[MusicaController::class,'mostrar']);
 
 Route::get('/listartematica',[TematicaController::class,'mostrar']);
 
+Route::get('/listarreservas',[ReservaController::class,'mostrar']);
+
 Route::post('/hacerreserva',[ReservaController::class,'store']);
 
 Route::post('/eliminarentrada',[EntradaController::class,'eliminar']);

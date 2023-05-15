@@ -31,14 +31,15 @@ class FiestaController extends Controller
      */
     public function store(Request $request)
     {
-        $fechahora = substr( $request->input('fecha'),0,10).' 23:00:00';
+        $fechahora = substr($request->input('fecha'), 0, 10) . ' 23:00:00';
         $fiesta = new Fiesta;
         $fiesta->fecha = $fechahora;
         // dd($request->input('id_musica'));
         $fiesta->id_tematica = $request->input('id_tematica');
         $fiesta->id_musica = $request->input('id_musica');
         $fiesta->id_empresa = $request->input('id_empresa');
-        $fiesta->foto = $request->input('id_empresa') .'--' . str(now()->tz('Europe/Madrid')->format("Y-m-d-H-i-s")) . '--' . $request->file('foto')->getClientOriginalName();
+        $fiesta->eliminado = 0;
+        $fiesta->foto = $request->input('id_empresa') . '--' . str(now()->tz('Europe/Madrid')->format("Y-m-d-H-i-s")) . '--' . $request->file('foto')->getClientOriginalName();
         $fiesta->save();
         if ($request->hasFile('foto')) {
             $foto = $request->file('foto');
@@ -82,7 +83,7 @@ class FiestaController extends Controller
     }
     public function getall()
     {
-        $fiestas =  Fiesta::where('fecha','>',now()->format('Y-m-d'))->where('eliminado','==',0)->with(['Empresa','Musica','Tematica','Entrada'])->get();
+        $fiestas =  Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '==', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get();
         // PortalPlaylistElement::with('AirtimePlaylists.AirtimePlaylistContents')->get();
         // foreach ($fiestas as $f){
         //     $f->empresa;
@@ -92,11 +93,35 @@ class FiestaController extends Controller
         return $fiestas;
     }
 
-    public function eliminar(Request $request){
-        $id=$request->input('id_fiesta');
+    public function eliminar(Request $request)
+    {
+        $id = $request->input('id_fiesta');
         $fiesta = Fiesta::find($id);
         $fiesta->eliminado = 1;
         $fiesta->save();
     }
 
+    public function actualizar(Request $request)
+    {
+
+        $id = $request->input('fiesta_elegida');
+        $fiesta = Fiesta::find($id);
+        $fiesta->id_tematica = $request->input('id_tematica');
+        $fiesta->id_musica = $request->input('id_musica');
+        $nombrefoto = $request->input('id_empresa') . '--'.str(now()->tz('Europe/Madrid')->format("Y-m-d-H-i-s")) . '--' . $request->file('foto')->getClientOriginalName();
+        if($fiesta->foto){
+            $ruta = storage_path('/fiestas/'.$fiesta->foto);
+            if (file_exists($ruta)){
+                unlink($ruta);
+            } 
+        }
+        $fiesta->foto = $nombrefoto;
+        $fiesta->save();
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            Storage::build(storage_path("/fiestas/"))->put($fiesta->foto, file_get_contents($foto));
+
+            return 'Guardado';
+        }
+    }
 }

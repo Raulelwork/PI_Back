@@ -51,8 +51,13 @@ export default {
 }
 
 .fondolog{
+    @apply bg-no-repeat bg-center	bg-cover bg-fixed;
     background-image: url(../../img/fondlo.jpg);
-    @apply bg-no-repeat bg-center	bg-cover bg-fixed
+}
+
+.fondoreserva{
+    @apply bg-no-repeat bg-center	bg-cover bg-fixed;
+    background-image: url(../../img/back5.jpg);
 }
 
 .trImpar {
@@ -73,6 +78,14 @@ export default {
 
 .th {
     @apply bg-gray-600 p-2 max-[750px]:hidden md:border md:border-gray-500 text-white md:table-cell;
+}
+
+.pagelink {
+    @apply block bg-white border-2 border-white cursor-pointer;
+}
+
+.pageitem {
+    @apply block bg-white border-2 border-white cursor-pointer m-1;
 }
 
 </style>

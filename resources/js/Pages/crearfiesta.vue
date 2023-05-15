@@ -1,6 +1,3 @@
-<script setup>
-import Layout from '@/components/Layout.vue';
-</script>
 <template>
     <section class="fondolog">
         <Layout>
@@ -66,10 +63,11 @@ input::placeholder {
 import { Link } from "@inertiajs/vue3";
 import NavLink from "../components/NavLink.vue";
 import axios from 'axios';
+import Layout from '@/components/Layout.vue';
 
 
 export default {
-    components: { NavLink, Link },
+    components: { NavLink, Link, Layout },
     data() {
         return {
             showMenu: false,

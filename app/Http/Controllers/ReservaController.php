@@ -69,4 +69,9 @@ class ReservaController extends Controller
     {
         //
     }
+    
+    public function mostrar(){
+        return Reserva::where('id_cliente','=',Auth::id())->get();
+
+    }
 }

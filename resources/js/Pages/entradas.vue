@@ -186,8 +186,6 @@ export default {
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
-
-
 }
 
 .mySwiper {

@@ -1,5 +1,5 @@
 <template>
-    <section class="fondolog bg-fixed bg-no-repeat bg-center bg-cover">
+    <section class="fondolog">
         <Layout>
             <h1 class="text-7xl text-center text-white mt-14 mb-12">{{ empresa.nombre }}</h1>
             <div class="flex flex-wrap justify-center items-center text-center text-white">
@@ -31,10 +31,11 @@
                     </form>
                 </div>
             </div>
-            <div class=" min-[450px]:grid place-items-center  border-t-4 border-t-black" id="entradas">
+            <h1 class="text-white text-3xl text-center">ENTRADAS</h1>
+            <div class=" min-[450px]:grid place-items-center ">
                 <div class=" flex flex-wrap justify-center min-[1400px]:grid min-[1400px]:grid-cols-4">
                     <div class="bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg  m-7  max-[450px]:scale-75"
-                        v-for="fiesta in fiestas" :key="fiesta.id">
+                        v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
                         <img v-bind:src="'http://[::1]:5173/storage/fiestas/' + fiesta.foto"
                             class="mb-4 w-full h-80 object-cover" alt="">
                         <h1 class="text-lg text-center">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha) }}</h1>
@@ -46,26 +47,31 @@
                         </div>
                         <div class="m-2">
                             <h1 class="text-base text-center">ENTRADAS</h1>
+                            <p class="flex justify-center items-center mt-3" v-if="!$page.props.auth.user">Se requiere
+                                <nav-link class="hover:text-blue-500 no-underline hover:scale-105 text-pink-600 mx-3"
+                                    href="/login">Inicia Sesion</nav-link> para reservar
+                            </p>
                             <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
                                 delay: 4500,
                                 disableOnInteraction: false,
                             }" :pagination="false" :navigation="false" :modules="modules"
-                                v-if="fiesta.entrada.length > 0">
+                                v-else-if="fiesta.entrada.length > 0">
 
                                 <swiper-slide v-for="e in fiesta.entrada"
                                     class="mySwiper max-[400px]:flex max-[400px]:flex-col" :key="e.id">
-                                    <p class="m-2 text-blue-500 text-lg">{{ e.tipo }}</p>
+                                    <p :class="color[Math.floor(Math.random() * 6)] + ' text-lg'">{{ e.tipo }}</p>
                                     <p class="m-2"> {{ e.consumiciones }} Copas </p>
                                     <p class="m-2"> {{ e.precio }}€ </p>
                                     <div
                                         class="float-right px-3 m-2 border-2 rounded-xl border-blue-600 hover:bg-blue-700/80 duration-300 hover:scale-105 text-white bg-blue-500/80 text-lg justify-end ">
-                                        <button>Reservar</button>
+                                        <button @click="enviar" :data-id="e.id">Reservar</button>
                                     </div>
                                 </swiper-slide>
                             </swiper>
                             <p class="flex justify-center items-center text-gray-600 mt-3" v-else>No hay entradas
                                 disponibles</P>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -98,6 +104,8 @@ export default {
     data() {
         return {
             showMenu: false,
+            color: ['text-blue-600', 'text-pink-600', 'text-red-600', 'text-green-600', 'text-purple-600', 'text-violet-600'],
+
         };
     },
 
@@ -116,6 +124,11 @@ export default {
             const anio = dateObj.getFullYear().toString();
             return `${dia}-${mes}-${anio}`;
         },
+        orderByDate: function (fiestas) {
+            return fiestas.sort(function (a, b) {
+                return new Date(a.fecha) - new Date(b.fecha);
+            });
+        }
     },
     setup() {
         return {

@@ -6,7 +6,7 @@ import Layout from '@/components/Layout.vue';
         <Layout>
             <section class="flex justify-center mt-14">
                 <div class=" max-w-md justify-center text-white text-center mt-8 bg-gray-800/90 rounded-md p-12">
-                    <h1 class="text-3xl text-white">Crear Entrada</h1>
+                    <h1 class="text-3xl text-white">Editar Fiesta</h1>
                     <form action="">
                         <div class="mt-8">
                             <label for="Selecciona la fiesta:">Fiesta:</label>
@@ -17,7 +17,7 @@ import Layout from '@/components/Layout.vue';
                                 <optgroup v-for="e in empresas" :key="e.id" class="text-pink-300" :label="e.nombre">
                                     <option
                                         v-for="f in fiestas.filter(f => f.id_empresa == e.id && new Date(f.fecha) >= new Date())"
-                                        class="text-white m-40" :key="f.id" v-bind:value="f.id"> {{ formatdate(f.fecha) }}
+                                        class="text-white m-40" :key="f.id" v-bind:value="f"> {{ formatdate(f.fecha) }}
                                         -> {{ f.musica.nombre }}</option>
                                 </optgroup>
                             </select>
@@ -41,7 +41,13 @@ import Layout from '@/components/Layout.vue';
 
                             </select>
                         </div>
-
+                        <div>
+                            <label for="foto">Foto:</label>
+                            <br>
+                            <input type="file"
+                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                id="foto" ref="fotoInput" @change="cargarFoto" accept="image/*">
+                        </div>
 
                         <button
                             class="decoration-0 m-4 px-3 py-2 border-2 rounded-md bg-pink-900/80 hover:bg-pink-800/80 text-white hover:scale-110 duration-200"
@@ -75,6 +81,10 @@ export default {
             tematicas: [],
             musicas: [],
             fiesta_elegida: '',
+            id_musica: '',
+            id_tematica: '',
+            id_empresa: '',
+            foto: null,
 
         };
     },
@@ -110,17 +120,22 @@ export default {
 
     },
     methods: {
+        cargarFoto() {
+            this.foto = this.$refs.fotoInput.files[0];
+
+        },
         formatdate(dateTimeString) {
             return dateTimeString.slice(0, 10);
         },
         enviar() {
             const formData = new FormData();
-            formData.append('fiesta_elegida', this.fiesta_elegida);
-            formData.append('precio', this.precio);
-            formData.append('consumiciones', this.consumiciones);
-            formData.append('tipo', this.tipo_entrada);
+            formData.append('fiesta_elegida', this.fiesta_elegida.id);
+            formData.append('id_empresa', this.fiesta_elegida.id_empresa);
+            formData.append('id_musica', this.id_musica);
+            formData.append('id_tematica', this.id_tematica);
+            formData.append('foto', this.foto);
             console.log(formData)
-            axios.post('/crearentradas', formData, {
+            axios.post('/actualizafiesta', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
