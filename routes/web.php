@@ -83,6 +83,10 @@ Route::get('/listarallempresas',[EmpresaController::class,'getall']);
 
 Route::get('/listarfiestas',[FiestaController::class,'getall']);
 
+Route::get('/listarfiestasad',[FiestaController::class,'getforadministracion']);
+
+Route::get('/listarentradasad',[FiestaController::class,'entradasadministracion']);
+
 Route::post('/crearfiestas',[FiestaController::class,'store']);
 
 Route::post('/crearentradas',[EntradaController::class,'store']);
@@ -95,6 +99,8 @@ Route::get('/listartematica',[TematicaController::class,'mostrar']);
 
 Route::get('/listarreservas',[ReservaController::class,'mostrar']);
 
+Route::get('/reservasdeusuario',[FiestaController::class,'reservasUsuario']);
+
 Route::post('/hacerreserva',[ReservaController::class,'store']);
 
 Route::post('/eliminarentrada',[EntradaController::class,'eliminar']);
@@ -102,5 +108,12 @@ Route::post('/eliminarentrada',[EntradaController::class,'eliminar']);
 Route::post('/eliminarfiesta',[FiestaController::class,'eliminar']);
 
 Route::post('/actualizafiesta',[FiestaController::class,'actualizar']);
+
+// Eliminar:
+Route::post('/eliminarreserva',[ReservaController::class,'eliminar']);
+
+
+
+
 
 require __DIR__.'/auth.php';

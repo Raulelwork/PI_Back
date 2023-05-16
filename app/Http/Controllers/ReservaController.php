@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reserva;
+use App\Models\Entrada;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -31,11 +32,18 @@ class ReservaController extends Controller
      */
     public function store(Request $request)
     {
-        $reserva = new Reserva;
-        $reserva->fecha_reserva =  Carbon::now()->format('Y-m-d H:i:s');
-        $reserva->id_entrada = $request->input('id_entrada');
-        $reserva->id_cliente = Auth::id();
-        $reserva->save();
+        $id_cliente = Auth::id();
+        $reservaExistente = Reserva::where('id_cliente', $id_cliente)
+            ->where('id_entrada', $request->input('id_entrada'))
+            ->exists();
+
+        if (!$reservaExistente) {
+            $reserva = new Reserva;
+            $reserva->fecha_reserva =  Carbon::now()->format('Y-m-d H:i:s');
+            $reserva->id_entrada = $request->input('id_entrada');
+            $reserva->id_cliente = $id_cliente;
+            $reserva->save();
+        }
     }
 
     /**
@@ -69,9 +77,17 @@ class ReservaController extends Controller
     {
         //
     }
-    
-    public function mostrar(){
-        return Reserva::where('id_cliente','=',Auth::id())->get();
 
+    public function mostrar()
+    {
+        return Reserva::where('id_cliente', '=', Auth::id())->get();
+    }
+
+    public function eliminar( Request $request){
+        $id_usuario = Auth::id();
+        $id_entrada = $request->input('id_entrada');
+        Reserva::where('id_cliente', $id_usuario)
+       ->where('id_entrada', $id_entrada)
+       ->delete();
     }
 }

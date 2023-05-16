@@ -20,6 +20,8 @@
                         <tr
                             class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
                             <td class="th">Nombre Empresa</td>
+                            <td class="th">Musica</td>
+                            <td class="th">Tematica</td>
                             <td class="th">Fecha</td>
                             <td class="th">Eliminar</td>
 
@@ -27,8 +29,10 @@
                     </thead>
                     <tbody class="block md:table-row-group"
                         v-for="(f, index) in paginatedFiestas" :key="f.id">
-                        <tr class="">
+                        <tr class="max-[765px]:border-2 border-black ">
                             <td class="td"><span class="span">Nombre</span> {{ f.empresa.nombre }}</td>
+                            <td class="td"><span class="span">Musica</span> {{ f.musica.nombre }}</td>
+                            <td class="td"><span class="span">Tematica</span> {{ f.tematica.nombre }}</td>
                             <td class="td"><span class="span">Fecha</span>{{ f.fecha }}</td>
                             <td class="td">
                                 <button @click="eliminarfiesta(f.id)">
@@ -63,6 +67,8 @@
                         <tr
                             class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
                             <td class="th">Tipo</td>
+                            <td class="th">Precio</td>
+                            <td class="th">Consumicion</td>
                             <td class="th">Fecha Fiesta</td>
                             <td class="th">Empresa</td>
                             <td class="th">Eliminar</td>
@@ -70,14 +76,17 @@
                         </tr>
                     </thead>
                     <tbody class="block md:table-row-group"
-                        v-for="(f, index) in paginatedEntradas"
-                        :key="f.id">
-                        <tr class="" v-for="entr in f.entrada" :key="entr.id">
-                            <td class="td"><span class="span">Email</span> {{ entr.tipo }}</td>
-                            <td class="td"><span class="span">Fecha</span>{{ f.fecha }}</td>
-                            <td class="td"><span class="span">Empresa</span>{{ f.empresa.nombre }}</td>
+                        v-for="(entrada, index) in paginatedEntradas"
+                        :key="entrada.id">
+                        <tr class="max-[765px]:border-2 border-black ">
+                            <td class="td"><span class="span">Tipo</span> {{ entrada.tipo }}</td>
+                            <td class="td"><span class="span">Precio</span> {{ entrada.precio }}</td>
+                            <td class="td"><span class="span">Copas</span> {{ entrada.consumiciones }}</td>
+                            <td class="td"><span class="span">Fecha</span> {{ entrada.fecha }}</td>
+                            <td class="td"><span class="span">Empresa</span> {{ entrada.empresa }}</td>
+
                             <td class="td">
-                                <button @click="eliminarentrada(entr.id)">
+                                <button @click="eliminarentrada(entrada.id)">
                                     <img src="../../img/icon/borrar.png" class="w-6 m-auto" alt="">
                                 </button>
                             </td>
@@ -120,7 +129,6 @@ export default {
         return {
             showMenu: false,
             fiestas: [],
-            empresas: [],
             entradas: [],
             fiesta_elegida: '',
             entrada_elegida: '',
@@ -131,30 +139,7 @@ export default {
 
         };
     },
-    mounted() {
-        // axios.get('/listarfiestas')
-        //     .then(response => {
-        //         this.fiestas = response.data;
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     });
-        axios.get('/listarempresas')
-            .then(response => {
-                this.empresas = response.data;
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        axios.get('/listarentradas')
-            .then(response => {
-                this.entradas = response.data;
-            })
-            .catch(error => {
-                console.log(error);
-            });
-
-    },
+ 
     methods: {
 
         previousPage() {
@@ -221,20 +206,21 @@ export default {
         paginatedEntradas() {
             const startIndex = (this.currentPageEntrada - 1) * this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;
-            return this.fiestas.slice(startIndex, endIndex);
+            return this.entradas.slice(startIndex, endIndex);
         },
         //total de pagina 
         totalPages() {
             return Math.ceil(this.fiestas.length / this.itemsPerPage);
         },
         totalPagesEntrada() {
-            return Math.ceil(this.fiestas.length / this.itemsPerPage);
+            return Math.ceil(this.entradas.length / this.itemsPerPage);
         },
     },
     setup() {
         const fiestas = ref([])
+        const entradas= ref([])
         watchEffect(() => {
-            axios.get('/listarfiestas')
+            axios.get('/listarfiestasad')
                 .then(response => {
                     fiestas.value = response.data;
                     console.log(fiestas);
@@ -242,7 +228,7 @@ export default {
                 .catch(error => {
                     console.log('Error al obtener los datos:', error);
                 });
-            axios.get('/listarfiestas')
+            axios.get('/listarentradasad')
                 .then(response => {
                     entradas.value = response.data;
                     console.log(entradas);
@@ -252,7 +238,8 @@ export default {
                 });
         });
         return {
-            fiestas
+            fiestas,
+            entradas
         }
     }
 };

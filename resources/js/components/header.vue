@@ -53,10 +53,6 @@
                         <NavLink href="/reservas" :active="$page.component === 'Mis reservas'">Mis reservas</NavLink>
                     </li>
 
-
-                    <li class=" text-cyan-600 text-lg hover:text-black">
-                        <NavLink href="/perfil" :active="$page.component === 'Perfil'">Perfil</NavLink>
-                    </li>
                     <li class=" text-cyan-600 text-lg hover:text-black">
                         <NavLink href="/administracion" :active="$page.component === 'Administracion'">Administracion
                         </NavLink>

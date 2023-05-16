@@ -8,7 +8,7 @@ import { Link } from '@inertiajs/vue3';
         <div>
             <Link href="/">
                 <!-- <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" /> -->
-                <!-- <img src="../../img/logopng.png" class="w-40" alt=""> -->
+                <img src="../../img/logopng.png" class="w-40" alt="">
             </Link>
         </div>
 

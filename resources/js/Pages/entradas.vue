@@ -3,9 +3,6 @@
 <template>
     <Layout>
         <section>
-
-
-
             <div class="border-t-4 border-t-pink-600" id="discotecas">
                 <h1
                     class="text-white p-3 rounded-sm text-5xl mt-4 max-[1120px]:mx-0 max-[1120px]:text-4xl  text-center mx-96">

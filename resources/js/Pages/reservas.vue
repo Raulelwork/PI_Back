@@ -2,63 +2,36 @@
 <template>
     <section class="fondoreserva">
         <Layout>
-            <div>
-                <div>
-                    <div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div v-for="reserva in reservas.filter(reserva => reserva.id_entrada == entrada.id)" :key="reserva.id">
-
-            </div>
-
-
-            <div class=" min-[450px]:grid place-items-center  border-t-4 border-t-black" id="entradas">
+            <div class=" min-[450px]:grid place-items-center border-t-black">
                 <div class=" flex flex-wrap justify-center min-[1400px]:grid min-[1400px]:grid-cols-4">
-                    <div class="bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg  m-7  max-[450px]:scale-75"
-                        v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
-                        <div v-for="entrada in fiesta.entrada" :key="entrada.id">
-
-
-                        </div>
+                    <div v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id"
+                        class="bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg  m-7  max-[450px]:scale-75">
                         <img v-bind:src="'http://[::1]:5173/storage/fiestas/' + fiesta.foto"
                             class="mb-4 w-full h-80 object-cover" alt="">
-                        <h1 class="text-lg text-center">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha) }}</h1>
+                        <h1 class="text-lg text-center">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha)
+                        }}</h1>
                         <div class=" grid grid-cols-2 text-left text-black justify-items-center items-center">
+                            <p>Tipo Entrada:</p>
+                            <p>{{ fiesta.entradaactual.tipo }}</p>
+                            <p>Consumiciones:</p>
+                            <p>{{ fiesta.entradaactual.consumiciones }}</p>
+                            <p>Precio:</p>
+                            <p>{{ fiesta.entradaactual.precio }}€</p>
                             <p>Musica:</p>
                             <p>{{ fiesta.musica.nombre }}</p>
                             <p>Tematica:</p>
                             <p>{{ fiesta.tematica.nombre }}</p>
                         </div>
-                        <div class="m-2">
-                            <h1 class="text-base text-center">ENTRADAS</h1>
-                            <p class="flex justify-center items-center mt-3" v-if="!$page.props.auth.user">Se requiere
-                                <nav-link class="hover:text-blue-500 no-underline hover:scale-105 text-pink-600 mx-3"
-                                    href="/login">Inicia Sesion</nav-link> para reservar
-                            </p>
-                            <div
-                                class="flex justify-center m-2 border-2 rounded-xl border-black hover:bg-red-700 duration-100 hover:text-xl text-white bg-blue-500/80 text-lg ml-14  mr-14">
-                                <button>
-                                    <div class="relative">
-                                        <p class="text-white hover:text-white">Reservado</p>
-                                        <p
-                                            class="absolute inset-0 text-white hover:bg-red-700 opacity-0 hover:opacity-100 transition duration-100">
-                                            Cancelar
-                                        </p>
-                                    </div>
-                                </button>
-                            </div>
 
+                        <div class=" m-2 text-center">
+                            <button @click="eliminar(fiesta.entradaactual.id)" class="  rounded-md transition duration-300 hover:scale-125">
+                                <img src="../../img/icon/no.png" class="w-12  m-4" alt="Cancelar">
+                            </button>
                         </div>
 
                     </div>
                 </div>
             </div>
-
-
-
         </Layout>
     </section>
 </template>
@@ -76,27 +49,30 @@ export default {
         return {
             showMenu: false,
             fiestas: [],
-            reservas: [],
         };
     },
     mounted() {
-        axios.get('/listarfiestas')
+
+        axios.get('/reservasdeusuario')
             .then(response => {
                 this.fiestas = response.data;
             })
             .catch(error => {
                 console.log(error);
             });
-
-        axios.get('/listarreservas')
-            .then(response => {
-                this.reservas = response.data;
-            })
-            .catch(error => {
-                console.log(error);
-            });
     },
     methods: {
+        eliminar(id_ent) {
+            const id = id_ent;
+            axios.post('/eliminarreserva',{
+                'id_entrada':id
+            }).then(response => {
+                console.log(response);
+                window.location.replace("/reservas")
+            }).catch(error => {
+                console.log(error);
+            });
+        },
         formatdate(dateTimeString) {
             return this.formatearFecha(dateTimeString.slice(0, 10));
         },
@@ -115,3 +91,28 @@ export default {
     }
 }
 </script>
+
+<style>
+.image-button {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.image-button img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.img-reserva {
+  z-index: 1;
+}
+
+.img-x {
+  z-index: 2;
+}
+</style>

@@ -69,23 +69,23 @@ export default {
 }
 
 .td {
-    @apply p-2 m-auto md:border md:border-gray-500 block md:table-cell;
+    @apply m-4  md:border md:border-gray-500 block md:table-cell text-left min-[765px]:text-center;
 }
 
 .span {
-    @apply inline-block w-1/4 md:hidden font-bold;
+    @apply inline-block w-1/4 md:hidden text-pink-600 font-bold mr-4;
 }
 
 .th {
-    @apply bg-gray-600 p-2 max-[750px]:hidden md:border md:border-gray-500 text-white md:table-cell;
+    @apply bg-gray-600 p-2 text-white max-[750px]:hidden md:border md:border-gray-500 text-left block md:table-cell;
 }
 
 .pagelink {
-    @apply block bg-white border-2 border-white cursor-pointer;
+    @apply block m-1 cursor-pointer;
 }
 
 .pageitem {
-    @apply block bg-white border-2 border-white cursor-pointer m-1;
+    @apply block m-1 cursor-pointer;
 }
 
 </style>
