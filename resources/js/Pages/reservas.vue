@@ -68,7 +68,7 @@ export default {
                 'id_entrada':id
             }).then(response => {
                 console.log(response);
-                window.location.replace("/reservas")
+                // window.location.replace("/reservas")
             }).catch(error => {
                 console.log(error);
             });
