@@ -29,7 +29,10 @@ class TematicaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tematica = new Tematica;
+        $tematica->nombre = $request->input('nombre');
+        $tematica->save();
+        
     }
 
     /**

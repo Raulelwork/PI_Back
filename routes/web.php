@@ -7,6 +7,7 @@ use App\Http\Controllers\MusicaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TematicaController;
 use App\Http\Controllers\ReservaController;
+use App\Http\Controllers\ComentarioController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,6 +43,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+
+// Cargar vistas
+
 Route::get('/fiestas', function () {
     return Inertia::render('entradas');
 });
@@ -73,9 +78,35 @@ Route::get('/editafiesta', function () {
     return Inertia::render('editarfiesta');
 });
 
+Route::get('/addcontent', function () {
+    return Inertia::render('addcontent');
+});
 
+Route::get('/locales', function () {
+    return Inertia::render('locales');
+});
+
+
+
+// Crear/insertar datos
 
 Route::post('/crearempresa',[EmpresaController::class,'store']);
+
+Route::post('/crearfiestas',[FiestaController::class,'store']);
+
+Route::post('/crearentradas',[EntradaController::class,'store']);
+
+Route::post('/hacerreserva',[ReservaController::class,'store']);
+
+Route::post('/insertacomentario',[ComentarioController::class,'store']);
+
+Route::post('/actualizafiesta',[FiestaController::class,'actualizar']);
+
+Route::post('/crearmusica',[MusicaController::class,'store']);
+
+Route::post('/creartematica',[TematicaController::class,'store']);
+
+// Listar datos
 
 Route::get('/listarempresas',[EmpresaController::class,'getallid']);
 
@@ -87,10 +118,6 @@ Route::get('/listarfiestasad',[FiestaController::class,'getforadministracion']);
 
 Route::get('/listarentradasad',[FiestaController::class,'entradasadministracion']);
 
-Route::post('/crearfiestas',[FiestaController::class,'store']);
-
-Route::post('/crearentradas',[EntradaController::class,'store']);
-
 Route::get('/listarentradas',[EntradaController::class,'mostrar']);
 
 Route::get('/listarmusica',[MusicaController::class,'mostrar']);
@@ -101,15 +128,12 @@ Route::get('/listarreservas',[ReservaController::class,'mostrar']);
 
 Route::get('/reservasdeusuario',[FiestaController::class,'reservasUsuario']);
 
-Route::post('/hacerreserva',[ReservaController::class,'store']);
+// Eliminar Datos
 
 Route::post('/eliminarentrada',[EntradaController::class,'eliminar']);
 
 Route::post('/eliminarfiesta',[FiestaController::class,'eliminar']);
 
-Route::post('/actualizafiesta',[FiestaController::class,'actualizar']);
-
-// Eliminar:
 Route::post('/eliminarreserva',[ReservaController::class,'eliminar']);
 
 

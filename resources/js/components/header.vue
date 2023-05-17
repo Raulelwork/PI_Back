@@ -46,24 +46,27 @@
               
                         ">
 
-                    <li class=" text-cyan-600 text-lg hover:text-black">
-                        <NavLink href="/fiestas" :active="$page.component === 'fiestas'">Fiestas</NavLink>
+                    <li class=" text-cyan-600 text-lg hover:text-black ">
+                        <NavLink href="/locales" :active="$page.component === 'locales'" >Locales</NavLink>
                     </li>
                     <li class=" text-cyan-600 text-lg hover:text-black">
-                        <NavLink href="/reservas" :active="$page.component === 'Mis reservas'">Mis reservas</NavLink>
+                        <NavLink href="/fiestas" :active="$page.component === 'entradas'" class="hover:border-gray-300">Fiestas</NavLink>
+                    </li>
+                    <li class=" text-cyan-600 text-lg hover:text-black">
+                        <NavLink href="/reservas" :active="$page.component === 'reservas'" class="hover:border-gray-300">Mis reservas</NavLink>
                     </li>
 
                     <li class=" text-cyan-600 text-lg hover:text-black">
-                        <NavLink href="/administracion" :active="$page.component === 'Administracion'">Administracion
+                        <NavLink href="/administracion" :active="$page.component === 'administracion'" class="hover:border-gray-300">Administracion
                         </NavLink>
                     </li>
 
                     <li class=" text-cyan-600 text-lg hover:text-black" v-if="!$page.props.auth.user">
-                        <NavLink href="/login" :active="$page.component === 'Login'">Login</NavLink>
+                        <NavLink href="/login" :active="$page.component === 'login'" class="hover:border-gray-300">Login</NavLink>
                     </li>
                     <li class=" text-cyan-600 text-lg hover:text-black">
                         <NavLink href="/register" :active="$page.component === 'registrarse'"
-                            v-if="!$page.props.auth.user">
+                            v-if="!$page.props.auth.user" class="hover:border-gray-300">
                             Registrarse</NavLink>
                     </li>
 

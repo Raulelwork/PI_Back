@@ -11,29 +11,22 @@
                 <div class="w-96 h-80 bg-gray-800/90 rounded-md ">
                     <h2 class="text-2xl mt-2 mb-3">Comentarios</h2>
                     <div class=" overflow-y-auto h-44 mx-4 break-words text-justify	">
-                        <p> También puede cambiar la apariencia del texto, mover rápidamente frases y párrafos, así como
-                            copiar y pegar texto en el documento y entre documentos. </p>
-                        <p> También puede cambiar la apariencia del texto, mover rápidamente frases y párrafos, así como
-                            copiar y pegar texto en el documento y entre documentos. </p>
-                        <p> También puede cambiar la apariencia del texto, mover rápidamente frases y párrafos, así como
-                            copiar y pegar texto en el documento y entre documentos. </p>
-                        <p> También puede cambiar la apariencia del texto, mover rápidamente frases y párrafos, así como
-                            copiar y pegar texto en el documento y entre documentos. </p>
-                        <p> También puede cambiar la apariencia del texto, mover rápidamente frases y párrafos, así como
-                            copiar y pegar texto en el documento y entre documentos. </p>
+                        <div v-for="comentario in orderByDateComent(empresa.comentarios)" :key="comentario.id">
+                        <p :class="color[Math.floor(Math.random() * 6)] + ' text-lg'">{{ comentario.nombreusuario }}</p>
+                        <p class="text-white">{{ comentario.contenido }}</p>
+                    </div>
                     </div>
 
-                    <form action="">
-                        <div class="flex flex-col border-t-2 border-white/50">
-                            <input type="text" class="bg-gray-50/0 text-center pt-4" placeholder="Escribir aqui... ">
-                            <button class="my-3">Enviar</button>
-                        </div>
-                    </form>
+                    <div class="flex flex-col border-t-2 border-white/50">
+                        <input type="text" class="bg-gray-50/0 text-center pt-4" placeholder="Escribir aqui... "
+                            v-model="contcomentario">
+                        <button @click="comentar" class="mt-2 transition duration-300 hover:scale-110">Comentar</button>
+                    </div>
                 </div>
             </div>
             <h1 class="text-white text-3xl text-center">ENTRADAS</h1>
-            <div class=" min-[450px]:grid place-items-center ">
-                <div class=" flex flex-wrap justify-center min-[1400px]:grid min-[1400px]:grid-cols-4">
+            <div class=" min-[450px]:grid place-items-center  border-t-4 border-t-black" id="entradas">
+                <div class=" flex flex-wrap justify-center min-[1600px]:grid min-[1600px]:grid-cols-4">
                     <div class="bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg  m-7  max-[450px]:scale-75"
                         v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
                         <img v-bind:src="'http://[::1]:5173/storage/fiestas/' + fiesta.foto"
@@ -64,14 +57,13 @@
                                     <p class="m-2"> {{ e.precio }}€ </p>
                                     <div
                                         class="float-right px-3 m-2 border-2 rounded-xl border-blue-600 hover:bg-blue-700/80 duration-300 hover:scale-105 text-white bg-blue-500/80 text-lg justify-end ">
-                                        <button @click="enviar" :data-id="e.id">Reservar</button>
+                                        <button @click="enviar(e.id)">Reservar</button>
                                     </div>
                                 </swiper-slide>
                             </swiper>
                             <p class="flex justify-center items-center text-gray-600 mt-3" v-else>No hay entradas
                                 disponibles</P>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -104,16 +96,38 @@ export default {
     data() {
         return {
             showMenu: false,
-            color: ['text-blue-600', 'text-pink-600', 'text-red-600', 'text-green-600', 'text-purple-600', 'text-violet-600'],
-
+            color: ['text-blue-600', 'text-pink-600', 'text-red-600', 'text-green-600', 'text-orange-600','text-yellow-600', 'text-violet-600'],
+            contcomentario: '',
         };
     },
 
     props: {
         empresa: Object,
-        fiestas: []
+        fiestas: [],
     },
     methods: {
+        enviar(id_ent) {
+            const id = id_ent
+            axios.post('/hacerreserva',{
+                'id_entrada':id
+            }).then(response => {
+                console.log(response);
+            }).catch(error => {
+                console.log(error);
+            });
+        },
+        comentar() {
+            console.log(this.empresa.id)
+            axios.post('/insertacomentario', {
+                'contenido': this.contcomentario,
+                'id_empresa': this.empresa.id
+            }).then(response => {
+                console.log(response);
+                this.contcomentario = '';
+            }).catch(error => {
+                console.log(error);
+            });
+        },
         formatdate(dateTimeString) {
             return this.formatearFecha(dateTimeString.slice(0, 10));
         },
@@ -127,6 +141,11 @@ export default {
         orderByDate: function (fiestas) {
             return fiestas.sort(function (a, b) {
                 return new Date(a.fecha) - new Date(b.fecha);
+            });
+        },
+        orderByDateComent: function (fiestas) {
+            return fiestas.sort(function (a, b) {
+                return new Date(b.fecha) - new Date(a.fecha);
             });
         }
     },

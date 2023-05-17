@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Musica;
+use App\Models\Comentario;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
-class MusicaController extends Controller
+class ComentarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,23 +31,27 @@ class MusicaController extends Controller
      */
     public function store(Request $request)
     {
-        $musica = new Musica;
-        $musica->nombre = $request->input('nombre');
-        $musica->save();
-        
+        $comentario = new Comentario();
+        $comentario->contenido = $request->input('contenido');
+        $comentario->id_empresa = $request->input('id_empresa');
+        $comentario->id_usuario = Auth::id();
+        $comentario->eliminado = 0;
+        $comentario->fecha =  Carbon::now()->format('Y-m-d H:i:s');
+        $comentario->save();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Musica $musica)
+    public function show(Comentario $comentario)
     {
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Musica $musica)
+    public function edit(Comentario $comentario)
     {
         //
     }
@@ -53,7 +59,7 @@ class MusicaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Musica $musica)
+    public function update(Request $request, Comentario $comentario)
     {
         //
     }
@@ -61,13 +67,8 @@ class MusicaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Musica $musica)
+    public function destroy(Comentario $comentario)
     {
         //
-    }
-
-    public function mostrar()
-    {
-        return Musica::all();
     }
 }

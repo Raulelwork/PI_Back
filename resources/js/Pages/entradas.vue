@@ -28,7 +28,7 @@
 
             </div>
             <div class=" min-[450px]:grid place-items-center  border-t-4 border-t-black" id="entradas">
-                <div class=" flex flex-wrap justify-center min-[1400px]:grid min-[1400px]:grid-cols-4">
+                <div class=" flex flex-wrap justify-center min-[1600px]:grid min-[1600px]:grid-cols-4">
                     <div class="bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg  m-7  max-[450px]:scale-75"
                         v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
                         <img v-bind:src="'http://[::1]:5173/storage/fiestas/' + fiesta.foto"
@@ -59,7 +59,7 @@
                                     <p class="m-2"> {{ e.precio }}€ </p>
                                     <div
                                         class="float-right px-3 m-2 border-2 rounded-xl border-blue-600 hover:bg-blue-700/80 duration-300 hover:scale-105 text-white bg-blue-500/80 text-lg justify-end ">
-                                            <button @click="enviar" :data-id="e.id">Reservar</button>
+                                            <button @click="enviar(e.id)">Reservar</button>
                                     </div>
                                 </swiper-slide>
                             </swiper>
@@ -106,9 +106,8 @@ export default {
             color: ['text-blue-600', 'text-pink-600', 'text-red-600', 'text-green-600', 'text-purple-600', 'text-violet-600'],
         };
     }, methods: {
-        enviar(event) {
-            event.target.getAttribute('data-id');
-            const id = event.target.getAttribute('data-id')
+        enviar(id_ent) {
+            const id = id_ent
             axios.post('/hacerreserva',{
                 'id_entrada':id
             }).then(response => {

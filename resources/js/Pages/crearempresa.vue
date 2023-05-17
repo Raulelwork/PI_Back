@@ -8,29 +8,50 @@
                         <div>
                             <label for="nombre">Nombre</label>
                             <br>
-                            <input  class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200" type="text" v-model="nombre">
+                            <input
+                                class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200"
+                                type="text" v-model="nombre">
                         </div>
                         <div>
                             <label for="cif">Cif</label>
                             <br>
-                            <input class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200" type="text" v-model="cif">
+                            <input
+                                class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200"
+                                type="text" v-model="cif">
                         </div>
                         <div>
                             <label for="ubicacion">Ubicacion</label>
                             <br>
-                            <input class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200" type="text" v-model="ubicacion">
+                            <select name="ubicacion" v-model="ubicacion" id="ubicacion"
+                                class="p-1 text-gray-300 rounded-md bg-gray-700">
+                                <option value="Almeria">Almeria</option>
+                                <option value="Granada">Granada</option>
+                                <option value="Malaga">Malaga</option>
+                                <option value="Sevilla">Sevilla</option>
+                                <option value="Cadiz">Cadiz</option>
+                                <option value="Huelva">Huelva</option>
+                                <option value="Cordoba">Cordoba</option>
+                                <option value="Jaen">Jaen</option>
+
+                            </select>
                         </div>
                         <div>
                             <label for="lugar">Lugar</label>
                             <br>
-                            <input class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200" type="text" v-model="lugar">
+                            <input
+                                class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200"
+                                type="text" v-model="lugar">
                         </div>
                         <div>
                             <label for="foto">Foto:</label>
                             <br>
-                            <input type="file"  class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="foto" ref="fotoInput" @change="cargarFoto" accept="image/*">
+                            <input type="file"
+                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                id="foto" ref="fotoInput" @change="cargarFoto" accept="image/*">
                         </div>
-                        <button  class="decoration-0 m-4 px-3 py-2 border-2 rounded-md bg-pink-900/80 hover:bg-pink-800/80 text-white hover:scale-110 duration-200" @click.prevent="enviar">Enviar</button>
+                        <button
+                            class="decoration-0 m-4 px-3 py-2 border-2 rounded-md bg-pink-900/80 hover:bg-pink-800/80 text-white hover:scale-110 duration-200"
+                            @click.prevent="enviar">Enviar</button>
 
 
 
@@ -67,7 +88,7 @@ export default {
     },
     methods: {
         cargarFoto() {
-        this.foto = this.$refs.fotoInput.files[0];
+            this.foto = this.$refs.fotoInput.files[0];
 
         },
         enviar() {

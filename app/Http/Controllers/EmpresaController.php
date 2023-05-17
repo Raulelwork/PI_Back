@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use App\Models\Empresa;
+use App\Models\Comentario;
 use App\Models\Fiesta;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -94,10 +96,20 @@ class EmpresaController extends Controller
         return Empresa::all();
     }
     public function cargaperfil($id){
+        $empresa = Empresa::where('id',$id)->first();
+        $comentarios = Comentario::where('id_empresa',$id)->where('eliminado','==',0)->get();
+        // $comentarios->setAttribute('nombre_usuario','');
+        foreach($comentarios as $comentario){
+            $userName = User::where('id',$comentario->id_usuario)->get('nombre');
+            $comentario->setAttribute('nombreusuario','');
+            $comentario->nombreusuario = $userName[0]->nombre;
+        }
+        // dd($comentarios[0]->contenido);
+        $empresa->setAttribute('comentarios',$comentarios);
 
         return Inertia::render('perfil', [
-            'empresa' => Empresa::where('id',$id)->first(),
-            'fiestas'=>Fiesta::where('fecha','>',now()->format('Y-m-d'))->where('id_empresa','=',$id)->with(['Empresa','Musica','Tematica','Entrada'])->get()
+            'empresa' => $empresa,
+            'fiestas'=> Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('id_empresa','=',$id)->where('eliminado', '==', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get()
 
         ]);
     }
