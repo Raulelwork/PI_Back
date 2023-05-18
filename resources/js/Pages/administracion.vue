@@ -115,6 +115,8 @@
                             <td class="th">Tipo</td>
                             <td class="th">Precio</td>
                             <td class="th">Consumicion</td>
+                            <td class="th">Entradas Restantes</td>
+                            <td class="th">Entradas Iniciales</td>
                             <td class="th">Fecha Fiesta</td>
                             <td class="th">Empresa</td>
                             <td class="th">Eliminar</td>
@@ -128,6 +130,8 @@
                             <td class="td"><span class="span">Tipo</span> {{ entrada.tipo }}</td>
                             <td class="td"><span class="span">Precio</span> {{ entrada.precio }}</td>
                             <td class="td"><span class="span">Copas</span> {{ entrada.consumiciones }}</td>
+                            <td class="td"><span class="span">Copas</span> {{ entrada.aforo }}</td>
+                            <td class="td"><span class="span">Copas</span> {{ entrada.aforoinicial }}</td>
                             <td class="td"><span class="span">Fecha</span> {{ entrada.fecha }}</td>
                             <td class="td"><span class="span">Empresa</span> {{ entrada.empresa }}</td>
 

@@ -53,12 +53,12 @@
                                 v-else-if="fiesta.entrada.length > 0">
 
                                 <swiper-slide v-for="e in fiesta.entrada"
-                                    class="mySwiper max-[400px]:flex max-[400px]:flex-col" :key="e.id">
+                                    class="mySwiper max-[400px]:flex max-[400px]:flex-col bg-blue-200 border-2 border-black rounded-xl" :key="e.id">
                                     <p :class="color[Math.floor(Math.random() * 6)] + ' text-lg'">{{ e.tipo }}</p>
                                     <p class="m-2"> {{ e.consumiciones }} Copas </p>
                                     <p class="m-2"> {{ e.precio }}€ </p>
                                     <div
-                                        class="float-right px-3 m-2 border-2 rounded-xl border-blue-600 hover:bg-blue-700/80 duration-300 hover:scale-105 text-white bg-blue-500/80 text-lg justify-end ">
+                                        class="float-right px-3 m-2 border-2 rounded-xl border-pink-600/80 hover:bg-pink-600/80 bg-white duration-300 hover:text-white hover:scale-105 text-pink-600/80  text-lg justify-end ">
                                             <button @click="enviar(e.id)">Reservar</button>
                                     </div>
                                 </swiper-slide>

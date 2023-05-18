@@ -21,6 +21,9 @@ class Fiesta extends Model
         return $this->hasOne(Tematica::class, 'id', 'id_tematica');
     }
     public function entrada(){
+        return $this->hasMany(Entrada::class, 'id_fiesta','id')->where('aforo','>',0);
+    }
+    public function adentrada(){
         return $this->hasMany(Entrada::class, 'id_fiesta','id');
     }
 }

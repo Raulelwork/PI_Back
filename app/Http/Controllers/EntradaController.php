@@ -29,9 +29,12 @@ class EntradaController extends Controller
      */
     public function store(Request $request)
     {
+
         $Entrada = new Entrada;
         $Entrada->id_fiesta = $request->input('fiesta_elegida');
         $Entrada->precio = $request->input('precio');
+        $Entrada->aforo = $request->input('aforo');
+        $Entrada->aforoinicial = $request->input('aforo');
         $Entrada->consumiciones = $request->input('consumiciones');
         $Entrada->tipo = $request->input('tipo');
         $Entrada->eliminado = false;
@@ -72,7 +75,7 @@ class EntradaController extends Controller
     }
     public function mostrar()
     {
-        return Entrada::all();
+        return Entrada::where('aforo','>',0)->get();
     }
     public function eliminar(Request $request){
         $id=$request->input('id_entrada');

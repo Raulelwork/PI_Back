@@ -66,11 +66,11 @@ class FiestaController extends Controller
         foreach ($empresas as $empresa) {
             array_push($ids_empresas, $empresa->id);
         }
-        $fiestas =  Fiesta::whereIn('id_empresa', $ids_empresas)->where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '==', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get();
+        $fiestas =  Fiesta::whereIn('id_empresa', $ids_empresas)->where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '==', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada','Adentrada'])->get();
         $entradasfiltradas = [];
 
         foreach ($fiestas as $fiesta) {
-            foreach ($fiesta->entrada as $entrada)
+            foreach ($fiesta->adentrada as $entrada)
                 if ($entrada->eliminado == 0) {
                     $entrada->setAttribute('fecha',$fiesta->fecha);
                     $entrada->setAttribute('empresa',$fiesta->empresa->nombre);

@@ -11,14 +11,19 @@ import Layout from '@/components/Layout.vue';
                         <div class="mt-8">
                             <label for="Selecciona la fiesta:">Fiesta:</label>
                             <br>
-                            <select  v-model="fiesta_elegida" name="lenguajes" id="lang" class="p-1 text-gray-300 rounded-md bg-gray-700">
-                                <option value="" selected disabled>Seleccionar una opción</option>
-                                <optgroup v-for="e in empresas" :key="e.id" class="text-pink-300" :label="e.nombre">
-                                    <option
-                                        v-for="f in fiestas.filter(f => f.id_empresa == e.id && new Date(f.fecha) >= new Date())"
-                                        class="text-white m-40" :key="f.id" v-bind:value="f.id"> {{ formatdate(f.fecha) }} -> {{f.musica.nombre}}</option>
-                                </optgroup>
-                            </select>
+                            <div class=" overflow-y-auto h-10 mx-4 break-words text-justify	">
+                                <select v-model="fiesta_elegida" name="lenguajes" id="lang"
+                                    class="p-1 text-gray-300 rounded-md bg-gray-700 h-10">
+                                    <option value="" selected disabled>Seleccionar una opción</option>
+                                    <optgroup v-for="e in empresas" :key="e.id" class="text-pink-300" :label="e.nombre">
+                                        <option
+                                            v-for="f in fiestas.filter(f => f.id_empresa == e.id && new Date(f.fecha) >= new Date())"
+                                            class="text-white m-40" :key="f.id" v-bind:value="f.id"> {{ formatdate(f.fecha)
+                                            }} -> {{ f.musica.nombre }}</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
                         </div>
                         <div>
                             <label for="precio">Precio</label>
@@ -37,13 +42,21 @@ import Layout from '@/components/Layout.vue';
                         <div class="mt-8">
                             <label for="tipo_entrada">Tipo</label>
                             <br>
-                            <select name="tipo_entrada" v-model="tipo_entrada" id="tipo_entrada" class="p-1 text-gray-300 rounded-md bg-gray-700">
+                            <select name="tipo_entrada" v-model="tipo_entrada" id="tipo_entrada"
+                                class="p-1 text-gray-300 rounded-md bg-gray-700">
                                 <option value="Basica">Basica</option>
                                 <option value="Normal">Normal</option>
                                 <option value="Premium">Premium</option>
                                 <option value="Reservado">Reservado</option>
                                 <option value="Especial">Especial</option>
                             </select>
+                        </div>
+                        <div>
+                            <label for="precio">Nº Aforo</label>
+                            <br>
+                            <input
+                                class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200"
+                                type="number" v-model="aforo">
                         </div>
                         <button
                             class="decoration-0 m-4 px-3 py-2 border-2 rounded-md bg-pink-900/80 hover:bg-pink-800/80 text-white hover:scale-110 duration-200"
@@ -74,10 +87,11 @@ export default {
             showMenu: false,
             fiestas: [],
             empresas: [],
-            fiesta_elegida:'',
-            precio:'',
-            consumiciones:'',
-            tipo_entrada:'',
+            fiesta_elegida: '',
+            precio: '',
+            consumiciones: '',
+            tipo_entrada: '',
+            aforo: '',
         };
     },
     mounted() {
@@ -105,6 +119,7 @@ export default {
             const formData = new FormData();
             formData.append('fiesta_elegida', this.fiesta_elegida);
             formData.append('precio', this.precio);
+            formData.append('aforo', this.aforo);
             formData.append('consumiciones', this.consumiciones);
             formData.append('tipo', this.tipo_entrada);
             console.log(formData)

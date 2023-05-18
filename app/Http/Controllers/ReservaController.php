@@ -38,11 +38,15 @@ class ReservaController extends Controller
             ->exists();
 
         if (!$reservaExistente) {
+            $id_entrada = $request->input('id_entrada');
             $reserva = new Reserva;
             $reserva->fecha_reserva =  Carbon::now()->format('Y-m-d H:i:s');
-            $reserva->id_entrada = $request->input('id_entrada');
+            $reserva->id_entrada = $id_entrada;
             $reserva->id_cliente = $id_cliente;
             $reserva->save();
+            $entrada = Entrada::find($id_entrada);
+            $entrada->aforo = ($entrada->aforo - 1);
+            $entrada->save();
         }
     }
 
@@ -83,11 +87,15 @@ class ReservaController extends Controller
         return Reserva::where('id_cliente', '=', Auth::id())->get();
     }
 
-    public function eliminar( Request $request){
+    public function eliminar(Request $request)
+    {
         $id_usuario = Auth::id();
         $id_entrada = $request->input('id_entrada');
         Reserva::where('id_cliente', $id_usuario)
-       ->where('id_entrada', $id_entrada)
-       ->delete();
+            ->where('id_entrada', $id_entrada)
+            ->delete();
+        $entrada = Entrada::find($id_entrada);
+        $entrada->aforo = ($entrada->aforo + 1);
+        $entrada->save();
     }
 }
