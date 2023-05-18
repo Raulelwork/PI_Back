@@ -68,6 +68,16 @@ export default {
                 'id_entrada':id
             }).then(response => {
                 console.log(response);
+                for(var i = 0; i < this.fiestas.length; i++){
+                    for( var e = 0; e < this.fiestas[i].entrada.length; e++){
+                        console.log(this.fiestas[i].entrada[e])
+                        if(this.fiestas[i].entrada[e].id == id){
+                            this.fiestas.splice(i, 1);
+                            console.log('aaaaaaaaaaaaa')
+                        }
+                    }
+
+                }
                 // window.location.replace("/reservas")
             }).catch(error => {
                 console.log(error);

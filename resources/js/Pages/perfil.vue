@@ -84,6 +84,7 @@ import { Link } from "@inertiajs/vue3";
 import NavLink from "@/components/NavLink.vue";
 // import required modules
 import Layout from '@/components/Layout.vue';
+import Swal from 'sweetalert2';
 
 export default {
     components: {
@@ -112,8 +113,25 @@ export default {
                 'id_entrada':id
             }).then(response => {
                 console.log(response);
+                this.showAlert()
             }).catch(error => {
                 console.log(error);
+            });
+        },
+        showAlert() {
+            Swal.fire({
+                title: 'Reserva Realizada!',
+                text: 'Puedes visualizar la reserva en MIS RESERVAS.',
+                icon: 'success',
+                confirmButtonColor: '#1a202c'
+            });
+        },
+        showAlertComentario() {
+            Swal.fire({
+                title: 'Comentario Realizada!',
+                text: 'Puedes visualizar este recargando la pagina.',
+                icon: 'success',
+                confirmButtonColor: '#1a202c'
             });
         },
         comentar() {
@@ -124,6 +142,7 @@ export default {
             }).then(response => {
                 console.log(response);
                 this.contcomentario = '';
+                this.showAlertComentario();
             }).catch(error => {
                 console.log(error);
             });

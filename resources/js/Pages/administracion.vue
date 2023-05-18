@@ -296,7 +296,6 @@ export default {
             axios.get('/listarfiestasad')
                 .then(response => {
                     fiestas.value = response.data;
-                    console.log(fiestas);
                 })
                 .catch(error => {
                     console.log('Error al obtener los datos:', error);
@@ -304,7 +303,6 @@ export default {
             axios.get('/listarentradasad')
                 .then(response => {
                     entradas.value = response.data;
-                    console.log(entradas);
                 })
                 .catch(error => {
                     console.log('Error al obtener los datos:', error);
@@ -312,7 +310,6 @@ export default {
             axios.get('/listarempresas')
                 .then(response => {
                     empresas.value = response.data;
-                    console.log(entradas);
                 })
                 .catch(error => {
                     console.log('Error al obtener los datos:', error);

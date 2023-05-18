@@ -112,6 +112,7 @@ export default {
                 'id_entrada':id
             }).then(response => {
                 console.log(response);
+                this.showAlert()
             }).catch(error => {
                 console.log(error);
             });
