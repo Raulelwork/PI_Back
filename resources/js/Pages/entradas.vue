@@ -27,23 +27,23 @@
                 </swiper>
 
             </div>
-            <div class=" min-[450px]:grid place-items-center  border-t-4 border-t-black" id="entradas">
-                <div class=" flex flex-wrap justify-center min-[1600px]:grid min-[1600px]:grid-cols-4">
-                    <div class="bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg  m-7  max-[450px]:scale-75"
+            <div class="divUno " id="entradas">
+                <div class="divDos ">
+                    <div class="divFiesta"
                         v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
                         <img v-bind:src="'http://[::1]:5173/storage/fiestas/' + fiesta.foto"
-                            class="mb-4 w-full h-80 object-cover" alt="">
-                        <h1 class="text-lg text-center">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha) }}</h1>
-                        <div class=" grid grid-cols-2 text-left text-black justify-items-center items-center">
+                            class="imgFiesta" alt="">
+                        <h1 class="h1Fiesta">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha) }}</h1>
+                        <div class="contentFiesta ">
                             <p>Musica:</p>
                             <p>{{ fiesta.musica.nombre }}</p>
                             <p>Tematica:</p>
                             <p>{{ fiesta.tematica.nombre }}</p>
                         </div>
                         <div class="m-2">
-                            <h1 class="text-base text-center">ENTRADAS</h1>
-                            <p class="flex justify-center items-center mt-3" v-if="!$page.props.auth.user">Se requiere
-                                <nav-link class="hover:text-blue-500 no-underline hover:scale-105 text-pink-600 mx-3"
+                            <h1 class="h1Fiesta ">ENTRADAS</h1>
+                            <p class="entradaFiesta" v-if="!$page.props.auth.user">Se requiere
+                                <nav-link class="linkEntrada"
                                     href="/login">Inicia Sesion</nav-link> para reservar
                             </p>
                             <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
@@ -53,17 +53,17 @@
                                 v-else-if="fiesta.entrada.length > 0">
 
                                 <swiper-slide v-for="e in fiesta.entrada"
-                                    class="mySwiper max-[400px]:flex max-[400px]:flex-col bg-blue-200 border-2 border-black rounded-xl" :key="e.id">
+                                    class="swiperEntrada" :key="e.id">
                                     <p :class="color[Math.floor(Math.random() * 6)] + ' text-lg'">{{ e.tipo }}</p>
                                     <p class="m-2"> {{ e.consumiciones }} Copas </p>
                                     <p class="m-2"> {{ e.precio }}€ </p>
                                     <div
-                                        class="float-right px-3 m-2 border-2 rounded-xl border-pink-600/80 hover:bg-pink-600/80 bg-white duration-300 hover:text-white hover:scale-105 text-pink-600/80  text-lg justify-end ">
+                                        class="reservaEntrada ">
                                             <button @click="enviar(e.id)">Reservar</button>
                                     </div>
                                 </swiper-slide>
                             </swiper>
-                            <p class="flex justify-center items-center text-gray-600 mt-3" v-else>No hay entradas
+                            <p class="noDisponible" v-else>No hay entradas
                                 disponibles</P>
                         </div>
 
@@ -191,31 +191,4 @@ export default {
     align-items: center;
 }
 
-/* .tarjeta {
-    @apply bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg m-7;
-}
-
-.tar-img {
-    @apply mb-4 w-full;
-}
-
-.tar-cont {
-    @apply grid grid-cols-2 text-left text-black ml-10;
-}
-
-.tar-pie {
-    @apply flex justify-between;
-}
-
-.tar-precio {
-    @apply m-3 ml-8 text-lg inline-block
-}
-
-.tar-fecha {
-    @apply m-3 text-lg inline-block;
-}
-
-.tar-button {
-    @apply float-right px-3 m-2 border-2 rounded-xl border-blue-600 hover: bg-blue-700/80 duration-300 hover:scale-105 text-white bg-blue-500/80 text-lg
-} */
 </style>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comentario;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,7 @@ class ComentarioController extends Controller
      */
     public function store(Request $request)
     {
+        // Guarda el comentario
         $comentario = new Comentario();
         $comentario->contenido = $request->input('contenido');
         $comentario->id_empresa = $request->input('id_empresa');
@@ -38,6 +40,11 @@ class ComentarioController extends Controller
         $comentario->eliminado = 0;
         $comentario->fecha =  Carbon::now()->format('Y-m-d H:i:s');
         $comentario->save();
+        // Añadimos el nombre del usuario y devuelvo el comentario para añadirlo a los comentarios
+        $comentario->setAttribute('nombreusuario','');
+        $userName = User::where('id',$comentario->id_usuario)->get('nombre');
+        $comentario->nombreusuario = $userName[0]->nombre;
+        return $comentario;
     }
 
     /**

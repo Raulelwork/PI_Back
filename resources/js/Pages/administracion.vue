@@ -28,14 +28,13 @@
 
                         </tr>
                     </thead>
-                    <tbody class="block md:table-row-group"
-                        v-for="(empresa, index) in paginatedEmpresas" :key="empresa.id">
+                    <tbody class="block md:table-row-group" v-for="(empresa, index) in paginatedEmpresas" :key="empresa.id">
                         <tr class="max-[765px]:border-2 border-black ">
                             <td class="td"><span class="span">Nombre</span> {{ empresa.nombre }}</td>
-                            <td class="td"><span class="span">Ubicacion</span> {{  empresa.ubicacion }}</td>
-                            <td class="td"><span class="span">Lugar</span> {{  empresa.lugar }}</td>
+                            <td class="td"><span class="span">Ubicacion</span> {{ empresa.ubicacion }}</td>
+                            <td class="td"><span class="span">Lugar</span> {{ empresa.lugar }}</td>
                             <td class="td"><span class="span">Cif</span>{{ empresa.cif }}</td>
-                            
+
                         </tr>
                     </tbody>
 
@@ -72,8 +71,7 @@
 
                         </tr>
                     </thead>
-                    <tbody class="block md:table-row-group"
-                        v-for="(f, index) in paginatedFiestas" :key="f.id">
+                    <tbody class="block md:table-row-group" v-for="(f, index) in orderByDate(paginatedFiestas)" :key="f.id">
                         <tr class="max-[765px]:border-2 border-black ">
                             <td class="td"><span class="span">Nombre</span> {{ f.empresa.nombre }}</td>
                             <td class="td"><span class="span">Musica</span> {{ f.musica.nombre }}</td>
@@ -120,12 +118,9 @@
                             <td class="th">Fecha Fiesta</td>
                             <td class="th">Empresa</td>
                             <td class="th">Eliminar</td>
-
                         </tr>
                     </thead>
-                    <tbody class="block md:table-row-group"
-                        v-for="(entrada, index) in paginatedEntradas"
-                        :key="entrada.id">
+                    <tbody class="block md:table-row-group" v-for="(entrada, index) in paginatedEntradas" :key="entrada.id">
                         <tr class="max-[765px]:border-2 border-black ">
                             <td class="td"><span class="span">Tipo</span> {{ entrada.tipo }}</td>
                             <td class="td"><span class="span">Precio</span> {{ entrada.precio }}</td>
@@ -180,7 +175,7 @@ export default {
             showMenu: false,
             fiestas: [],
             entradas: [],
-            empresas:[],
+            empresas: [],
             fiesta_elegida: '',
             entrada_elegida: '',
 
@@ -191,9 +186,13 @@ export default {
 
         };
     },
- 
-    methods: {
 
+    methods: {
+        orderByDate: function (fiestas) {
+            return fiestas.sort(function (a, b) {
+                return new Date(a.fecha) - new Date(b.fecha);
+            });
+        },
         previousPage() {
             if (this.currentPage > 1) {
                 this.currentPage--;
@@ -208,8 +207,8 @@ export default {
         goToPage(pageNumber) {
             this.currentPage = pageNumber;
         },
-        
-        
+
+
         previousPageEntrada() {
             if (this.currentPageEntrada > 1) {
                 this.currentPageEntrada--;
@@ -239,12 +238,17 @@ export default {
             this.currentPageEmpresa = pageNumber;
         },
 
-        
+
         eliminarentrada(id_entrada) {
             axios.post('/eliminarentrada', {
                 'id_entrada': id_entrada
             }).then(response => {
                 console.log(response);
+                for (var i = 0; i < this.entradas.length; i++) {
+                    if (this.entradas[i].id == id_entrada) {
+                        this.entradas.splice(i, 1);
+                    }
+                }
             }).catch(error => {
                 console.log(error);
             });
@@ -254,6 +258,11 @@ export default {
                 'id_fiesta': id_fiesta
             }).then(response => {
                 console.log(response);
+                for (var i = 0; i < this.fiestas.length; i++) {
+                    if (this.fiestas[i].id == id_fiesta) {
+                        this.fiestas.splice(i, 1);
+                    }
+                }
             }).catch(error => {
                 console.log(error);
             });
@@ -261,7 +270,7 @@ export default {
 
     },
     computed: {
-        
+
         paginatedFiestas() {
             const startIndex = (this.currentPage - 1) * this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;
@@ -290,8 +299,8 @@ export default {
     },
     setup() {
         const fiestas = ref([])
-        const entradas= ref([])
-        const empresas= ref([])
+        const entradas = ref([])
+        const empresas = ref([])
         watchEffect(() => {
             axios.get('/listarfiestasad')
                 .then(response => {

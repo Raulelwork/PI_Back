@@ -109,7 +109,7 @@ class EmpresaController extends Controller
 
         return Inertia::render('perfil', [
             'empresa' => $empresa,
-            'fiestas'=> Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('id_empresa','=',$id)->where('eliminado', '==', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get()
+            'fiestas'=> Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('id_empresa','=',$id)->where('eliminado', '=', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get()
 
         ]);
     }

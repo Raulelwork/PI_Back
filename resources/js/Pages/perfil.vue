@@ -12,9 +12,9 @@
                     <h2 class="text-2xl mt-2 mb-3">Comentarios</h2>
                     <div class=" overflow-y-auto h-44 mx-4 break-words text-justify	">
                         <div v-for="comentario in orderByDateComent(empresa.comentarios)" :key="comentario.id">
-                        <p :class="color[Math.floor(Math.random() * 6)] + ' text-lg'">{{ comentario.nombreusuario }}</p>
-                        <p class="text-white">{{ comentario.contenido }}</p>
-                    </div>
+                            <p :class="color[Math.floor(Math.random() * 6)] + ' text-lg'">{{ comentario.nombreusuario }}</p>
+                            <p class="text-white">{{ comentario.contenido }}</p>
+                        </div>
                     </div>
 
                     <div class="flex flex-col border-t-2 border-white/50">
@@ -25,24 +25,23 @@
                 </div>
             </div>
             <h1 class="text-white text-3xl text-center">ENTRADAS</h1>
-            <div class=" min-[450px]:grid place-items-center  border-t-4 border-t-black" id="entradas">
-                <div class=" flex flex-wrap justify-center min-[1600px]:grid min-[1600px]:grid-cols-4">
-                    <div class="bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg  m-7  max-[450px]:scale-75"
-                        v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
-                        <img v-bind:src="'http://[::1]:5173/storage/fiestas/' + fiesta.foto"
-                            class="mb-4 w-full h-80 object-cover" alt="">
-                        <h1 class="text-lg text-center">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha) }}</h1>
-                        <div class=" grid grid-cols-2 text-left text-black justify-items-center items-center">
+
+
+            <div class="divUno " id="entradas">
+                <div class="divDos ">
+                    <div class="divFiesta" v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
+                        <img v-bind:src="'http://[::1]:5173/storage/fiestas/' + fiesta.foto" class="imgFiesta" alt="">
+                        <h1 class="h1Fiesta">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha) }}</h1>
+                        <div class="contentFiesta ">
                             <p>Musica:</p>
                             <p>{{ fiesta.musica.nombre }}</p>
                             <p>Tematica:</p>
                             <p>{{ fiesta.tematica.nombre }}</p>
                         </div>
                         <div class="m-2">
-                            <h1 class="text-base text-center">ENTRADAS</h1>
-                            <p class="flex justify-center items-center mt-3" v-if="!$page.props.auth.user">Se requiere
-                                <nav-link class="hover:text-blue-500 no-underline hover:scale-105 text-pink-600 mx-3"
-                                    href="/login">Inicia Sesion</nav-link> para reservar
+                            <h1 class="h1Fiesta ">ENTRADAS</h1>
+                            <p class="entradaFiesta" v-if="!$page.props.auth.user">Se requiere
+                                <nav-link class="linkEntrada" href="/login">Inicia Sesion</nav-link> para reservar
                             </p>
                             <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
                                 delay: 4500,
@@ -50,23 +49,24 @@
                             }" :pagination="false" :navigation="false" :modules="modules"
                                 v-else-if="fiesta.entrada.length > 0">
 
-                                <swiper-slide v-for="e in fiesta.entrada"
-                                    class="mySwiper max-[400px]:flex max-[400px]:flex-col" :key="e.id">
+                                <swiper-slide v-for="e in fiesta.entrada" class="swiperEntrada" :key="e.id">
                                     <p :class="color[Math.floor(Math.random() * 6)] + ' text-lg'">{{ e.tipo }}</p>
                                     <p class="m-2"> {{ e.consumiciones }} Copas </p>
                                     <p class="m-2"> {{ e.precio }}€ </p>
-                                    <div
-                                        class="float-right px-3 m-2 border-2 rounded-xl border-blue-600 hover:bg-blue-700/80 duration-300 hover:scale-105 text-white bg-blue-500/80 text-lg justify-end ">
+                                    <div class="reservaEntrada ">
                                         <button @click="enviar(e.id)">Reservar</button>
                                     </div>
                                 </swiper-slide>
                             </swiper>
-                            <p class="flex justify-center items-center text-gray-600 mt-3" v-else>No hay entradas
+                            <p class="noDisponible" v-else>No hay entradas
                                 disponibles</P>
                         </div>
+
                     </div>
                 </div>
             </div>
+
+
         </Layout>
     </section>
 </template>
@@ -97,7 +97,7 @@ export default {
     data() {
         return {
             showMenu: false,
-            color: ['text-blue-600', 'text-pink-600', 'text-red-600', 'text-green-600', 'text-orange-600','text-yellow-600', 'text-violet-600'],
+            color: ['text-blue-600', 'text-pink-600', 'text-red-600', 'text-green-600', 'text-orange-600', 'text-yellow-600', 'text-violet-600'],
             contcomentario: '',
         };
     },
@@ -109,8 +109,8 @@ export default {
     methods: {
         enviar(id_ent) {
             const id = id_ent
-            axios.post('/hacerreserva',{
-                'id_entrada':id
+            axios.post('/hacerreserva', {
+                'id_entrada': id
             }).then(response => {
                 console.log(response);
                 this.showAlert()
@@ -129,13 +129,13 @@ export default {
         showAlertComentario() {
             Swal.fire({
                 title: 'Comentario Realizada!',
-                text: 'Puedes visualizar este recargando la pagina.',
+                text: 'Tu comentario se ha realizado correctamente.',
                 icon: 'success',
                 confirmButtonColor: '#1a202c'
             });
         },
         comentar() {
-            console.log(this.empresa.id)
+            // console.log(this.empresa.id)
             axios.post('/insertacomentario', {
                 'contenido': this.contcomentario,
                 'id_empresa': this.empresa.id
@@ -143,6 +143,8 @@ export default {
                 console.log(response);
                 this.contcomentario = '';
                 this.showAlertComentario();
+                this.empresa.comentarios.push(response.data)
+
             }).catch(error => {
                 console.log(error);
             });

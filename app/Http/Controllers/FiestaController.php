@@ -39,7 +39,7 @@ class FiestaController extends Controller
     public function getall()
     // Se devuelven todas las fiestas .
     {
-        $fiestas =  Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '==', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get();
+        $fiestas =  Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '=', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get();
         return $fiestas;
     }
 
@@ -53,7 +53,7 @@ class FiestaController extends Controller
         foreach ($empresas as $empresa) {
             array_push($ids_empresas, $empresa->id);
         }
-        $fiestas =  Fiesta::whereIn('id_empresa', $ids_empresas)->where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '==', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get();
+        $fiestas =  Fiesta::whereIn('id_empresa', $ids_empresas)->where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '=', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get();
         return $fiestas;
     }
 
@@ -66,7 +66,7 @@ class FiestaController extends Controller
         foreach ($empresas as $empresa) {
             array_push($ids_empresas, $empresa->id);
         }
-        $fiestas =  Fiesta::whereIn('id_empresa', $ids_empresas)->where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '==', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada','Adentrada'])->get();
+        $fiestas =  Fiesta::whereIn('id_empresa', $ids_empresas)->where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '=', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada','Adentrada'])->get();
         $entradasfiltradas = [];
 
         foreach ($fiestas as $fiesta) {
@@ -88,7 +88,7 @@ class FiestaController extends Controller
         $id = Auth::id();
         $reservas = Reserva::where('id_cliente', $id)->get();
         $ids_reservas = [];
-        $fiestas =  Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '==', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get();
+        $fiestas =  Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '=', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get();
         $fiestasFiltradas = [];
         foreach ($reservas as $reserva) {
             array_push($ids_reservas, $reserva->id_entrada);
