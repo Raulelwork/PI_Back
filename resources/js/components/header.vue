@@ -53,7 +53,7 @@
                         <NavLink href="/fiestas" :active="$page.component === 'entradas'" class="hover:border-gray-300">
                             Fiestas</NavLink>
                     </li>
-                    <li class=" text-cyan-600 text-lg hover:text-black">
+                    <li class=" text-cyan-600 text-lg hover:text-black" v-if="$page.props.auth.user">
                         <NavLink href="/reservas" :active="$page.component === 'reservas'" class="hover:border-gray-300">Mis
                             reservas</NavLink>
                     </li>
