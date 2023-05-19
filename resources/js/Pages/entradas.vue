@@ -111,10 +111,10 @@ export default {
             axios.post('/hacerreserva',{
                 'id_entrada':id
             }).then(response => {
-                console.log(response);
+                // console.log(response);
                 this.showAlert()
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         },
         showAlert() {
@@ -152,7 +152,7 @@ export default {
                 this.fiestas = response.data;
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             });
 
         axios.get('/listarallempresas')
@@ -160,7 +160,7 @@ export default {
                 this.empresas = response.data;
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             });
     },
 

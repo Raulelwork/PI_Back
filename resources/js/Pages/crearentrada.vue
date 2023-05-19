@@ -100,14 +100,14 @@ export default {
                 this.fiestas = response.data;
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         axios.get('/listarempresas')
             .then(response => {
                 this.empresas = response.data;
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             });
 
     },
@@ -122,15 +122,14 @@ export default {
             formData.append('aforo', this.aforo);
             formData.append('consumiciones', this.consumiciones);
             formData.append('tipo', this.tipo_entrada);
-            console.log(formData)
             axios.post('/crearentradas', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then(response => {
-                console.log(response);
+                // console.log(response);
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         },
     }

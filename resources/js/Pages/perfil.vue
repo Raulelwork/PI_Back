@@ -112,10 +112,10 @@ export default {
             axios.post('/hacerreserva', {
                 'id_entrada': id
             }).then(response => {
-                console.log(response);
+                // console.log(response);
                 this.showAlert()
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         },
         showAlert() {
@@ -140,13 +140,13 @@ export default {
                 'contenido': this.contcomentario,
                 'id_empresa': this.empresa.id
             }).then(response => {
-                console.log(response);
+                // console.log(response);
                 this.contcomentario = '';
                 this.showAlertComentario();
                 this.empresa.comentarios.push(response.data)
 
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         },
         formatdate(dateTimeString) {
@@ -177,4 +177,13 @@ export default {
     },
 };
 </script>
+
+<style>
+
+.mySwiper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
 

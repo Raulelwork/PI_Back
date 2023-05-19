@@ -98,15 +98,14 @@ export default {
             formData.append('cif', this.cif);
             formData.append('ubicacion', this.ubicacion);
             formData.append('lugar', this.lugar);
-            console.log(formData)
             axios.post('/crearempresa', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then(response => {
-                console.log(response);
+                // console.log(response);
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         },
     },

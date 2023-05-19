@@ -73,15 +73,12 @@ export default {
             const formData = new FormData();
             formData.append('nombre', this.nombreMusica);
 
-            console.log(formData)
             axios.post('/crearmusica', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then(response => {
-                console.log(response);
             }).catch(error => {
-                console.log(error);
             });
         },
 
@@ -89,15 +86,12 @@ export default {
             const formData = new FormData();
             formData.append('nombre', this.nombreTematica);
 
-            console.log(formData)
             axios.post('/creartematica', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then(response => {
-                console.log(response);
             }).catch(error => {
-                console.log(error);
             });
         },
     }

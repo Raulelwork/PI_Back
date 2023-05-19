@@ -58,7 +58,7 @@ export default {
                 this.fiestas = response.data;
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             });
     },
     methods: {
@@ -67,7 +67,7 @@ export default {
             axios.post('/eliminarreserva',{
                 'id_entrada':id
             }).then(response => {
-                console.log(response);
+                // console.log(response);
                 for(var i = 0; i < this.fiestas.length; i++){
                     for( var e = 0; e < this.fiestas[i].entrada.length; e++){
                         if(this.fiestas[i].entrada[e].id == id){
@@ -77,7 +77,7 @@ export default {
                 }
                 // window.location.replace("/reservas")
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         },
         formatdate(dateTimeString) {

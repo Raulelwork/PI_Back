@@ -94,28 +94,28 @@ export default {
                 this.fiestas = response.data;
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         axios.get('/listarempresas')
             .then(response => {
                 this.empresas = response.data;
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         axios.get('/listarmusica')
             .then(response => {
                 this.musicas = response.data;
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         axios.get('/listartematica')
             .then(response => {
                 this.tematicas = response.data;
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             });
 
     },
@@ -134,15 +134,14 @@ export default {
             formData.append('id_musica', this.id_musica);
             formData.append('id_tematica', this.id_tematica);
             formData.append('foto', this.foto);
-            console.log(formData)
             axios.post('/actualizafiesta', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then(response => {
-                console.log(response);
+                // console.log(response);
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         },
     }

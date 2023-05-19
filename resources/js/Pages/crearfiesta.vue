@@ -88,21 +88,21 @@ export default {
                 this.empresas = response.data;
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         axios.get('/listarmusica')
             .then(response => {
                 this.musicas = response.data;
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         axios.get('/listartematica')
             .then(response => {
                 this.tematicas = response.data;
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             });
     },
     methods: {
@@ -117,15 +117,15 @@ export default {
             formData.append('id_tematica', this.id_tematica);
             formData.append('id_musica', this.id_musica);
             formData.append('id_empresa', this.id_empresa);
-            console.log(formData)
+         
             axios.post('/crearfiestas', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then(response => {
-                console.log(response);
+                // console.log(response);
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         },
     },

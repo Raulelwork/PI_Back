@@ -243,28 +243,24 @@ export default {
             axios.post('/eliminarentrada', {
                 'id_entrada': id_entrada
             }).then(response => {
-                console.log(response);
                 for (var i = 0; i < this.entradas.length; i++) {
                     if (this.entradas[i].id == id_entrada) {
                         this.entradas.splice(i, 1);
                     }
                 }
             }).catch(error => {
-                console.log(error);
             });
         },
         eliminarfiesta(id_fiesta) {
             axios.post('/eliminarfiesta', {
                 'id_fiesta': id_fiesta
             }).then(response => {
-                console.log(response);
                 for (var i = 0; i < this.fiestas.length; i++) {
                     if (this.fiestas[i].id == id_fiesta) {
                         this.fiestas.splice(i, 1);
                     }
                 }
             }).catch(error => {
-                console.log(error);
             });
         },
 
@@ -307,21 +303,21 @@ export default {
                     fiestas.value = response.data;
                 })
                 .catch(error => {
-                    console.log('Error al obtener los datos:', error);
+                    // console.log('Error al obtener los datos:', error);
                 });
             axios.get('/listarentradasad')
                 .then(response => {
                     entradas.value = response.data;
                 })
                 .catch(error => {
-                    console.log('Error al obtener los datos:', error);
+                    // console.log('Error al obtener los datos:', error);
                 });
             axios.get('/listarempresas')
                 .then(response => {
                     empresas.value = response.data;
                 })
                 .catch(error => {
-                    console.log('Error al obtener los datos:', error);
+                    // console.log('Error al obtener los datos:', error);
                 });
         });
         return {
