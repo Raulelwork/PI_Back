@@ -65,6 +65,14 @@
                         </div>
 
                     </li>
+                    <li class=" text-cyan-600 text-lg hover:text-black" v-if="$page.props.auth.user">
+                        <div v-if="$page.props.auth.user.id == 1">
+                            <NavLink href="/control" :active="$page.component === 'control'"
+                                class="hover:border-gray-300">Control
+                            </NavLink>
+                        </div>
+
+                    </li>
 
 
                     <li class=" text-cyan-600 text-lg hover:text-black" v-if="!$page.props.auth.user">

@@ -78,7 +78,7 @@ Route::get('/editafiesta', function () {
     return Inertia::render('editarfiesta');
 });
 
-Route::get('/addcontent', function () {
+Route::get('/control', function () {
     return Inertia::render('addcontent');
 });
 

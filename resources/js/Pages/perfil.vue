@@ -49,7 +49,7 @@
                             }" :pagination="false" :navigation="false" :modules="modules"
                                 v-else-if="fiesta.entrada.length > 0">
 
-                                <swiper-slide v-for="e in fiesta.entrada" class="swiperEntrada" :key="e.id">
+                                <swiper-slide v-for="e in fiesta.entrada" class="mySwiper swiperEntrada" :key="e.id">
                                     <p :class="color[Math.floor(Math.random() * 6)] + ' text-lg'">{{ e.tipo }}</p>
                                     <p class="m-2"> {{ e.consumiciones }} Copas </p>
                                     <p class="m-2"> {{ e.precio }}€ </p>
@@ -178,10 +178,3 @@ export default {
 };
 </script>
 
-<style>
-.mySwiper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-</style>

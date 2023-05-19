@@ -131,4 +131,10 @@ export default {
     @apply block m-1 cursor-pointer;
 }
 
+
+.mySwiper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 </style>
