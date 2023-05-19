@@ -185,6 +185,10 @@ export default {
     background-attachment: fixed;
 }
 
-
+.mySwiper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 </style>
