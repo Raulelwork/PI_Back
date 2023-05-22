@@ -83,26 +83,30 @@ class FiestaController extends Controller
 
 
     public function reservasUsuario()
-    // Se devuelven todas las fiestas filtradas por las reservas que ha realizado el usuario.
+    // Se devuelven todas las entradas filtradas por las reservas que ha realizado el usuario.
     {
         $id = Auth::id();
         $reservas = Reserva::where('id_cliente', $id)->get();
-        $ids_reservas = [];
         $fiestas =  Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '=', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get();
-        $fiestasFiltradas = [];
-        foreach ($reservas as $reserva) {
-            array_push($ids_reservas, $reserva->id_entrada);
-        }
+        $entradasFiltradas = [];
+        
 
         foreach ($fiestas as $fiesta){
             foreach($fiesta->entrada as $entrada){
-                if(in_array($entrada->id,$ids_reservas)){
-                    $fiesta->setAttribute('entradaactual',$entrada);
-                    array_push($fiestasFiltradas,$fiesta);
+                foreach ($reservas as $reserva) {
+                    if($entrada->id == $reserva->id_entrada){
+                    $entrada->setAttribute('nombreempresa',$fiesta->empresa->nombre);
+                    $entrada->setAttribute('idreserva',$reserva->id);
+                    $entrada->setAttribute('fecha',$fiesta->fecha);
+                    $entrada->setAttribute('foto',$fiesta->foto);
+                    $entrada->setAttribute('musica',$fiesta->musica->nombre);
+                    $entrada->setAttribute('tematica',$fiesta->tematica->nombre);
+                    array_push($entradasFiltradas,$entrada);
+                    }
                 }
             }
         }
-        return $fiestasFiltradas;
+        return $entradasFiltradas;
     }
 
 

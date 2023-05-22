@@ -17,10 +17,15 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col border-t-2 border-white/50">
+                    <div class="flex flex-col border-t-2 border-white/50" v-if="$page.props.auth.user">
                         <input type="text" class="bg-gray-50/0 text-center pt-4" placeholder="Escribir aqui... "
                             v-model="contcomentario">
                         <button @click="comentar" class="mt-2 transition duration-300 hover:scale-110">Comentar</button>
+                    </div>
+                    <div class="pt-4 mt-6 border-t-2 border-white/50" v-else>
+                        Se requiere
+                        <nav-link class="linkEntrada" href="/login">Inicia Sesion</nav-link> para comentar
+                        <p></p>
                     </div>
                 </div>
             </div>
@@ -179,7 +184,6 @@ export default {
 </script>
 
 <style>
-
 .mySwiper {
     display: flex;
     justify-content: center;

@@ -4,27 +4,28 @@
         <Layout>
             <div class=" min-[450px]:grid place-items-center border-t-black">
                 <div class=" flex flex-wrap justify-center min-[1400px]:grid min-[1400px]:grid-cols-4">
-                    <div v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id"
+                    <div v-for="entrada in  orderByDate(entradas)" :key="entrada.id"
                         class="bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg  m-7  max-[450px]:scale-75">
-                        <img v-bind:src="'http://[::1]:5173/storage/fiestas/' + fiesta.foto"
+                        <img v-bind:src="'http://[::1]:5173/storage/fiestas/' + entrada.foto"
                             class="mb-4 w-full h-80 object-cover" alt="">
-                        <h1 class="text-lg text-center">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha)
+                        <h1 class="text-lg text-center">{{ entrada.nombreempresa }} -> {{ formatdate(entrada.fecha)
                         }}</h1>
                         <div class=" grid grid-cols-2 text-left text-black justify-items-center items-center">
                             <p>Tipo Entrada:</p>
-                            <p>{{ fiesta.entradaactual.tipo }}</p>
+                            <p>{{ entrada.tipo }}</p>
                             <p>Consumiciones:</p>
-                            <p>{{ fiesta.entradaactual.consumiciones }}</p>
+                            <p>{{ entrada.consumiciones }}</p>
                             <p>Precio:</p>
-                            <p>{{ fiesta.entradaactual.precio }}€</p>
+                            <p>{{ entrada.precio }}€</p>
                             <p>Musica:</p>
-                            <p>{{ fiesta.musica.nombre }}</p>
+                            <p>{{ entrada.musica }}</p>
                             <p>Tematica:</p>
-                            <p>{{ fiesta.tematica.nombre }}</p>
+                            <p>{{ entrada.tematica }}</p>
                         </div>
 
                         <div class=" m-2 text-center">
-                            <button @click="eliminar(fiesta.entradaactual.id)" class="  rounded-md transition duration-300 hover:scale-125">
+                            <button @click="eliminar(entrada.idreserva)"
+                                class="  rounded-md transition duration-300 hover:scale-125">
                                 <img src="../../img/icon/no.png" class="w-12  m-4" alt="Cancelar">
                             </button>
                         </div>
@@ -48,31 +49,29 @@ export default {
     data() {
         return {
             showMenu: false,
-            fiestas: [],
+            entradas: [],
         };
     },
     mounted() {
 
         axios.get('/reservasdeusuario')
             .then(response => {
-                this.fiestas = response.data;
+                this.entradas = response.data;
             })
             .catch(error => {
                 // console.log(error);
             });
     },
     methods: {
-        eliminar(id_ent) {
-            const id = id_ent;
-            axios.post('/eliminarreserva',{
-                'id_entrada':id
+        eliminar(id_res) {
+            const id = id_res;
+            axios.post('/eliminarreserva', {
+                'id': id
             }).then(response => {
                 // console.log(response);
-                for(var i = 0; i < this.fiestas.length; i++){
-                    for( var e = 0; e < this.fiestas[i].entrada.length; e++){
-                        if(this.fiestas[i].entrada[e].id == id){
-                            this.fiestas.splice(i, 1);
-                        }
+                for (var i = 0; i < this.entradas.length; i++) {
+                    if (this.entradas[i].idreserva== id) {
+                        this.entradas.splice(i, 1);
                     }
                 }
                 // window.location.replace("/reservas")
@@ -90,8 +89,8 @@ export default {
             const anio = dateObj.getFullYear().toString();
             return `${dia}-${mes}-${anio}`;
         },
-        orderByDate: function (fiestas) {
-            return fiestas.sort(function (a, b) {
+        orderByDate: function (entradas) {
+            return entradas.sort(function (a, b) {
                 return new Date(a.fecha) - new Date(b.fecha);
             });
         }
@@ -101,25 +100,25 @@ export default {
 
 <style>
 .image-button {
-  position: relative;
-  overflow: hidden;
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
 }
 
 .image-button img {
-  position: absolute;
-  top: 0;
-  left: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .img-reserva {
-  z-index: 1;
+    z-index: 1;
 }
 
 .img-x {
-  z-index: 2;
+    z-index: 2;
 }
 </style>
