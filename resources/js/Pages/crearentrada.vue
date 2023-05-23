@@ -78,6 +78,7 @@ input::placeholder {
 <script>
 import { Link } from "@inertiajs/vue3";
 import NavLink from "../components/NavLink.vue";
+import Swal from 'sweetalert2';
 
 
 export default {
@@ -128,8 +129,26 @@ export default {
                 }
             }).then(response => {
                 // console.log(response);
+                this.showAlert()
             }).catch(error => {
                 // console.log(error);
+                this.showAlertError()
+            });
+        },
+        showAlert() {
+            Swal.fire({
+                title: 'Entrada Creada',
+                text: 'Tu entrada ha sido creada exitosamente.',
+                icon: 'success',
+                confirmButtonColor: '#1a202c'
+            });
+        },
+        showAlertError() {
+            Swal.fire({
+                title: 'Ha surgido un error',
+                text: 'Error inesperado. Intenta realizar esta operacion en unos minutos..',
+                icon: 'success',
+                confirmButtonColor: '#1a202c'
             });
         },
     }

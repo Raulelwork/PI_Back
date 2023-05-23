@@ -59,6 +59,10 @@ export default {
     @apply bg-no-repeat bg-center	bg-cover bg-fixed;
     background-image: url(../../img/back5.jpg);
 }
+.entradas{
+    @apply bg-no-repeat bg-center	bg-cover bg-fixed;
+    background-image: url(../../img/back5.jpg);
+}
 
 /* Estilos de las fiestas  */
 .divUno{

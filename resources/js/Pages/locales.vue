@@ -1,49 +1,29 @@
 
 
 <template>
-    <Layout>
-        <section>
-            <div class="border-t-4 border-t-pink-600">
+    <section class="entradas">
 
-                <!-- <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                }" :pagination="{
-    clickable: true,
-}" :navigation="false" :modules="modules" class="mySwiper">
-                    <swiper-slide class="mySwiper" v-for="empresa in empresas" :key="empresa.id">
-                        <nav-link :href="'perfil/' + empresa.id">
-                            <div
-                                class="bg-black/60 max-w-sm rounded-sm overflow-hidden shadow-lg  m-7 p-4 transition duration-500 hover:scale-110">
-                                <h2 class="text-white text-4xl m-3 text-center">{{ empresa.nombre }}</h2>
-                                <img v-bind:src="'http://[::1]:5173/storage/empresas/' + empresa.foto"
-                                    class="mb-4 object-cover h-72 w-72 " alt="">
-                            </div>
-                        </nav-link>
-                    </swiper-slide>
-                </swiper> -->
-
-            </div>
-            <div class=" min-[450px]:grid place-items-center  border-t-4 border-t-black" id="entradas">
+        <Layout>
+            <div class=" min-[450px]:grid place-items-center  border-t-4 border-t-black">
                 <h1
                     class="text-white p-3 rounded-sm text-5xl mt-4 max-[1120px]:mx-0 max-[1120px]:text-4xl  text-center mx-96">
                     LOCALES
                 </h1>
                 <div class=" flex flex-wrap justify-center min-[1400px]:grid min-[1400px]:grid-cols-4">
-                    <div v-for="empresa in empresas" :key="empresa.id" >
+                    <div v-for="empresa in empresas" :key="empresa.id">
                         <nav-link :href="'perfil/' + empresa.id" class="no-underline">
                             <div
                                 class="bg-black/60 max-w-sm rounded-sm overflow-hidden shadow-lg  m-7 p-4 transition duration-500  hover:scale-110">
                                 <h2 class="text-white text-4xl m-3 text-center">{{ empresa.nombre }}</h2>
-                                <img v-bind:src="'http://[::1]:5173/storage/empresas/' + empresa.foto"
+                                <img v-bind:src="'https://pipartytime.com/storage/empresas/' + empresa.foto"
                                     class="mb-4 object-cover h-72 w-72 " alt="">
                             </div>
                         </nav-link>
                     </div>
                 </div>
             </div>
-        </section>
-    </Layout>
+        </Layout>
+    </section>
 </template>
 
 <script>
@@ -82,12 +62,3 @@ export default {
 
 </script>
 
-<style>
-#entradas {
-    background-image: url(../../img/back5.jpg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed;
-}
-</style>

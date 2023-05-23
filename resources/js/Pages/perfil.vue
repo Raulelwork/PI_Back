@@ -1,10 +1,12 @@
 <template>
-    <section class="fondolog">
+    <section class="entradas">
         <Layout>
-            <h1 class="text-7xl text-center text-white mt-14 mb-12">{{ empresa.nombre }}</h1>
+            <section class="fondolog">
+
+            <h1 class="text-7xl text-center text-white pt-14 mb-12">{{ empresa.nombre }}</h1>
             <div class="flex flex-wrap justify-center items-center text-center text-white">
                 <div class="max-w-xl bg-gray-800/80 rounded-md m-12">
-                    <img v-bind:src="'http://[::1]:5173/storage/empresas/' + empresa.foto"
+                    <img v-bind:src="'https://pipartytime.com/storage/empresas/' + empresa.foto"
                         class="max-w-sm max-h-sm object-cover p-12" alt="foto perfil">
 
                 </div>
@@ -29,13 +31,15 @@
                     </div>
                 </div>
             </div>
-            <h1 class="text-white text-3xl text-center">ENTRADAS</h1>
+
+            </section>
 
 
-            <div class="divUno " id="entradas">
+            <div class="divUno ">
+                <h1 class="text-white text-3xl text-center">ENTRADAS</h1>
                 <div class="divDos ">
                     <div class="divFiesta" v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
-                        <img v-bind:src="'http://[::1]:5173/storage/fiestas/' + fiesta.foto" class="imgFiesta" alt="">
+                        <img v-bind:src="'https://pipartytime.com/storage/fiestas/' + fiesta.foto" class="imgFiesta" alt="">
                         <h1 class="h1Fiesta">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha) }}</h1>
                         <div class="contentFiesta ">
                             <p>Musica:</p>

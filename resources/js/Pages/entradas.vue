@@ -1,77 +1,76 @@
 
 
 <template>
-    <Layout>
-        <section>
-            <div class="border-t-4 border-t-pink-600" id="discotecas">
-                <h1
-                    class="text-white p-3 rounded-sm text-5xl mt-4 max-[1120px]:mx-0 max-[1120px]:text-4xl  text-center mx-96">
-                    LOCALES MAS DEMANDADOS
-                </h1>
-                <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                }" :pagination="{
+    <section class="entradas">
+
+        <Layout>
+            <section>
+                <div class="border-t-4 border-t-pink-600" id="discotecas">
+                    <h1
+                        class="text-white p-3 rounded-sm text-5xl mt-4 max-[1120px]:mx-0 max-[1120px]:text-4xl  text-center mx-96">
+                        LOCALES MAS DEMANDADOS
+                    </h1>
+                    <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    }" :pagination="{
     clickable: true,
 }" :navigation="false" :modules="modules" class="mySwiper">
-                    <swiper-slide class="mySwiper" v-for="empresa in empresas" :key="empresa.id">
-                        <nav-link :href="'perfil/' + empresa.id">
-                            <div
-                                class="bg-black/60 max-w-sm rounded-sm overflow-hidden shadow-lg  m-7 p-4 transition duration-500 hover:scale-110">
-                                <h2 class="text-white text-4xl m-3 text-center">{{ empresa.nombre }}</h2>
-                                <img v-bind:src="'http://[::1]:5173/storage/empresas/' + empresa.foto"
-                                    class="mb-4 object-cover h-72 w-72 " alt="">
+                        <swiper-slide class="mySwiper" v-for="empresa in empresas" :key="empresa.id">
+                            <nav-link :href="'perfil/' + empresa.id">
+                                <div
+                                    class="bg-black/60 max-w-sm rounded-sm overflow-hidden shadow-lg  m-7 p-4 transition duration-500 hover:scale-110">
+                                    <h2 class="text-white text-4xl m-3 text-center">{{ empresa.nombre }}</h2>
+                                    <img v-bind:src="'https://pipartytime.com/storage/empresas/' + empresa.foto"
+                                        class="mb-4 object-cover h-72 w-72 " alt="">
+                                </div>
+                            </nav-link>
+                        </swiper-slide>
+                    </swiper>
+
+                </div>
+                <div class="divUno ">
+                    <div class="divDos ">
+                        <div class="divFiesta" v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
+                            <img v-bind:src="'https://pipartytime.com/storage/fiestas/' + fiesta.foto" class="imgFiesta"
+                                alt="">
+                            <h1 class="h1Fiesta">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha) }}</h1>
+                            <div class="contentFiesta ">
+                                <p>Musica:</p>
+                                <p>{{ fiesta.musica.nombre }}</p>
+                                <p>Tematica:</p>
+                                <p>{{ fiesta.tematica.nombre }}</p>
                             </div>
-                        </nav-link>
-                    </swiper-slide>
-                </swiper>
+                            <div class="m-2">
+                                <h1 class="h1Fiesta ">ENTRADAS</h1>
+                                <p class="entradaFiesta" v-if="!$page.props.auth.user">Se requiere
+                                    <nav-link class="linkEntrada" href="/login">Inicia Sesion</nav-link> para reservar
+                                </p>
+                                <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
+                                    delay: 4500,
+                                    disableOnInteraction: false,
+                                }" :pagination="false" :navigation="false" :modules="modules"
+                                    v-else-if="fiesta.entrada.length > 0">
 
-            </div>
-            <div class="divUno " id="entradas">
-                <div class="divDos ">
-                    <div class="divFiesta"
-                        v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
-                        <img v-bind:src="'http://[::1]:5173/storage/fiestas/' + fiesta.foto"
-                            class="imgFiesta" alt="">
-                        <h1 class="h1Fiesta">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha) }}</h1>
-                        <div class="contentFiesta ">
-                            <p>Musica:</p>
-                            <p>{{ fiesta.musica.nombre }}</p>
-                            <p>Tematica:</p>
-                            <p>{{ fiesta.tematica.nombre }}</p>
-                        </div>
-                        <div class="m-2">
-                            <h1 class="h1Fiesta ">ENTRADAS</h1>
-                            <p class="entradaFiesta" v-if="!$page.props.auth.user">Se requiere
-                                <nav-link class="linkEntrada"
-                                    href="/login">Inicia Sesion</nav-link> para reservar
-                            </p>
-                            <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
-                                delay: 4500,
-                                disableOnInteraction: false,
-                            }" :pagination="false" :navigation="false" :modules="modules"
-                                v-else-if="fiesta.entrada.length > 0">
-
-                                <swiper-slide v-for="e in fiesta.entrada"
-                                    class="mySwiper swiperEntrada" :key="e.id">
-                                    <p :class="color[Math.floor(Math.random() * 6)] + ' text-lg'">{{ e.tipo }}</p>
-                                    <p class="m-2"> {{ e.consumiciones }} Copas </p>
-                                    <p class="m-2"> {{ e.precio }}€ </p>
-                                    <div
-                                        class="reservaEntrada ">
+                                    <swiper-slide v-for="e in fiesta.entrada" class="mySwiper swiperEntrada" :key="e.id">
+                                        <p :class="color[Math.floor(Math.random() * 6)] + ' text-lg'">{{ e.tipo }}</p>
+                                        <p class="m-2"> {{ e.consumiciones }} Copas </p>
+                                        <p class="m-2"> {{ e.precio }}€ </p>
+                                        <div class="reservaEntrada ">
                                             <button @click="enviar(e.id)">Reservar</button>
-                                    </div>
-                                </swiper-slide>
-                            </swiper>
-                            <p class="noDisponible" v-else>No hay entradas
-                                disponibles</P>
-                        </div>
+                                        </div>
+                                    </swiper-slide>
+                                </swiper>
+                                <p class="noDisponible" v-else>No hay entradas
+                                    disponibles</P>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </Layout>
+            </section>
+        </Layout>
+    </section>
 </template>
 
 <script>
@@ -108,8 +107,8 @@ export default {
     }, methods: {
         enviar(id_ent) {
             const id = id_ent
-            axios.post('/hacerreserva',{
-                'id_entrada':id
+            axios.post('/hacerreserva', {
+                'id_entrada': id
             }).then(response => {
                 // console.log(response);
                 this.showAlert()
@@ -177,18 +176,10 @@ export default {
     background-size: cover;
 }
 
-#entradas {
-    background-image: url(../../img/back5.jpg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed;
-}
 
 .mySwiper {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 </style>

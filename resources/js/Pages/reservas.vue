@@ -6,7 +6,7 @@
                 <div class=" flex flex-wrap justify-center min-[1400px]:grid min-[1400px]:grid-cols-4">
                     <div v-for="entrada in  orderByDate(entradas)" :key="entrada.id"
                         class="bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg  m-7  max-[450px]:scale-75">
-                        <img v-bind:src="'http://[::1]:5173/storage/fiestas/' + entrada.foto"
+                        <img v-bind:src="'https://pipartytime.com/storage/fiestas/' + entrada.foto"
                             class="mb-4 w-full h-80 object-cover" alt="">
                         <h1 class="text-lg text-center">{{ entrada.nombreempresa }} -> {{ formatdate(entrada.fecha)
                         }}</h1>
@@ -24,7 +24,7 @@
                         </div>
 
                         <div class=" m-2 text-center">
-                            <button @click="eliminar(entrada.idreserva)"
+                            <button @click="eliminar([entrada.id,entrada.idreserva])"
                                 class="  rounded-md transition duration-300 hover:scale-125">
                                 <img src="../../img/icon/no.png" class="w-12  m-4" alt="Cancelar">
                             </button>
@@ -63,10 +63,12 @@ export default {
             });
     },
     methods: {
-        eliminar(id_res) {
-            const id = id_res;
+        eliminar(array) {
+            const id = array[1];
+            const id_entrada = array[0];
             axios.post('/eliminarreserva', {
-                'id': id
+                'id': id,
+                'id_entrada':id_entrada
             }).then(response => {
                 // console.log(response);
                 for (var i = 0; i < this.entradas.length; i++) {

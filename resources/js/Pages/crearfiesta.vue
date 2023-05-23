@@ -64,6 +64,7 @@ import { Link } from "@inertiajs/vue3";
 import NavLink from "../components/NavLink.vue";
 import axios from 'axios';
 import Layout from '@/components/Layout.vue';
+import Swal from 'sweetalert2';
 
 
 export default {
@@ -124,8 +125,26 @@ export default {
                 }
             }).then(response => {
                 // console.log(response);
+                this.showAlert()
             }).catch(error => {
                 // console.log(error);
+                this.showAlertError()
+            });
+        },
+        showAlert() {
+            Swal.fire({
+                title: 'Fiesta Creada!',
+                text: 'Tu fiesta se ha realizado con exito.',
+                icon: 'success',
+                confirmButtonColor: '#1a202c'
+            });
+        },
+        showAlertError() {
+            Swal.fire({
+                title: 'Ha surgido un error',
+                text: 'Error inesperado. Intenta realizar esta operacion en unos minutos..',
+                icon: 'success',
+                confirmButtonColor: '#1a202c'
             });
         },
     },

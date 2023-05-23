@@ -90,6 +90,10 @@ class ReservaController extends Controller
     public function eliminar(Request $request)
     {
         $id = $request->input('id');
+        $id_entrada = $request->input('id_entrada');
         Reserva::where('id', $id)->delete();
+        $entrada = Entrada::find($id_entrada);
+        $entrada->aforo = ($entrada->aforo + 1);
+        $entrada->save();
     }
 }

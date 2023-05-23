@@ -69,6 +69,7 @@ input::placeholder {
 <script>
 import { Link } from "@inertiajs/vue3";
 import NavLink from "../components/NavLink.vue";
+import Swal from 'sweetalert2';
 
 
 export default {
@@ -140,8 +141,26 @@ export default {
                 }
             }).then(response => {
                 // console.log(response);
+                this.showAlert()
             }).catch(error => {
                 // console.log(error);
+                this.showAlertError()
+            });
+        },
+        showAlert() {
+            Swal.fire({
+                title: 'Fiesta Actualizada!',
+                text: 'Tu fiesta se ha actualizado con exito.',
+                icon: 'success',
+                confirmButtonColor: '#1a202c'
+            });
+        },
+        showAlertError() {
+            Swal.fire({
+                title: 'Ha surgido un error',
+                text: 'Error inesperado. Intenta realizar esta operacion en unos minutos..',
+                icon: 'success',
+                confirmButtonColor: '#1a202c'
             });
         },
     }
