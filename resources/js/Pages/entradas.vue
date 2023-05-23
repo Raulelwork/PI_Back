@@ -30,73 +30,74 @@
 
                 </div>
                 <section>
-                    <div class="flex flex-col bg-black/70 rounded-br-xl float-left p-4 overflow-y-auto h-96 w-36 ">
+                    <div
+                        class="flex flex-col bg-black/70 rounded-br-xl min-[650px]:float-left p-4 overflow-y-auto h-96 w-44 ">
                         <h1 class="text-white text-center text-2xl">Filtros</h1>
                         <hr class="mb-4">
 
                         <h1 class="text-white text-center text-xl">Ciudades</h1>
-                        <div class="flex flex-col m-2 text-blue-400 items-center">
-                            <label for="sevilla">Sevilla</label>
+                        <div class="m-2 text-blue-400 items-center">
                             <input type="checkbox" v-model="ciudades['sevilla']" id="sevilla" @change="filtrar"
-                                name="ciudad" class="mr-2 mt-1 ml-1 rounded-full p-2">
+                                name="ciudad" class="mx-2 mt-1 rounded-full p-1">
+                            <label for="sevilla">Sevilla</label>
                         </div>
 
-                        <div class="flex flex-col m-2 text-pink-400 items-center">
-                            <label for="malaga">Málaga</label>
+                        <div class=" m-2 text-pink-400 items-center">
                             <input type="checkbox" v-model="ciudades['malaga']" id="malaga" @change="filtrar" name="ciudad"
-                                class="mx-2 mt-1 rounded-full p-2">
+                                class="mx-2 mt-1 rounded-full p-1">
+                            <label for="malaga">Málaga</label>
                         </div>
 
-                        <div class="flex flex-col m-2 text-blue-400 items-center">
-                            <label for="cadiz">Cádiz</label>
+                        <div class="m-2 text-blue-400 items-center">
                             <input type="checkbox" v-model="ciudades['cadiz']" id="cadiz" @change="filtrar" name="ciudad"
-                                class="mx-2 mt-1 rounded-full p-2">
+                                class="mx-2 mt-1 rounded-full p-1">
+                            <label for="cadiz">Cádiz</label>
                         </div>
 
-                        <div class="flex flex-col m-2 text-pink-400 items-center">
-                            <label for="granada">Granada</label>
+                        <div class=" m-2 text-pink-400 items-center">
                             <input type="checkbox" v-model="ciudades['granada']" id="granada" @change="filtrar"
-                                name="ciudad" class="mx-2 mt-1 rounded-full p-2">
+                                name="ciudad" class="mx-2 mt-1 rounded-full p-1">
+                            <label for="granada">Granada</label>
                         </div>
 
-                        <div class="flex flex-col m-2 text-blue-400 items-center">
-                            <label for="cordoba">Córdoba</label>
+                        <div class="m-2 text-blue-400 items-center">
                             <input type="checkbox" v-model="ciudades['cordoba']" id="cordoba" @change="filtrar"
-                                name="ciudad" class="mx-2 mt-1 rounded-full p-2">
+                                name="ciudad" class="mx-2 mt-1 rounded-full p-1">
+                            <label for="cordoba">Córdoba</label>
                         </div>
 
-                        <div class="flex flex-col m-2 text-pink-400 items-center">
-                            <label for="almeria">Almería</label>
+                        <div class=" m-2 text-pink-400 items-center">
                             <input type="checkbox" v-model="ciudades['almeria']" id="almeria" @change="filtrar"
-                                name="ciudad" class="mx-2 mt-1 rounded-full p-2">
+                                name="ciudad" class="mx-2 mt-1 rounded-full p-1">
+                            <label for="almeria">Almería</label>
                         </div>
 
-                        <div class="flex flex-col m-2 text-blue-400 items-center">
-                            <label for="huelva">Huelva</label>
+                        <div class="m-2 text-blue-400 items-center">
                             <input type="checkbox" v-model="ciudades['huelva']" id="huelva" @change="filtrar" name="ciudad"
-                                class="mx-2 mt-1 rounded-full p-2">
+                                class="mx-2 mt-1 rounded-full p-1">
+                            <label for="huelva">Huelva</label>
                         </div>
 
-                        <div class="flex flex-col m-2 text-pink-400 items-center">
-                            <label for="jaen">Jaén</label>
+                        <div class=" m-2 text-pink-400 items-center">
                             <input type="checkbox" v-model="ciudades['jaen']" id="jaen" @change="filtrar" name="ciudad"
-                                class="mx-2 mt-1 rounded-full p-2">
+                                class="mx-2 mt-1 rounded-full p-1">
+                            <label for="jaen">Jaén</label>
                         </div>
 
                         <h1 class="text-white text-center text-xl">Musica</h1>
 
-                        <div v-for="m in musica" :key="m.id" class="flex flex-col m-2 text-blue-400 items-center">
-                            <label for="musica">{{m.nombre}}</label>
-                            <input type="checkbox" v-model="m.filtrado" @change="filtrar"
-                                name="ciudad" class="mr-2 mt-1 ml-1 rounded-full p-2">
+                        <div v-for="m in musica" :key="m.id" class="m-2 text-blue-400 items-center">
+                            <input type="checkbox" v-model="m.filtrado" @change="filtrar" name="ciudad"
+                                class="mr-2 mt-1 ml-1 rounded-full p-1">
+                            <label for="musica">{{ m.nombre }}</label>
                         </div>
 
                         <h1 class="text-white text-center text-xl">Tematica</h1>
 
-                        <div v-for="t in tematica" :key="t.id" class="flex flex-col m-2 text-pink-400 items-center">
-                            <label for="tematica">{{t.nombre}}</label>
-                            <input type="checkbox" v-model="t.filtrado" @change="filtrar"
-                                name="ciudad" class="mr-2 mt-1 ml-1 rounded-full p-2">
+                        <div v-for="t in tematica" :key="t.id" class=" m-2 text-pink-400 items-center">
+                            <input type="checkbox" v-model="t.filtrado" @change="filtrar" name="ciudad"
+                                class="mr-2 mt-1 ml-1 rounded-full p-1">
+                            <label for="tematica">{{ t.nombre }}</label>
                         </div>
 
 
@@ -180,11 +181,11 @@ export default {
             fiestasFiltradas: [],
             empresas: [],
             id_entrada: '',
-            musica:[],
-            tematica:[],
-            filtrosciudad:[],
-            filtrosmusica:[],
-            filtrostematica:[],
+            musica: [],
+            tematica: [],
+            filtrosciudad: [],
+            filtrosmusica: [],
+            filtrostematica: [],
             ciudades: {
                 almeria: false,
                 granada: false,
@@ -244,18 +245,42 @@ export default {
                 }
             }
             for (let mus in this.musica) {
-                console.log(this.musica[mus].filtrado)
+                // console.log(this.musica[mus].filtrado)
                 if (this.musica[mus].filtrado) {
                     this.filtrosmusica.push(this.musica[mus].nombre)
                 }
             }
-            
-            if (this.filtrosciudad.length == 0) {
+
+            for (let tem in this.tematica) {
+                if (this.tematica[tem].filtrado) {
+                    this.filtrostematica.push(this.tematica[tem].nombre)
+                }
+            }
+
+            if (this.filtrosciudad.length == 0 && this.filtrosmusica.length == 0 && this.filtrostematica.length == 0) {
                 this.fiestasFiltradas = this.fiestas;
             } else {
                 for (let fiesta in this.fiestas) {
                     // console.log(this.fiestas[fiesta].empresa.ubicacion.toLowerCase())
-                    if (this.filtrosciudad.includes(this.fiestas[fiesta].empresa.ubicacion.toLowerCase())) {
+                    if (this.filtrosciudad.includes(this.fiestas[fiesta].empresa.ubicacion.toLowerCase()) && this.filtrosmusica.length == 0 && this.filtrostematica.length == 0) {
+                        this.fiestasFiltradas.push(this.fiestas[fiesta])
+                    }
+                    else if (this.filtrosciudad.includes(this.fiestas[fiesta].empresa.ubicacion.toLowerCase()) && this.filtrosmusica.includes(this.fiestas[fiesta].musica.nombre) && this.filtrostematica.length == 0) {
+                        this.fiestasFiltradas.push(this.fiestas[fiesta])
+                    }
+                    else if (this.filtrostematica.includes(this.fiestas[fiesta].tematica.nombre) && this.filtrosmusica.length == 0 && this.filtrosciudad.length == 0) {
+                        this.fiestasFiltradas.push(this.fiestas[fiesta])
+                    }
+                    else if (this.filtrosmusica.includes(this.fiestas[fiesta].musica.nombre) && this.filtrostematica.length == 0 && this.filtrosciudad.length == 0) {
+                        this.fiestasFiltradas.push(this.fiestas[fiesta])
+                    }
+                    else if (this.filtrostematica.includes(this.fiestas[fiesta].tematica.nombre) && this.filtrosmusica.length == 0 && this.filtrosciudad.includes(this.fiestas[fiesta].empresa.ubicacion.toLowerCase())) {
+                        this.fiestasFiltradas.push(this.fiestas[fiesta])
+                    }
+                    else if (this.filtrostematica.includes(this.fiestas[fiesta].tematica.nombre) && this.filtrosciudad.length == 0 && this.filtrosmusica.includes(this.fiestas[fiesta].musica.nombre)) {
+                        this.fiestasFiltradas.push(this.fiestas[fiesta])
+                    }
+                    else if (this.filtrostematica.includes(this.fiestas[fiesta].tematica.nombre) && this.filtrosciudad.includes(this.fiestas[fiesta].empresa.ubicacion.toLowerCase()) && this.filtrosmusica.includes(this.fiestas[fiesta].musica.nombre)) {
                         this.fiestasFiltradas.push(this.fiestas[fiesta])
                     }
                 }

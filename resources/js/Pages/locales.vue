@@ -64,7 +64,7 @@
                         <div v-for="empresa in empresasFiltradas" :key="empresa.id">
                             <nav-link :href="'perfil/' + empresa.id" class="no-underline">
                                 <div
-                                    class="bg-black/60 max-w-sm rounded-sm overflow-hidden shadow-lg  m-7 p-4 transition duration-500  hover:scale-110">
+                                    class="bg-gray-300/20 max-w-sm rounded-sm overflow-hidden shadow-xl  shadow-pink-600/40  m-7 p-4 transition duration-500 hover:scale-110">
                                     <h2 class="text-white text-4xl m-3 text-center">{{ empresa.nombre }}</h2>
                                     <img v-bind:src="'https://pipartytime.com/storage/empresas/' + empresa.foto"
                                         class="mb-4 object-cover h-72 w-72 " alt="">
@@ -82,7 +82,6 @@
 // Import Swiper styles
 import { Link } from "@inertiajs/vue3";
 import NavLink from "@/components/NavLink.vue";
-// import required modules
 import Layout from '@/components/Layout.vue';
 
 

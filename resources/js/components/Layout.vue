@@ -72,7 +72,7 @@ export default {
     @apply flex flex-wrap justify-center min-[1600px]:grid min-[1600px]:grid-cols-4;
 }
 .divFiesta{
-    @apply bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg  m-7  max-[450px]:scale-75;
+    @apply bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg shadow-blue-700 m-7 max-[450px]:scale-75;
 }
 .imgFiesta{
     @apply mb-4 w-full h-80 object-cover;
