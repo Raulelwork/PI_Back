@@ -40,7 +40,7 @@
                 <div class="divDos ">
                     <div class="divFiesta" v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
                         <img v-bind:src="'https://pipartytime.com/storage/fiestas/' + fiesta.foto" class="imgFiesta" alt="">
-                        <h1 class="h1Fiesta">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha) }}</h1>
+                        <h1 class="h1Fiesta text-pink-600">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha) }}</h1>
                         <div class="contentFiesta ">
                             <p>Musica:</p>
                             <p>{{ fiesta.musica.nombre }}</p>

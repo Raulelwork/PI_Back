@@ -78,7 +78,7 @@ export default {
     @apply mb-4 w-full h-80 object-cover;
 }
 .h1Fiesta{
-    @apply text-lg text-center;
+    @apply text-lg flex justify-center;
 }
 .contentFiesta{
     @apply grid grid-cols-2 text-left text-black justify-items-center items-center;

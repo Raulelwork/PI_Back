@@ -42,6 +42,7 @@ import { Link } from "@inertiajs/vue3";
 import NavLink from "../components/NavLink.vue";
 import Layout from '@/components/Layout.vue';
 import { ref } from 'vue';
+import Swal from 'sweetalert2';
 
 
 export default {
@@ -63,6 +64,14 @@ export default {
             });
     },
     methods: {
+        showAlert() {
+            Swal.fire({
+                title: 'Reserva Eliminada!',
+                text: 'Tu reserva se ha eliminado con exito.',
+                icon: 'success',
+                confirmButtonColor: '#1a202c'
+            });
+        },
         eliminar(array) {
             const id = array[1];
             const id_entrada = array[0];
@@ -76,6 +85,7 @@ export default {
                         this.entradas.splice(i, 1);
                     }
                 }
+                this.showAlert()
                 // window.location.replace("/reservas")
             }).catch(error => {
                 // console.log(error);

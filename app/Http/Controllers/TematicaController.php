@@ -68,6 +68,10 @@ class TematicaController extends Controller
     }
     public function mostrar()
     {
-        return Tematica::all();
+        $tematica = Tematica::all();
+        foreach($tematica as $tem){
+            $tem->setAttribute('filtrado',false);
+        }
+        return $tematica;
     }
 }

@@ -17,22 +17,12 @@ const form = useForm({
 });
 
 const submit = () => {
-    if (esValido(form)) {
-        form.post(route('register'), {
-            onFinish: () => form.reset('password', 'password_confirmation'),
-        });
-    }
+    form.post(route('register'), {
+        onFinish: () => form.reset('password', 'password_confirmation'),
+    });
+
 };
-function esValido(form){
-    console.log(form.apellidos)
-    if(form.nombre == '' && !/^[A-Za-z]+$/.test(form.nombre) ){
-        return false
-    }
-    else if(form.apellidos == '' && !/^[A-Za-z]+$/.test(form.apellidos)){
-        return false
-    }
-    return true
-}
+
 </script>
 
 <template>

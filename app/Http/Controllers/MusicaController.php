@@ -68,6 +68,10 @@ class MusicaController extends Controller
 
     public function mostrar()
     {
-        return Musica::all();
+        $musica = Musica::all();
+        foreach($musica as $music){
+            $music->setAttribute('filtrado',false);
+        }
+        return $musica;
     }
 }

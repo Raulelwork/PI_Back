@@ -29,45 +29,122 @@
                     </swiper>
 
                 </div>
-                <div class="divUno ">
-                    <div class="divDos ">
-                        <div class="divFiesta" v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
-                            <img v-bind:src="'https://pipartytime.com/storage/fiestas/' + fiesta.foto" class="imgFiesta"
-                                alt="">
-                            <h1 class="h1Fiesta">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha) }}</h1>
-                            <div class="contentFiesta ">
-                                <p>Musica:</p>
-                                <p>{{ fiesta.musica.nombre }}</p>
-                                <p>Tematica:</p>
-                                <p>{{ fiesta.tematica.nombre }}</p>
-                            </div>
-                            <div class="m-2">
-                                <h1 class="h1Fiesta ">ENTRADAS</h1>
-                                <p class="entradaFiesta" v-if="!$page.props.auth.user">Se requiere
-                                    <nav-link class="linkEntrada" href="/login">Inicia Sesion</nav-link> para reservar
-                                </p>
-                                <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
-                                    delay: 4500,
-                                    disableOnInteraction: false,
-                                }" :pagination="false" :navigation="false" :modules="modules"
-                                    v-else-if="fiesta.entrada.length > 0">
+                <section>
+                    <div class="flex flex-col bg-black/70 rounded-br-xl float-left p-4 overflow-y-auto h-96 w-36 ">
+                        <h1 class="text-white text-center text-2xl">Filtros</h1>
+                        <hr class="mb-4">
 
-                                    <swiper-slide v-for="e in fiesta.entrada" class="mySwiper swiperEntrada" :key="e.id">
-                                        <p :class="color[Math.floor(Math.random() * 6)] + ' text-lg'">{{ e.tipo }}</p>
-                                        <p class="m-2"> {{ e.consumiciones }} Copas </p>
-                                        <p class="m-2"> {{ e.precio }}€ </p>
-                                        <div class="reservaEntrada ">
-                                            <button @click="enviar(e.id)">Reservar</button>
-                                        </div>
-                                    </swiper-slide>
-                                </swiper>
-                                <p class="noDisponible" v-else>No hay entradas
-                                    disponibles</P>
-                            </div>
+                        <h1 class="text-white text-center text-xl">Ciudades</h1>
+                        <div class="flex flex-col m-2 text-blue-400 items-center">
+                            <label for="sevilla">Sevilla</label>
+                            <input type="checkbox" v-model="ciudades['sevilla']" id="sevilla" @change="filtrar"
+                                name="ciudad" class="mr-2 mt-1 ml-1 rounded-full p-2">
+                        </div>
 
+                        <div class="flex flex-col m-2 text-pink-400 items-center">
+                            <label for="malaga">Málaga</label>
+                            <input type="checkbox" v-model="ciudades['malaga']" id="malaga" @change="filtrar" name="ciudad"
+                                class="mx-2 mt-1 rounded-full p-2">
+                        </div>
+
+                        <div class="flex flex-col m-2 text-blue-400 items-center">
+                            <label for="cadiz">Cádiz</label>
+                            <input type="checkbox" v-model="ciudades['cadiz']" id="cadiz" @change="filtrar" name="ciudad"
+                                class="mx-2 mt-1 rounded-full p-2">
+                        </div>
+
+                        <div class="flex flex-col m-2 text-pink-400 items-center">
+                            <label for="granada">Granada</label>
+                            <input type="checkbox" v-model="ciudades['granada']" id="granada" @change="filtrar"
+                                name="ciudad" class="mx-2 mt-1 rounded-full p-2">
+                        </div>
+
+                        <div class="flex flex-col m-2 text-blue-400 items-center">
+                            <label for="cordoba">Córdoba</label>
+                            <input type="checkbox" v-model="ciudades['cordoba']" id="cordoba" @change="filtrar"
+                                name="ciudad" class="mx-2 mt-1 rounded-full p-2">
+                        </div>
+
+                        <div class="flex flex-col m-2 text-pink-400 items-center">
+                            <label for="almeria">Almería</label>
+                            <input type="checkbox" v-model="ciudades['almeria']" id="almeria" @change="filtrar"
+                                name="ciudad" class="mx-2 mt-1 rounded-full p-2">
+                        </div>
+
+                        <div class="flex flex-col m-2 text-blue-400 items-center">
+                            <label for="huelva">Huelva</label>
+                            <input type="checkbox" v-model="ciudades['huelva']" id="huelva" @change="filtrar" name="ciudad"
+                                class="mx-2 mt-1 rounded-full p-2">
+                        </div>
+
+                        <div class="flex flex-col m-2 text-pink-400 items-center">
+                            <label for="jaen">Jaén</label>
+                            <input type="checkbox" v-model="ciudades['jaen']" id="jaen" @change="filtrar" name="ciudad"
+                                class="mx-2 mt-1 rounded-full p-2">
+                        </div>
+
+                        <h1 class="text-white text-center text-xl">Musica</h1>
+
+                        <div v-for="m in musica" :key="m.id" class="flex flex-col m-2 text-blue-400 items-center">
+                            <label for="musica">{{m.nombre}}</label>
+                            <input type="checkbox" v-model="m.filtrado" @change="filtrar"
+                                name="ciudad" class="mr-2 mt-1 ml-1 rounded-full p-2">
+                        </div>
+
+                        <h1 class="text-white text-center text-xl">Tematica</h1>
+
+                        <div v-for="t in tematica" :key="t.id" class="flex flex-col m-2 text-pink-400 items-center">
+                            <label for="tematica">{{t.nombre}}</label>
+                            <input type="checkbox" v-model="t.filtrado" @change="filtrar"
+                                name="ciudad" class="mr-2 mt-1 ml-1 rounded-full p-2">
+                        </div>
+
+
+                    </div>
+                    <div class="divUno ">
+                        <div class="divDos ">
+                            <div class="divFiesta" v-for="fiesta in  orderByDate(fiestasFiltradas)" :key="fiesta.id">
+                                <img v-bind:src="'https://pipartytime.com/storage/fiestas/' + fiesta.foto" class="imgFiesta"
+                                    alt="">
+                                <nav-link class="h1Fiesta text-pink-600 hover:text-blue-950"
+                                    :href="'perfil/' + fiesta.empresa.id">{{ fiesta.empresa.nombre }} -> {{
+                                        formatdate(fiesta.fecha) }}</nav-link>
+                                <div class="contentFiesta ">
+                                    <p>Musica:</p>
+                                    <p>{{ fiesta.musica.nombre }}</p>
+                                    <p>Tematica:</p>
+                                    <p>{{ fiesta.tematica.nombre }}</p>
+                                </div>
+                                <div class="m-2">
+                                    <h1 class="h1Fiesta ">ENTRADAS</h1>
+                                    <p class="entradaFiesta" v-if="!$page.props.auth.user">Se requiere
+                                        <nav-link class="linkEntrada" href="/login">Inicia Sesion</nav-link> para reservar
+                                    </p>
+                                    <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
+                                        delay: 4500,
+                                        disableOnInteraction: false,
+                                    }" :pagination="false" :navigation="false" :modules="modules"
+                                        v-else-if="fiesta.entrada.length > 0">
+
+                                        <swiper-slide v-for="e in fiesta.entrada" class="mySwiper swiperEntrada"
+                                            :key="e.id">
+                                            <p :class="color[Math.floor(Math.random() * 6)] + ' text-lg'">{{ e.tipo }}</p>
+                                            <p class="m-2"> {{ e.consumiciones }} Copas </p>
+                                            <p class="m-2"> {{ e.precio }}€ </p>
+                                            <div class="reservaEntrada ">
+                                                <button @click="enviar(e.id)">Reservar</button>
+                                            </div>
+                                        </swiper-slide>
+                                    </swiper>
+                                    <p class="noDisponible" v-else>No hay entradas
+                                        disponibles</P>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
+
             </section>
         </Layout>
     </section>
@@ -100,8 +177,24 @@ export default {
         return {
             showMenu: false,
             fiestas: [],
+            fiestasFiltradas: [],
             empresas: [],
             id_entrada: '',
+            musica:[],
+            tematica:[],
+            filtrosciudad:[],
+            filtrosmusica:[],
+            filtrostematica:[],
+            ciudades: {
+                almeria: false,
+                granada: false,
+                cadiz: false,
+                cordoba: false,
+                malaga: false,
+                sevilla: false,
+                huelva: false,
+                jaen: false
+            },
             color: ['text-blue-600', 'text-pink-600', 'text-red-600', 'text-green-600', 'text-purple-600', 'text-violet-600'],
         };
     }, methods: {
@@ -138,7 +231,38 @@ export default {
             return fiestas.sort(function (a, b) {
                 return new Date(a.fecha) - new Date(b.fecha);
             });
+        },
+
+        filtrar() {
+            this.fiestasFiltradas = [];
+            this.filtrosciudad = [];
+            this.filtrosmusica = [];
+            this.filtrostematica = [];
+            for (let ciudad in this.ciudades) {
+                if (this.ciudades[ciudad]) {
+                    this.filtrosciudad.push(ciudad)
+                }
+            }
+            for (let mus in this.musica) {
+                console.log(this.musica[mus].filtrado)
+                if (this.musica[mus].filtrado) {
+                    this.filtrosmusica.push(this.musica[mus].nombre)
+                }
+            }
+            
+            if (this.filtrosciudad.length == 0) {
+                this.fiestasFiltradas = this.fiestas;
+            } else {
+                for (let fiesta in this.fiestas) {
+                    // console.log(this.fiestas[fiesta].empresa.ubicacion.toLowerCase())
+                    if (this.filtrosciudad.includes(this.fiestas[fiesta].empresa.ubicacion.toLowerCase())) {
+                        this.fiestasFiltradas.push(this.fiestas[fiesta])
+                    }
+                }
+                // console.log(this.filtros)
+            }
         }
+
     },
     setup() {
         return {
@@ -149,6 +273,7 @@ export default {
         axios.get('/listarfiestas')
             .then(response => {
                 this.fiestas = response.data;
+                this.fiestasFiltradas = response.data;
             })
             .catch(error => {
                 // console.log(error);
@@ -157,6 +282,20 @@ export default {
         axios.get('/listarallempresas')
             .then(response => {
                 this.empresas = response.data;
+            })
+            .catch(error => {
+                // console.log(error);
+            });
+        axios.get('/listarmusica')
+            .then(response => {
+                this.musica = response.data;
+            })
+            .catch(error => {
+                // console.log(error);
+            });
+        axios.get('/listartematica')
+            .then(response => {
+                this.tematica = response.data;
             })
             .catch(error => {
                 // console.log(error);
