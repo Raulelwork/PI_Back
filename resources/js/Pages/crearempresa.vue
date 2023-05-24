@@ -106,6 +106,11 @@ export default {
             }).then(response => {
                 // console.log(response);
                 this.showAlert()
+                this.nombre = ''
+                this.foto = null
+                this.cif = ''
+                this.ubicacion = ''
+                this.lugar = ''
             }).catch(error => {
                 // console.log(error);
                 this.showAlertError()

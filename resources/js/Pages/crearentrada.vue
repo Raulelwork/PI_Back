@@ -52,7 +52,7 @@ import Layout from '@/components/Layout.vue';
                             </select>
                         </div>
                         <div>
-                            <label for="precio">Nº Aforo</label>
+                            <label for="precio">Entradas</label>
                             <br>
                             <input
                                 class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200"
@@ -144,6 +144,11 @@ export default {
                 }).then(response => {
                     // console.log(response);
                     this.showAlert()
+                    this.fiesta_elegida = ''
+                    this.precio= ''
+                    this.aforo= ''
+                    this.consumiciones= ''
+                    this.tipo_entrada= ''
                 }).catch(error => {
                     // console.log(error);
                     this.showAlertError()

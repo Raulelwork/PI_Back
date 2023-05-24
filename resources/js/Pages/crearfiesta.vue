@@ -126,6 +126,11 @@ export default {
             }).then(response => {
                 // console.log(response);
                 this.showAlert()
+                this.foto = null
+                this.fecha = ''
+                this.id_tematica = ''
+                this.id_musica= '',
+                this.id_empresa= '',
             }).catch(error => {
                 // console.log(error);
                 this.showAlertError()

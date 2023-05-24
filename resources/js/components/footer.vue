@@ -2,11 +2,11 @@
 <template>
     <footer class="bg-white dark:bg-gray-900">
 
-        <div class="sm:flex sm:items-center sm:justify-between pb-6 pt-8">
-            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400 ml-6">© 2023 <a href="https://flowbite.com/"
+        <div class="flex flex-col sm:justify-between pb-6 pt-8">
+            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400 ml-6">© 2023 <a href="https://pipartytime.com/"
                     class="hover:underline">PartyTime™</a>. Todos los derechos reservados.
             </span>
-            <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0 mr-6">
+            <div class="flex justify-center mt-4 space-x-6 sm:justify-center sm:mt-0 mr-6">
                 <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill-rule="evenodd"

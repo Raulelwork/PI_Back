@@ -142,6 +142,9 @@ export default {
             }).then(response => {
                 // console.log(response);
                 this.showAlert()
+                this.fiesta_elegida = ''
+                this.id_musica = ''
+                this.id_empresa = ''
             }).catch(error => {
                 // console.log(error);
                 this.showAlertError()

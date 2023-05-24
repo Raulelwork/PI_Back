@@ -110,7 +110,7 @@ export default {
 
 /* Estilos de las fiestas  */
 .divUno{
-    @apply min-[450px]:grid place-items-center  border-t-4 border-t-black;
+    @apply min-[450px]:grid place-items-center;
 }
 .divDos{
     @apply flex flex-wrap justify-center min-[1600px]:grid min-[1600px]:grid-cols-4;

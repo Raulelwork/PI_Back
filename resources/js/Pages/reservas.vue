@@ -2,6 +2,8 @@
 <template>
     <section class="fondoreserva">
         <Layout>
+            <h1 class="text-3xl text-center text-white my-10">MIS RESERVAS</h1>
+
             <div class=" min-[450px]:grid place-items-center border-t-black">
                 <div class=" flex flex-wrap justify-center min-[1400px]:grid min-[1400px]:grid-cols-4">
                     <div v-for="entrada in  orderByDate(entradas)" :key="entrada.id"
@@ -24,7 +26,7 @@
                         </div>
 
                         <div class=" m-2 text-center">
-                            <button @click="eliminar([entrada.id,entrada.idreserva])"
+                            <button @click="eliminar([entrada.id, entrada.idreserva])"
                                 class="  rounded-md transition duration-300 hover:scale-125">
                                 <img src="../../img/icon/no.png" class="w-12  m-4" alt="Cancelar">
                             </button>
@@ -77,11 +79,11 @@ export default {
             const id_entrada = array[0];
             axios.post('/eliminarreserva', {
                 'id': id,
-                'id_entrada':id_entrada
+                'id_entrada': id_entrada
             }).then(response => {
                 // console.log(response);
                 for (var i = 0; i < this.entradas.length; i++) {
-                    if (this.entradas[i].idreserva== id) {
+                    if (this.entradas[i].idreserva == id) {
                         this.entradas.splice(i, 1);
                     }
                 }

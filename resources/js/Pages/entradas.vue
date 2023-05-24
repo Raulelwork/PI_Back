@@ -102,12 +102,13 @@
 
 
                     </div>
+
                     <div class="dropdown text-white">
                         <button class="md:hidden dropbtn m-4">Filtros</button>
                         <div class="dropdown-content">
                             <div class="flex flex-col bg-black/70 rounded-br-xl float-left p-4 overflow-y-auto h-96 w-44">
                                 <h1 class="text-white text-xl">Ciudades</h1>
-                                <div class="m-2 text-blue-400 block inline-block">
+                                <div class="m-2 text-blue-400 inline-block">
                                     <input type="checkbox" v-model="ciudades['sevilla']" id="sevilla" @change="filtrar"
                                         name="ciudad" class="mx-2 mt-1 rounded-full p-1">
                                     <label for="sevilla">Sevilla</label>
@@ -173,6 +174,8 @@
 
                         </div>
                     </div>
+                    <h1 class="text-white text-3xl text-center">ENTRADAS</h1>
+
                     <div class="divUno ">
                         <div class="divDos ">
                             <div class="divFiesta" v-for="fiesta in  orderByDate(fiestasFiltradas)" :key="fiesta.id">
@@ -200,7 +203,7 @@
 
                                         <swiper-slide v-for="e in fiesta.entrada" class="mySwiper swiperEntrada"
                                             :key="e.id">
-                                            <p :class="color[Math.floor(Math.random() * 6)] + ' text-lg'">{{ e.tipo }}</p>
+                                            <p :class="color[Math.floor(Math.random() * 6)] + ' text-base'">{{ e.tipo }}</p>
                                             <p class="m-2"> {{ e.consumiciones }} Copas </p>
                                             <p class="m-2"> {{ e.precio }}€ </p>
                                             <div class="reservaEntrada ">
@@ -406,7 +409,7 @@ export default {
 
 <style>
 #discotecas {
-    background-image: url(../../img/fondodisc2.jpg);
+    background-image: url(../../img/fondodisc2.webp);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -417,5 +420,25 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropdown-content div {
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 </style>
