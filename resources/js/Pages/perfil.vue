@@ -7,7 +7,7 @@
             <div class="flex flex-wrap justify-center items-center text-center text-white">
                 <div class="max-w-xl bg-gray-800/80 rounded-md m-12">
                     <img v-bind:src="'https://pipartytime.com/storage/empresas/' + empresa.foto"
-                        class="max-w-sm max-h-sm object-cover p-12" alt="foto perfil">
+                        class=" md:max-w-sm max-h-sm object-cover md:p-12" alt="foto perfil">
 
                 </div>
                 <div class="w-96 h-80 bg-gray-800/90 rounded-md ">

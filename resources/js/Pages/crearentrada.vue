@@ -12,7 +12,7 @@ import Layout from '@/components/Layout.vue';
                             <label for="Selecciona la fiesta:">Fiesta:</label>
                             <br>
                             <div class=" overflow-y-auto h-10 mx-4 break-words text-justify	">
-                                <select v-model="fiesta_elegida" name="lenguajes" id="lang"
+                                <select required v-model="fiesta_elegida" name="lenguajes" id="lang"
                                     class="p-1 text-gray-300 rounded-md bg-gray-700 h-10">
                                     <option value="" selected disabled>Seleccionar una opción</option>
                                     <optgroup v-for="e in empresas" :key="e.id" class="text-pink-300" :label="e.nombre">
@@ -42,7 +42,7 @@ import Layout from '@/components/Layout.vue';
                         <div class="mt-8">
                             <label for="tipo_entrada">Tipo</label>
                             <br>
-                            <select name="tipo_entrada" v-model="tipo_entrada" id="tipo_entrada"
+                            <select name="tipo_entrada" required v-model="tipo_entrada" id="tipo_entrada"
                                 class="p-1 text-gray-300 rounded-md bg-gray-700">
                                 <option value="Basica">Basica</option>
                                 <option value="Normal">Normal</option>
@@ -113,27 +113,44 @@ export default {
 
     },
     methods: {
+        validacion() {
+            if (this.precio < 0 || this.precio == '') {
+                return false
+            }
+            if (this.aforo < 0 || this.aforo == '') {
+                return false
+            }
+            if (this.consumiciones < 0 || this.consumiciones == '') {
+                return false
+            }
+            return true
+        },
         formatdate(dateTimeString) {
             return dateTimeString.slice(0, 10);
         },
         enviar() {
-            const formData = new FormData();
-            formData.append('fiesta_elegida', this.fiesta_elegida);
-            formData.append('precio', this.precio);
-            formData.append('aforo', this.aforo);
-            formData.append('consumiciones', this.consumiciones);
-            formData.append('tipo', this.tipo_entrada);
-            axios.post('/crearentradas', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then(response => {
-                // console.log(response);
-                this.showAlert()
-            }).catch(error => {
-                // console.log(error);
-                this.showAlertError()
-            });
+
+            if (this.validacion()) {
+                const formData = new FormData();
+                formData.append('fiesta_elegida', this.fiesta_elegida);
+                formData.append('precio', this.precio);
+                formData.append('aforo', this.aforo);
+                formData.append('consumiciones', this.consumiciones);
+                formData.append('tipo', this.tipo_entrada);
+                axios.post('/crearentradas', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(response => {
+                    // console.log(response);
+                    this.showAlert()
+                }).catch(error => {
+                    // console.log(error);
+                    this.showAlertError()
+                });
+            }else{
+                this.showAlertValidacion()
+            }
         },
         showAlert() {
             Swal.fire({
@@ -147,7 +164,15 @@ export default {
             Swal.fire({
                 title: 'Ha surgido un error',
                 text: 'Error inesperado. Intenta realizar esta operacion en unos minutos..',
-                icon: 'success',
+                icon: 'error',
+                confirmButtonColor: '#1a202c'
+            });
+        },
+        showAlertValidacion() {
+            Swal.fire({
+                title: 'Error de validacion',
+                text: 'Los datos introducidos no son validos.',
+                icon: 'error',
                 confirmButtonColor: '#1a202c'
             });
         },

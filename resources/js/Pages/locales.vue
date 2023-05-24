@@ -4,75 +4,129 @@
     <section class="entradas">
 
         <Layout>
-                <div class="flex flex-col bg-black/70 rounded-br-xl float-left p-4 ">
-                    <h1 class="text-white text-xl" >Ciudades</h1>
-                    <div class="flex flex-col m-2 text-blue-400 items-center">
-                        <label for="sevilla">Sevilla</label>
-                        <input type="checkbox" v-model="ciudades['sevilla']" id="sevilla" @change="filtrar" name="ciudad"
-                            class="mr-2 mt-1 ml-1 rounded-full p-2">
-                    </div>
-
-                    <div class="flex flex-col m-2 text-pink-400 items-center">
-                        <label for="malaga">Málaga</label>
-                        <input type="checkbox" v-model="ciudades['malaga']" id="malaga" @change="filtrar" name="ciudad"
-                            class="mx-2 mt-1 rounded-full p-2">
-                    </div>
-
-                    <div class="flex flex-col m-2 text-blue-400 items-center">
-                        <label for="cadiz">Cádiz</label>
-                        <input type="checkbox" v-model="ciudades['cadiz']" id="cadiz" @change="filtrar" name="ciudad"
-                            class="mx-2 mt-1 rounded-full p-2">
-                    </div>
-
-                    <div class="flex flex-col m-2 text-pink-400 items-center">
-                        <label for="granada">Granada</label>
-                        <input type="checkbox" v-model="ciudades['granada']" id="granada" @change="filtrar" name="ciudad"
-                            class="mx-2 mt-1 rounded-full p-2">
-                    </div>
-
-                    <div class="flex flex-col m-2 text-blue-400 items-center">
-                        <label for="cordoba">Córdoba</label>
-                        <input type="checkbox" v-model="ciudades['cordoba']" id="cordoba" @change="filtrar" name="ciudad"
-                            class="mx-2 mt-1 rounded-full p-2">
-                    </div>
-
-                    <div class="flex flex-col m-2 text-pink-400 items-center">
-                        <label for="almeria">Almería</label>
-                        <input type="checkbox" v-model="ciudades['almeria']" id="almeria" @change="filtrar" name="ciudad"
-                            class="mx-2 mt-1 rounded-full p-2">
-                    </div>
-
-                    <div class="flex flex-col m-2 text-blue-400 items-center">
-                        <label for="huelva">Huelva</label>
-                        <input type="checkbox" v-model="ciudades['huelva']" id="huelva" @change="filtrar" name="ciudad"
-                            class="mx-2 mt-1 rounded-full p-2">
-                    </div>
-
-                    <div class="flex flex-col m-2 text-pink-400 items-center">
-                        <label for="jaen">Jaén</label>
-                        <input type="checkbox" v-model="ciudades['jaen']" id="jaen" @change="filtrar" name="ciudad"
-                            class="mx-2 mt-1 rounded-full p-2">
-                    </div>
+            <h1 class="text-white p-3 rounded-sm text-5xl mt-4 max-[1120px]:mx-0 max-[1120px]:text-4xl  text-center mx-96">
+                LOCALES
+            </h1>
+            <div class="hidden md:flex flex-col bg-black/70 rounded-br-xl float-left p-4 ">
+                <h1 class="text-white text-xl">Ciudades</h1>
+                <div class="flex flex-col m-2 text-blue-400 items-center">
+                    <label for="sevilla">Sevilla</label>
+                    <input type="checkbox" v-model="ciudades['sevilla']" id="sevilla" @change="filtrar" name="ciudad"
+                        class="mr-2 mt-1 ml-1 rounded-full p-2">
                 </div>
-                <div class=" min-[450px]:grid place-items-center  border-t-4 border-t-black">
-                    <h1
-                        class="text-white p-3 rounded-sm text-5xl mt-4 max-[1120px]:mx-0 max-[1120px]:text-4xl  text-center mx-96">
-                        LOCALES
-                    </h1>
 
-                    <div class=" flex flex-wrap justify-center min-[1400px]:grid min-[1400px]:grid-cols-4">
-                        <div v-for="empresa in empresasFiltradas" :key="empresa.id">
-                            <nav-link :href="'perfil/' + empresa.id" class="no-underline">
-                                <div
-                                    class="bg-gray-300/20 max-w-sm rounded-sm overflow-hidden shadow-xl  shadow-pink-600/40  m-7 p-4 transition duration-500 hover:scale-110">
-                                    <h2 class="text-white text-4xl m-3 text-center">{{ empresa.nombre }}</h2>
-                                    <img v-bind:src="'https://pipartytime.com/storage/empresas/' + empresa.foto"
-                                        class="mb-4 object-cover h-72 w-72 " alt="">
-                                </div>
-                            </nav-link>
+                <div class="flex flex-col m-2 text-pink-400 items-center">
+                    <label for="malaga">Málaga</label>
+                    <input type="checkbox" v-model="ciudades['malaga']" id="malaga" @change="filtrar" name="ciudad"
+                        class="mx-2 mt-1 rounded-full p-2">
+                </div>
+
+                <div class="flex flex-col m-2 text-blue-400 items-center">
+                    <label for="cadiz">Cádiz</label>
+                    <input type="checkbox" v-model="ciudades['cadiz']" id="cadiz" @change="filtrar" name="ciudad"
+                        class="mx-2 mt-1 rounded-full p-2">
+                </div>
+
+                <div class="flex flex-col m-2 text-pink-400 items-center">
+                    <label for="granada">Granada</label>
+                    <input type="checkbox" v-model="ciudades['granada']" id="granada" @change="filtrar" name="ciudad"
+                        class="mx-2 mt-1 rounded-full p-2">
+                </div>
+
+                <div class="flex flex-col m-2 text-blue-400 items-center">
+                    <label for="cordoba">Córdoba</label>
+                    <input type="checkbox" v-model="ciudades['cordoba']" id="cordoba" @change="filtrar" name="ciudad"
+                        class="mx-2 mt-1 rounded-full p-2">
+                </div>
+
+                <div class="flex flex-col m-2 text-pink-400 items-center">
+                    <label for="almeria">Almería</label>
+                    <input type="checkbox" v-model="ciudades['almeria']" id="almeria" @change="filtrar" name="ciudad"
+                        class="mx-2 mt-1 rounded-full p-2">
+                </div>
+
+                <div class="flex flex-col m-2 text-blue-400 items-center">
+                    <label for="huelva">Huelva</label>
+                    <input type="checkbox" v-model="ciudades['huelva']" id="huelva" @change="filtrar" name="ciudad"
+                        class="mx-2 mt-1 rounded-full p-2">
+                </div>
+
+                <div class="flex flex-col m-2 text-pink-400 items-center">
+                    <label for="jaen">Jaén</label>
+                    <input type="checkbox" v-model="ciudades['jaen']" id="jaen" @change="filtrar" name="ciudad"
+                        class="mx-2 mt-1 rounded-full p-2">
+                </div>
+            </div>
+            <div class="dropdown text-white">
+                <button class="md:hidden dropbtn m-4">Filtros</button>
+                <div class="dropdown-content">
+                    <div class="flex flex-col bg-black/70 rounded-br-xl float-left p-4 ">
+                        <h1 class="text-white text-xl">Ciudades</h1>
+                        <div class="m-2 text-blue-400 block inline-block">
+                            <input type="checkbox" v-model="ciudades['sevilla']" id="sevilla" @change="filtrar"
+                                name="ciudad" class="mx-2 mt-1 rounded-full p-1">
+                            <label for="sevilla">Sevilla</label>
+                        </div>
+
+                        <div class=" m-2 text-pink-400 block inline-block">
+                            <input type="checkbox" v-model="ciudades['malaga']" id="malaga" @change="filtrar" name="ciudad"
+                                class="mx-2 mt-1 rounded-full p-1">
+                            <label for="malaga">Málaga</label>
+                        </div>
+
+                        <div class="m-2 text-blue-400 block inline-block">
+                            <input type="checkbox" v-model="ciudades['cadiz']" id="cadiz" @change="filtrar" name="ciudad"
+                                class="mx-2 mt-1 rounded-full p-1">
+                            <label for="cadiz">Cádiz</label>
+                        </div>
+
+                        <div class=" m-2 text-pink-400 block inline-block">
+                            <input type="checkbox" v-model="ciudades['granada']" id="granada" @change="filtrar"
+                                name="ciudad" class="mx-2 mt-1 rounded-full p-1">
+                            <label for="granada">Granada</label>
+                        </div>
+
+                        <div class="m-2 text-blue-400 block inline-block">
+                            <input type="checkbox" v-model="ciudades['cordoba']" id="cordoba" @change="filtrar"
+                                name="ciudad" class="mx-2 mt-1 rounded-full p-1">
+                            <label for="cordoba">Córdoba</label>
+                        </div>
+
+                        <div class=" m-2 text-pink-400 block inline-block">
+                            <input type="checkbox" v-model="ciudades['almeria']" id="almeria" @change="filtrar"
+                                name="ciudad" class="mx-2 mt-1 rounded-full p-1">
+                            <label for="almeria">Almería</label>
+                        </div>
+
+                        <div class="m-2 text-blue-400 block inline-block">
+                            <input type="checkbox" v-model="ciudades['huelva']" id="huelva" @change="filtrar" name="ciudad"
+                                class="mx-2 mt-1 rounded-full p-1">
+                            <label for="huelva">Huelva</label>
+                        </div>
+
+                        <div class=" m-2 text-pink-400 block inline-block">
+                            <input type="checkbox" v-model="ciudades['jaen']" id="jaen" @change="filtrar" name="ciudad"
+                                class="mx-2 mt-1 rounded-full p-1">
+                            <label for="jaen">Jaén</label>
                         </div>
                     </div>
+
                 </div>
+            </div>
+            <div class=" min-[450px]:grid place-items-center">
+                <div class=" flex flex-wrap justify-center min-[1400px]:grid min-[1400px]:grid-cols-4">
+                    <div v-for="empresa in empresasFiltradas" :key="empresa.id">
+                        <nav-link :href="'perfil/' + empresa.id" class="no-underline">
+                            <div
+                                class="bg-gray-300/20 max-w-sm rounded-sm overflow-hidden shadow-xl  shadow-pink-600/40  m-7 p-4 transition duration-500 hover:scale-110">
+                                <h2 class="text-white text-4xl m-3 text-center">{{ empresa.nombre }}</h2>
+                                <img v-bind:src="'https://pipartytime.com/storage/empresas/' + empresa.foto"
+                                    class="mb-4 object-cover h-72 w-72 " alt="">
+                            </div>
+                        </nav-link>
+                    </div>
+                </div>
+            </div>
         </Layout>
     </section>
 </template>
@@ -147,4 +201,27 @@ export default {
 };
 
 </script>
+
+
+<style>
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropdown-content div {
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+</style>
 

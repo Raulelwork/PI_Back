@@ -39,9 +39,53 @@ export default {
     font-family: 'Righteous';
 }
 
+/* Personalizar el scrollbar */
+/* Webkit (Safari, Chrome, Opera) */
 ::-webkit-scrollbar {
-    display: none;
+  width: 10px;
 }
+
+::-webkit-scrollbar-thumb {
+  background-color: #818181;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #000;
+  border-radius: 5px;
+}
+
+/* Firefox */
+/* Utiliza la pseudo-clase "-moz" */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #818181 #000;
+}
+
+/* Estilos adicionales para Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #818181 #000;
+}
+
+/* Estilos adicionales para Microsoft Edge */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #818181 #000;
+}
+
+/* Estilos adicionales para Internet Explorer */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #818181 #000;
+}
+
+
+
+
+/* ::-webkit-scrollbar {
+    display: none;
+} */
 
 #cuerpo {
     min-height: 100vh;
@@ -72,7 +116,7 @@ export default {
     @apply flex flex-wrap justify-center min-[1600px]:grid min-[1600px]:grid-cols-4;
 }
 .divFiesta{
-    @apply bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg shadow-blue-700 m-7 max-[450px]:scale-75;
+    @apply bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg shadow-blue-700 m-7 sm:scale-95 lg:scale-100;
 }
 .imgFiesta{
     @apply mb-4 w-full h-80 object-cover;

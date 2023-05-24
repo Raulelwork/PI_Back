@@ -166,6 +166,7 @@ import Layout from '@/components/Layout.vue';
 import Swal from 'sweetalert2';
 
 
+
 export default {
     components: {
         Swiper,

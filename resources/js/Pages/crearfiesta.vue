@@ -143,7 +143,7 @@ export default {
             Swal.fire({
                 title: 'Ha surgido un error',
                 text: 'Error inesperado. Intenta realizar esta operacion en unos minutos..',
-                icon: 'success',
+                icon: 'error',
                 confirmButtonColor: '#1a202c'
             });
         },
