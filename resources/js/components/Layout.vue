@@ -163,7 +163,7 @@ export default {
     @apply m-4  md:border md:border-gray-500 block md:table-cell text-left min-[765px]:text-center;
 }
 
-.span {
+.mobile {
     @apply inline-block w-1/4 md:hidden text-pink-600 font-bold mr-4;
 }
 

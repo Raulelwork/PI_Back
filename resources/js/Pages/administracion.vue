@@ -22,18 +22,18 @@
                         <tr
                             class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
                             <td class="th">Nombre Empresa</td>
-                            <td class="th">Ubicacion</td>
+                            <td class="th">Ciudad</td>
                             <td class="th">Lugar</td>
                             <td class="th">Cif</td>
 
                         </tr>
                     </thead>
-                    <tbody class="block md:table-row-group" v-for="(empresa, index) in paginatedEmpresas" :key="empresa.id">
-                        <tr class="max-[765px]:border-2 border-black ">
-                            <td class="td"><span class="span">Nombre</span> {{ empresa.nombre }}</td>
-                            <td class="td"><span class="span">Ubicacion</span> {{ empresa.ubicacion }}</td>
-                            <td class="td"><span class="span">Lugar</span> {{ empresa.lugar }}</td>
-                            <td class="td"><span class="span">Cif</span>{{ empresa.cif }}</td>
+                    <tbody class="block md:table-row-group max-[765px]:border-2 border-black mb-1" v-for="(empresa, index) in paginatedEmpresas" :key="empresa.id">
+                        <tr>
+                            <td class="td"><span class="mobile">Nombre</span> {{ empresa.nombre }}</td>
+                            <td class="td"><span class="mobile">Ciudad</span> {{ empresa.ubicacion }}</td>
+                            <td class="td"><span class="mobile">Lugar</span> {{ empresa.lugar }}</td>
+                            <td class="td"><span class="mobile">Cif</span>{{ empresa.cif }}</td>
 
                         </tr>
                     </tbody>
@@ -71,12 +71,12 @@
 
                         </tr>
                     </thead>
-                    <tbody class="block md:table-row-group" v-for="(f, index) in orderByDate(paginatedFiestas)" :key="f.id">
-                        <tr class="max-[765px]:border-2 border-black ">
-                            <td class="td"><span class="span">Nombre</span> {{ f.empresa.nombre }}</td>
-                            <td class="td"><span class="span">Musica</span> {{ f.musica.nombre }}</td>
-                            <td class="td"><span class="span">Tematica</span> {{ f.tematica.nombre }}</td>
-                            <td class="td"><span class="span">Fecha</span>{{ f.fecha }}</td>
+                    <tbody class="block md:table-row-group max-[765px]:border-2 border-black mb-1" v-for="(f, index) in orderByDate(paginatedFiestas)" :key="f.id">
+                        <tr >
+                            <td class="td"><span class="mobile">Nombre</span> {{ f.empresa.nombre }}</td>
+                            <td class="td"><span class="mobile">Musica</span> {{ f.musica.nombre }}</td>
+                            <td class="td"><span class="mobile">Tematica</span> {{ f.tematica.nombre }}</td>
+                            <td class="td"><span class="mobile">Fecha</span>{{ f.fecha }}</td>
                             <td class="td">
                                 <button @click="eliminarfiesta(f.id)">
                                     <img src="../../img/icon/borrar.png" class="w-6 m-auto" alt="">
@@ -120,15 +120,15 @@
                             <td class="th">Eliminar</td>
                         </tr>
                     </thead>
-                    <tbody class="block md:table-row-group" v-for="(entrada, index) in paginatedEntradas" :key="entrada.id">
-                        <tr class="max-[765px]:border-2 border-black ">
-                            <td class="td"><span class="span">Tipo</span> {{ entrada.tipo }}</td>
-                            <td class="td"><span class="span">Precio</span> {{ entrada.precio }}</td>
-                            <td class="td"><span class="span">Copas</span> {{ entrada.consumiciones }}</td>
-                            <td class="td"><span class="span">Copas</span> {{ entrada.aforo }}</td>
-                            <td class="td"><span class="span">Copas</span> {{ entrada.aforoinicial }}</td>
-                            <td class="td"><span class="span">Fecha</span> {{ entrada.fecha }}</td>
-                            <td class="td"><span class="span">Empresa</span> {{ entrada.empresa }}</td>
+                    <tbody class="block md:table-row-group max-[765px]:border-2 border-black mb-1 " v-for="(entrada, index) in paginatedEntradas" :key="entrada.id">
+                        <tr>
+                            <td class="td"><span class="mobile">Tipo</span> {{ entrada.tipo }}</td>
+                            <td class="td"><span class="mobile">Precio</span> {{ entrada.precio }}</td>
+                            <td class="td"><span class="mobile">Copas</span> {{ entrada.consumiciones }}</td>
+                            <td class="td"><span class="mobile">Copas</span> {{ entrada.aforo }}</td>
+                            <td class="td"><span class="mobile">Copas</span> {{ entrada.aforoinicial }}</td>
+                            <td class="td"><span class="mobile">Fecha</span> {{ entrada.fecha }}</td>
+                            <td class="td"><span class="mobile">Empresa</span> {{ entrada.empresa }}</td>
 
                             <td class="td">
                                 <button @click="eliminarentrada(entrada.id)">
