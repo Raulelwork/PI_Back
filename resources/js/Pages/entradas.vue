@@ -178,7 +178,7 @@
 
                     <div class="divUno ">
                         <div class="divDos ">
-                            <div class="divFiesta" v-for="fiesta in  orderByDate(fiestasFiltradas)" :key="fiesta.id">
+                            <div class="divFiesta shadow-animated" v-for="fiesta in  orderByDate(fiestasFiltradas)" :key="fiesta.id">
                                 <img v-bind:src="'https://pipartytime.com/storage/fiestas/' + fiesta.foto" class="imgFiesta"
                                     alt="">
                                 <nav-link class="h1Fiesta text-pink-600 hover:text-blue-950"
@@ -441,4 +441,22 @@ export default {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+
+.shadow-animated {
+    animation: shadow-pulse 10s infinite;
+  }
+
+  @keyframes shadow-pulse {
+    0% {
+        box-shadow: 0 10px 13px 0px rgba(219, 39, 93, 0.637);
+    }
+    50% {
+      box-shadow: 0 10px 13px 0px rgb(0, 68, 170);
+    }
+    100% {
+        box-shadow: 0 10px 13px 0px rgba(219, 39, 93, 0.637);
+    }
+  }
+
 </style>

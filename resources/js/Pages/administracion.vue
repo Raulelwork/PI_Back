@@ -67,6 +67,7 @@
                             <td class="th">Musica</td>
                             <td class="th">Tematica</td>
                             <td class="th">Fecha</td>
+                            <td class="th">Reservas</td>
                             <td class="th">Eliminar</td>
 
                         </tr>
@@ -77,7 +78,14 @@
                             <td class="td"><span class="mobile">Musica</span> {{ f.musica.nombre }}</td>
                             <td class="td"><span class="mobile">Tematica</span> {{ f.tematica.nombre }}</td>
                             <td class="td"><span class="mobile">Fecha</span>{{ f.fecha }}</td>
-                            <td class="td">
+                            <td class="td"><span class="mobile">Reservas</span>
+                                <nav-link :href="'listadoreserva/' + f.id">
+                                    <img src="../../img/icon/listado.png" class="w-6 m-auto" alt="">
+
+                                </nav-link>
+
+                            </td>
+                            <td class="td"><span class="mobile">Eliminar</span>
                                 <button @click="eliminarfiesta(f.id)">
                                     <img src="../../img/icon/borrar.png" class="w-6 m-auto" alt="">
                                 </button>
@@ -263,7 +271,6 @@ export default {
             }).catch(error => {
             });
         },
-
     },
     computed: {
 

@@ -37,7 +37,6 @@ class ComentarioController extends Controller
         $comentario->contenido = $request->input('contenido');
         $comentario->id_empresa = $request->input('id_empresa');
         $comentario->id_usuario = Auth::id();
-        $comentario->eliminado = 0;
         $comentario->fecha =  Carbon::now()->format('Y-m-d H:i:s');
         $comentario->save();
         // Añadimos el nombre del usuario y devuelvo el comentario para añadirlo a los comentarios
@@ -77,5 +76,21 @@ class ComentarioController extends Controller
     public function destroy(Comentario $comentario)
     {
         //
+    }
+
+    public function listar(){
+        $comentarios = Comentario::all();
+
+        foreach($comentarios as $comentario){
+            $usuario = User::find($comentario->id_usuario);
+            $comentario->setAttribute('nombre',$usuario->nombre);
+        }
+        return $comentarios;
+    }
+
+    public function eliminar(Request $request){
+        $id=$request->input('id');
+        $comentario = Comentario::find($id);
+        $comentario->delete();
     }
 }

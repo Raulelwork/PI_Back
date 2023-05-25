@@ -10,7 +10,7 @@
                         class="bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg  m-7  max-[450px]:scale-75">
                         <img v-bind:src="'https://pipartytime.com/storage/fiestas/' + entrada.foto"
                             class="mb-4 w-full h-80 object-cover" alt="">
-                        <h1 class="text-lg text-center">{{ entrada.nombreempresa }} -> {{ formatdate(entrada.fecha)
+                        <h1 class="text-lg text-center text-pink-600">{{ entrada.nombreempresa }} -> {{ formatdate(entrada.fecha)
                         }}</h1>
                         <div class=" grid grid-cols-2 text-left text-black justify-items-center items-center">
                             <p>Tipo Entrada:</p>

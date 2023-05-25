@@ -58,6 +58,8 @@ Route::get('/reservas', function () {
 
 Route::get('/perfil/{id}',[EmpresaController::class,'cargaperfil']);
 
+Route::get('/listadoreserva/{id_fiesta}',[ReservaController::class,'listarad']);
+
 Route::get('/administracion', function () {
     return Inertia::render('administracion');
 });
@@ -128,6 +130,10 @@ Route::get('/listarreservas',[ReservaController::class,'mostrar']);
 
 Route::get('/reservasdeusuario',[FiestaController::class,'reservasUsuario']);
 
+Route::get('/listarcomentarios',[ComentarioController::class,'listar']);
+
+
+
 // Eliminar Datos
 
 Route::post('/eliminarentrada',[EntradaController::class,'eliminar']);
@@ -135,6 +141,8 @@ Route::post('/eliminarentrada',[EntradaController::class,'eliminar']);
 Route::post('/eliminarfiesta',[FiestaController::class,'eliminar']);
 
 Route::post('/eliminarreserva',[ReservaController::class,'eliminar']);
+
+Route::post('/eliminarcomentario',[ComentarioController::class,'eliminar']);
 
 
 

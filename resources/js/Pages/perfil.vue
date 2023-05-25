@@ -38,7 +38,7 @@
             <div class="divUno ">
                 <h1 class="text-white text-3xl text-center">ENTRADAS</h1>
                 <div class="divDos ">
-                    <div class="divFiesta" v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
+                    <div class="divFiesta shadow-animated" v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
                         <img v-bind:src="'https://pipartytime.com/storage/fiestas/' + fiesta.foto" class="imgFiesta" alt="">
                         <h1 class="h1Fiesta text-pink-600">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha) }}</h1>
                         <div class="contentFiesta ">
@@ -193,5 +193,21 @@ export default {
     justify-content: center;
     align-items: center;
 }
+
+.shadow-animated {
+    animation: shadow-pulse 10s infinite;
+  }
+
+  @keyframes shadow-pulse {
+    0% {
+        box-shadow: 0 10px 13px 0px rgba(219, 39, 93, 0.637);
+    }
+    50% {
+      box-shadow: 0 10px 13px 0px rgb(0, 68, 170);
+    }
+    100% {
+        box-shadow: 0 10px 13px 0px rgba(219, 39, 93, 0.637);
+    }
+  }
 </style>
 

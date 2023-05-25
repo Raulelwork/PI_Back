@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Reserva;
 use App\Models\Entrada;
+use App\Models\Fiesta;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class ReservaController extends Controller
 {
@@ -86,6 +89,40 @@ class ReservaController extends Controller
     {
         return Reserva::where('id_cliente', '=', Auth::id())->get();
     }
+
+
+    // Devuelve las reservas de la fiesta que esta seleccionada en administracion->mostrar reservas
+    public function listarad($id_f){
+        $totalReservas = [];
+        $fiesta =  Fiesta::with(['Empresa', 'Musica', 'Tematica', 'Adentrada'])->find($id_f);
+         foreach ($fiesta->adentrada as $entrada){
+            $reservas = Reserva::where('id_entrada',$entrada->id)->get();
+
+            foreach($reservas as $reserva){
+                $usuario = User::find($reserva->id_cliente);
+                $reserva->setAttribute('nombre',$usuario->nombre);
+                $reserva->setAttribute('apellidos',$usuario->apellidos);
+                $reserva->setAttribute('email',$usuario->email);
+                $reserva->setAttribute('telefono',$usuario->telefono);    
+                $reserva->setAttribute('tipo_entrada',$entrada->tipo);    
+                array_push($totalReservas,$reserva);
+
+            }
+
+        }
+
+        return Inertia::render('listadoreservas', [
+
+            'reservas'=> $totalReservas,
+            'id_seguridad' =>$fiesta->empresa->id_usuario,
+            'nombre_empresa' => $fiesta->empresa->nombre,
+            'musica' =>$fiesta->musica->nombre,
+            'tematica' =>$fiesta->tematica->nombre,
+            'fecha_fiesta' =>$fiesta->fecha            
+
+        ]);
+    }
+
 
     public function eliminar(Request $request)
     {

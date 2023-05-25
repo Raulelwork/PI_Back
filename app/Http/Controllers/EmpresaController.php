@@ -97,7 +97,7 @@ class EmpresaController extends Controller
     }
     public function cargaperfil($id){
         $empresa = Empresa::where('id',$id)->first();
-        $comentarios = Comentario::where('id_empresa',$id)->where('eliminado','==',0)->get();
+        $comentarios = Comentario::where('id_empresa',$id)->get();
         // $comentarios->setAttribute('nombre_usuario','');
         foreach($comentarios as $comentario){
             $userName = User::where('id',$comentario->id_usuario)->get('nombre');

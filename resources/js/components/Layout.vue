@@ -116,7 +116,7 @@ export default {
     @apply flex flex-wrap justify-center min-[1600px]:grid min-[1600px]:grid-cols-4;
 }
 .divFiesta{
-    @apply bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg shadow-blue-700 m-7 sm:scale-95 lg:scale-100;
+    @apply bg-white/90 max-w-sm rounded-t-xl overflow-hidden m-7 sm:scale-95 lg:scale-100;
 }
 .imgFiesta{
     @apply mb-4 w-full h-80 object-cover;
@@ -164,7 +164,7 @@ export default {
 }
 
 .mobile {
-    @apply inline-block w-1/4 md:hidden text-pink-600 font-bold mr-4;
+    @apply inline-block w-1/4 md:hidden text-pink-600 font-bold mr-6;
 }
 
 .th {

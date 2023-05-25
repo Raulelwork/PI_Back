@@ -9,6 +9,6 @@ class Comentario extends Model
 {
     public $timestamps = false;
     use HasFactory;
-    protected $fillable = ['id_usuario', 'id_empresa', 'contenido', 'fecha','lugar'];
+    protected $fillable = ['id_usuario', 'id_empresa', 'contenido', 'fecha'];
 
 }
