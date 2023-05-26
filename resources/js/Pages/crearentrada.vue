@@ -5,7 +5,7 @@ import Layout from '@/components/Layout.vue';
     <section class="fondolog">
         <Layout>
             <section class="flex justify-center mt-14">
-                <div class=" max-w-md justify-center text-white text-center mt-8 bg-gray-800/90 rounded-md p-12">
+                <div class=" max-w-md justify-center text-white text-center mt-8 bg-gray-900/90 rounded-md p-12">
                     <h1 class="text-3xl text-white">Crear Entrada</h1>
                     <form action="">
                         <div class="mt-8">
@@ -59,7 +59,7 @@ import Layout from '@/components/Layout.vue';
                                 type="number" v-model="aforo">
                         </div>
                         <button
-                            class="decoration-0 m-4 px-3 py-2 border-2 rounded-md bg-pink-900/80 hover:bg-pink-800/80 text-white hover:scale-110 duration-200"
+                        class="decoration-0 m-4 px-3 py-2 border-2 border-black rounded-md bg-blue-300/70 hover:bg-blue-400/80 text-white hover:scale-110 duration-200"
                             @click.prevent="enviar">Crear Entrada</button>
 
                     </form>
