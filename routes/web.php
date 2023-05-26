@@ -114,6 +114,8 @@ Route::get('/listarempresas',[EmpresaController::class,'getallid']);
 
 Route::get('/listarallempresas',[EmpresaController::class,'getall']);
 
+Route::get('/listarrandomempresas',[EmpresaController::class,'getrandom']);
+
 Route::get('/listarfiestas',[FiestaController::class,'getall']);
 
 Route::get('/listarfiestasad',[FiestaController::class,'getforadministracion']);

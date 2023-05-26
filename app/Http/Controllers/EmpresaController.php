@@ -95,6 +95,10 @@ class EmpresaController extends Controller
     {
         return Empresa::all();
     }
+    public function getrandom()
+    {
+        return Empresa::inRandomOrder()->take(5)->get();
+    }
     public function cargaperfil($id){
         $empresa = Empresa::where('id',$id)->first();
         $comentarios = Comentario::where('id_empresa',$id)->get();

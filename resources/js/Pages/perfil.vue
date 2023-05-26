@@ -1,18 +1,20 @@
 <template>
     <section class="entradas">
         <Layout>
-            <section class="fondolog">
+            <section class="fondolog
+            ">
 
-            <h1 class="text-7xl text-center text-white pt-14 mb-12">{{ empresa.nombre }}</h1>
+            <h1 class="animated-name text-7xl text-center text-white pt-14 mb-12">{{ empresa.nombre }}</h1>
             <div class="flex flex-wrap justify-center items-center text-center text-white">
-                <div class="max-w-xl bg-gray-800/80 rounded-md m-12">
+                <div class="max-w-xl bg-gray-900/90 rounded-md m-12">
                     <img v-bind:src="'https://pipartytime.com/storage/empresas/' + empresa.foto"
                         class=" md:max-w-sm max-h-sm object-cover md:p-12" alt="foto perfil">
 
                 </div>
-                <div class="w-96 h-80 bg-gray-800/90 rounded-md ">
+                <div class="w-96 h-96 bg-gray-900/90 rounded-md ">
                     <h2 class="text-2xl mt-2 mb-3">Comentarios</h2>
-                    <div class=" overflow-y-auto h-44 mx-4 break-words text-justify	">
+                    <hr>
+                    <div class=" overflow-y-auto h-60 mx-4 break-words text-justify	">
                         <div v-for="comentario in orderByDateComent(empresa.comentarios)" :key="comentario.id">
                             <p :class="color[Math.floor(Math.random() * 6)] + ' text-lg'">{{ comentario.nombreusuario }}</p>
                             <p class="text-white">{{ comentario.contenido }}</p>
@@ -36,7 +38,7 @@
 
 
             <div class="divUno ">
-                <h1 class="text-white text-3xl text-center">ENTRADAS</h1>
+                <h1 class="text-white text-4xl mt-4 text-center">ENTRADAS</h1>
                 <div class="divDos ">
                     <div class="divFiesta shadow-animated" v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
                         <img v-bind:src="'https://pipartytime.com/storage/fiestas/' + fiesta.foto" class="imgFiesta" alt="">
@@ -209,5 +211,23 @@ export default {
         box-shadow: 0 10px 13px 0px rgba(219, 39, 93, 0.637);
     }
   }
+
+
+
+  /* .animated-name {
+  transition: color 0.5s ease;
+} */
+
+.animated-name{
+  animation: colorAnimation 10s infinite;
+}
+
+@keyframes colorAnimation {
+  0% { color: rgba(255, 0, 128, 0.514); }
+  50% { color: rgba(0, 174, 255, 0.699); }
+  100% {  color: rgba(255, 0, 128, 0.514); }
+}
+
+
 </style>
 

@@ -8,7 +8,7 @@
                 <div class="border-t-4 border-t-pink-600" id="discotecas">
                     <h1
                         class="text-white p-3 rounded-sm text-5xl mt-4 max-[1120px]:mx-0 max-[1120px]:text-4xl  text-center mx-96">
-                        LOCALES MAS DEMANDADOS
+                        LOCALES DESTACADOS
                     </h1>
                     <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
                         delay: 2500,
@@ -379,7 +379,7 @@ export default {
                 // console.log(error);
             });
 
-        axios.get('/listarallempresas')
+        axios.get('/listarrandomempresas')
             .then(response => {
                 this.empresas = response.data;
             })
