@@ -178,7 +178,8 @@
 
                     <div class="divUno ">
                         <div class="divDos ">
-                            <div class="divFiesta shadow-animated" v-for="fiesta in  orderByDate(fiestasFiltradas)" :key="fiesta.id">
+                            <div class="divFiesta shadow-animated" v-for="fiesta in paginatedFiestas"
+                                :key="fiesta.id">
                                 <img v-bind:src="'https://pipartytime.com/storage/fiestas/' + fiesta.foto" class="imgFiesta"
                                     alt="">
                                 <nav-link class="h1Fiesta text-pink-600 hover:text-blue-950"
@@ -217,6 +218,23 @@
 
                             </div>
                         </div>
+                    </div>
+                    <div class="flex justify-center m-4 text-white">
+                        <nav>
+                            <ul class="flex justify-center list-none p-0">
+                                <li class="pageitem" :class="{ disabled: currentPageFiesta === 1 }">
+                                    <button class="pagelink" @click="previousPageFiesta">Anterior</button>
+                                </li>
+                                <li class="pageitem" v-for="pageNumber in totalPagesFiesta" :key="pageNumber"
+                                    :class="{ active: pageNumber === currentPageFiesta }">
+                                    <button class="pagelink" @click="goToPageFiesta(pageNumber)">{{ pageNumber
+                                    }}</button>
+                                </li>
+                                <li class="pageitem" :class="{ disabled: currentPageFiesta === totalPagesFiesta }">
+                                    <button class="pagelink" @click="nextPageFiesta">Siguiente</button>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </section>
 
@@ -271,9 +289,26 @@ export default {
                 huelva: false,
                 jaen: false
             },
+            currentPageFiesta: 1,
+            itemsPerPage: 4,
             color: ['text-blue-600', 'text-pink-600', 'text-red-600', 'text-green-600', 'text-purple-600', 'text-violet-600'],
         };
     }, methods: {
+        previousPageFiesta() {
+            if (this.currentPageFiesta > 1) {
+                this.currentPageFiesta--;
+            }
+        },
+        //boton siguiente de la paginacion tabla Fiestas
+        nextPageFiesta() {
+            if (this.currentPageFiesta < this.totalPagesFiesta) {
+                this.currentPageFiesta++;
+            }
+        },
+        goToPageFiesta(pageNumber) {
+            this.currentPageFiesta = pageNumber;
+        },
+
         enviar(id_ent) {
             const id = id_ent
             axios.post('/hacerreserva', {
@@ -401,6 +436,17 @@ export default {
                 // console.log(error);
             });
     },
+    computed: {
+
+        paginatedFiestas() {
+            const startIndex = (this.currentPageFiesta - 1) * this.itemsPerPage;
+            const endIndex = startIndex + this.itemsPerPage;
+            return this.fiestasFiltradas.slice(startIndex, endIndex);
+        },
+        totalPagesFiesta() {
+            return Math.ceil(this.fiestasFiltradas.length / this.itemsPerPage);
+        },
+    }
 
 
 };
@@ -445,18 +491,19 @@ export default {
 
 .shadow-animated {
     animation: shadow-pulse 10s infinite;
-  }
+}
 
-  @keyframes shadow-pulse {
+@keyframes shadow-pulse {
     0% {
         box-shadow: 0 10px 13px 0px rgba(219, 39, 93, 0.637);
     }
+
     50% {
-      box-shadow: 0 10px 13px 0px rgb(0, 68, 170);
+        box-shadow: 0 10px 13px 0px rgb(0, 68, 170);
     }
+
     100% {
         box-shadow: 0 10px 13px 0px rgba(219, 39, 93, 0.637);
     }
-  }
-
+}
 </style>
