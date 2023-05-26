@@ -115,7 +115,7 @@
             </div>
             <div class=" min-[450px]:grid place-items-center">
                 <div class=" flex flex-wrap justify-center min-[1400px]:grid min-[1400px]:grid-cols-4">
-                    <div v-for="empresa in paginatedEmpresas" :key="empresa.id">
+                    <div v-for="empresa in empresasFiltradas" :key="empresa.id">
                         <nav-link :href="'perfil/' + empresa.id" class="no-underline">
                             <div
                                 class="bg-gray-300/20 max-w-sm rounded-sm overflow-hidden shadow-xl shadow-pink-600/40 hover:shadow-blue-500/40 m-7 p-4 transition duration-500 hover:scale-110">
@@ -126,23 +126,6 @@
                         </nav-link>
                     </div>
                 </div>
-            </div>
-            <div class="flex justify-center m-4 text-white">
-                <nav>
-                    <ul class="flex justify-center list-none p-0">
-                        <li class="pageitem" :class="{ disabled: currentPageFiesta === 1 }">
-                            <button class="pagelink hoverpage" @click="previousPageEmpresa">Anterior</button>
-                        </li>
-                        <li class="pageitem" v-for="pageNumber in totalPagesEmpresa" :key="pageNumber"
-                            :class="{ active: pageNumber === currentPageEmpresa }">
-                            <button class="pagelink hoverpage" @click="goToPageEmpresa(pageNumber)">{{ pageNumber
-                            }}</button>
-                        </li>
-                        <li class="pageitem" :class="{ disabled: currentPageEmpresa === totalPagesEmpresa }">
-                            <button class="pagelink hoverpage" @click="nextPageEmpresa">Siguiente</button>
-                        </li>
-                    </ul>
-                </nav>
             </div>
         </Layout>
     </section>
@@ -177,9 +160,7 @@ export default {
                 sevilla: false,
                 huelva: false,
                 jaen: false
-            },
-            currentPageEmpresa: 1,
-            itemsPerPage: 8,
+            }
 
         };
     },
@@ -195,20 +176,6 @@ export default {
             });
     },
     methods: {
-        previousPageEmpresa() {
-            if (this.currentPageEmpresa > 1) {
-                this.currentPageEmpresa--;
-            }
-        },
-        //boton siguiente de la paginacion tabla Empresas
-        nextPageEmpresa() {
-            if (this.currentPageEmpresa < this.totalPagesEmpresa) {
-                this.currentPageEmpresa++;
-            }
-        },
-        goToPageEmpresa(pageNumber) {
-            this.currentPageEmpresa = pageNumber;
-        },
         filtrar() {
             this.empresasFiltradas = [];
             this.filtros = [];
@@ -229,19 +196,8 @@ export default {
                 // console.log(this.filtros)
             }
         }
-    },
-
-    computed: {
-
-        paginatedEmpresas() {
-            const startIndex = (this.currentPageEmpresa - 1) * this.itemsPerPage;
-            const endIndex = startIndex + this.itemsPerPage;
-            return this.empresasFiltradas.slice(startIndex, endIndex);
-        },
-        totalPagesEmpresa() {
-            return Math.ceil(this.empresasFiltradas.length / this.itemsPerPage);
-        },
     }
+
 };
 
 </script>
@@ -267,5 +223,9 @@ export default {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+
+
+
 </style>
 

@@ -32,7 +32,7 @@
                 <section>
                     <div
                         class="hidden md:flex flex-col bg-black/70 rounded-br-xl min-[650px]:float-left p-4 overflow-y-auto h-96 w-44 ">
-                        <h1 class="text-white text-center text-2xl">Filtros</h1>
+                        <h1 class="text-white text-center text-2xl ">Filtros</h1>
                         <hr class="mb-4">
 
                         <h1 class="text-white text-center text-xl">Ciudades</h1>
@@ -104,7 +104,7 @@
                     </div>
 
                     <div class="dropdown text-white">
-                        <button class="md:hidden dropbtn m-4">Filtros</button>
+                        <h2 class="md:hidden dropbtn m-4">Filtros </h2>
                         <div class="dropdown-content">
                             <div class="flex flex-col bg-black/70 rounded-br-xl float-left p-4 overflow-y-auto h-96 w-44">
                                 <h1 class="text-white text-xl">Ciudades</h1>
@@ -177,9 +177,11 @@
                     <h1 class="text-white text-3xl text-center">ENTRADAS</h1>
 
                     <div class="divUno ">
+                        <p v-if="fiestasFiltradas.length == 0" class="text-white text-center text-xl p-4 mx-4">No hay fiestas disponibles
+                            con estos filtros.
+                            Intentelo de nuevo mas tarde...</p>
                         <div class="divDos ">
-                            <div class="divFiesta shadow-animated" v-for="fiesta in paginatedFiestas"
-                                :key="fiesta.id">
+                            <div class="divFiesta shadow-animated" v-for="fiesta in paginatedFiestas" :key="fiesta.id">
                                 <img v-bind:src="'https://pipartytime.com/storage/fiestas/' + fiesta.foto" class="imgFiesta"
                                     alt="">
                                 <nav-link class="h1Fiesta text-pink-600 hover:text-blue-950"
@@ -223,15 +225,15 @@
                         <nav>
                             <ul class="flex justify-center list-none p-0">
                                 <li class="pageitem" :class="{ disabled: currentPageFiesta === 1 }">
-                                    <button class="pagelink" @click="previousPageFiesta">Anterior</button>
+                                    <button class="pagelink hoverpage" @click="previousPageFiesta">Anterior</button>
                                 </li>
                                 <li class="pageitem" v-for="pageNumber in totalPagesFiesta" :key="pageNumber"
                                     :class="{ active: pageNumber === currentPageFiesta }">
-                                    <button class="pagelink" @click="goToPageFiesta(pageNumber)">{{ pageNumber
+                                    <button class="pagelink hoverpage" @click="goToPageFiesta(pageNumber)">{{ pageNumber
                                     }}</button>
                                 </li>
                                 <li class="pageitem" :class="{ disabled: currentPageFiesta === totalPagesFiesta }">
-                                    <button class="pagelink" @click="nextPageFiesta">Siguiente</button>
+                                    <button class="pagelink hoverpage" @click="nextPageFiesta">Siguiente</button>
                                 </li>
                             </ul>
                         </nav>
@@ -294,6 +296,7 @@ export default {
             color: ['text-blue-600', 'text-pink-600', 'text-red-600', 'text-green-600', 'text-purple-600', 'text-violet-600'],
         };
     }, methods: {
+
         previousPageFiesta() {
             if (this.currentPageFiesta > 1) {
                 this.currentPageFiesta--;
@@ -495,15 +498,15 @@ export default {
 
 @keyframes shadow-pulse {
     0% {
-        box-shadow: 0 10px 13px 0px rgba(219, 39, 93, 0.637);
+        box-shadow: 0 10px 15px 0px rgba(219, 39, 93, 0.637);
     }
 
     50% {
-        box-shadow: 0 10px 13px 0px rgb(0, 68, 170);
+        box-shadow: 0 10px 15px 0px rgb(0, 68, 170);
     }
 
     100% {
-        box-shadow: 0 10px 13px 0px rgba(219, 39, 93, 0.637);
+        box-shadow: 0 10px 15px 0px rgba(219, 39, 93, 0.637);
     }
 }
 </style>

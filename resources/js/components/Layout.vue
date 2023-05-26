@@ -94,9 +94,15 @@ export default {
     justify-content: space-between;
 }
 
+.hoverpage{
+    @apply transition duration-100 hover:text-gray-500 
+}
+
+
 .fondolog{
     @apply bg-no-repeat bg-center	bg-cover bg-fixed;
     background-image: url(../../img/fondlo.jpg);
+
 }
 
 .fondoreserva{
@@ -137,7 +143,7 @@ export default {
 }
 
 .swiperEntrada{
-    @apply flex max-[400px]:flex-col bg-blue-200 border-2 border-black rounded-xl justify-center items-center;
+    @apply flex max-[400px]:flex-col bg-gray-300 border-2 border-black rounded-xl justify-center items-center;
 }
 
 .reservaEntrada{
