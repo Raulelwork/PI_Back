@@ -34,7 +34,6 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
-
 * {
     font-family: 'Righteous';
 }

@@ -4,7 +4,7 @@
             <section class="flex justify-center mt-14">
                 <div class=" max-w-md justify-center text-white text-center mt-8 bg-gray-900/90 rounded-md p-12">
                     <h1 class="text-3xl text-white">Crear Fiestas</h1>
-                    <form >
+                    <form>
                         <div class="mt-8">
                             <label for="fecha">Fecha</label>
                             <br>
@@ -14,9 +14,10 @@
                         <div class="mt-8">
                             <label for="tematica">Tematica</label>
                             <br>
-                            <select name="tematica" v-model="id_tematica"  class="p-1 text-gray-300 rounded-md bg-gray-700"
+                            <select name="tematica" v-model="id_tematica" class="p-1 text-gray-300 rounded-md bg-gray-700"
                                 id="tematica">
-                                <option v-for="tematica in tematicas" :key="tematica.id" :value="tematica.id">{{tematica.nombre}}</option>
+                                <option v-for="tematica in tematicas" :key="tematica.id" :value="tematica.id">
+                                    {{ tematica.nombre }}</option>
                             </select>
                         </div>
                         <div class="mt-8">
@@ -24,7 +25,8 @@
                             <br>
                             <select name="musica" v-model="id_musica" id="musica"
                                 class="p-1 text-gray-300 rounded-md bg-gray-700">
-                                <option v-for="musica in musicas" :key="musica.id" :value="musica.id">{{musica.nombre}}</option>
+                                <option v-for="musica in musicas" :key="musica.id" :value="musica.id">{{ musica.nombre }}
+                                </option>
 
                             </select>
                         </div>
@@ -43,7 +45,7 @@
                                 id="foto" ref="fotoInput" @change="cargarFoto" accept="image/*">
                         </div>
                         <button
-                        class="decoration-0 m-4 px-3 py-2 border-2 border-black rounded-md bg-blue-300/70 hover:bg-blue-400/80 text-white hover:scale-110 duration-200"
+                            class="decoration-0 m-4 px-3 py-2 border-2 border-black rounded-md bg-blue-300/70 hover:bg-blue-400/80 text-white hover:scale-110 duration-200"
                             @click.prevent="enviar">Crear Fiesta</button>
 
                     </form>
@@ -113,28 +115,34 @@ export default {
         },
         enviar() {
             const formData = new FormData();
-            formData.append('foto', this.foto);
-            formData.append('fecha', this.fecha);
-            formData.append('id_tematica', this.id_tematica);
-            formData.append('id_musica', this.id_musica);
-            formData.append('id_empresa', this.id_empresa);
-         
-            axios.post('/crearfiestas', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then(response => {
-                // console.log(response);
-                this.showAlert()
-                this.foto = null
-                this.fecha = ''
-                this.id_tematica = ''
-                this.id_musica= ''
-                this.id_empresa= ''
-            }).catch(error => {
-                // console.log(error);
-                this.showAlertError()
-            });
+            if (this.foto != null && this.fecha != '' && this.id_tematica != '' && this.id_musica != '' && this.id_empresa != '') {
+                formData.append('foto', this.foto);
+                formData.append('fecha', this.fecha);
+                formData.append('id_tematica', this.id_tematica);
+                formData.append('id_musica', this.id_musica);
+                formData.append('id_empresa', this.id_empresa);
+
+
+
+                axios.post('/crearfiestas', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(response => {
+                    // console.log(response);
+                    this.showAlert()
+                    this.foto = null
+                    this.fecha = ''
+                    this.id_tematica = ''
+                    this.id_musica = ''
+                    this.id_empresa = ''
+                }).catch(error => {
+                    // console.log(error);
+                    this.showAlertError()
+                });
+            } else {
+                this.showAlertValidacion()
+            }
         },
         showAlert() {
             Swal.fire({
@@ -148,6 +156,14 @@ export default {
             Swal.fire({
                 title: 'Ha surgido un error',
                 text: 'Error inesperado. Intenta realizar esta operacion en unos minutos..',
+                icon: 'error',
+                confirmButtonColor: '#1a202c'
+            });
+        },
+        showAlertValidacion() {
+            Swal.fire({
+                title: 'Error de Validacion',
+                text: 'No se permiten campos vacios o incompletos!',
                 icon: 'error',
                 confirmButtonColor: '#1a202c'
             });

@@ -123,6 +123,12 @@ export default {
             if (this.consumiciones < 0 || this.consumiciones == '') {
                 return false
             }
+            if (this.fiesta_elegida == '') {
+                return false
+            }
+            if (this.tipo_entrada == '') {
+                return false
+            }
             return true
         },
         formatdate(dateTimeString) {

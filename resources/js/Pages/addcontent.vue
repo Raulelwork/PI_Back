@@ -41,7 +41,7 @@ import Layout from '@/components/Layout.vue';
             </section>
 
 
-            <h1 class="text-3xl text-black text-center">Gestionar Comentarios</h1>
+            <h1 class="text-3xl text-black text-center my-8">Gestionar Comentarios</h1>
             <table class="min-[600px]:min-w-full border-collapse block md:table">
                 <thead class="block md:table-header-group">
                     <tr
@@ -105,10 +105,10 @@ import Layout from '@/components/Layout.vue';
                     v-for="(empresa, index) in paginatedEmpresas" :key="empresa.id">
                     <tr>
                         <td class="td"><span class="mobile">Nombre</span> {{ empresa.nombre }}</td>
-                        <td class="td"><span class="mobile">Propietario</span> {{ empresa.propietario }}</td>
+                        <td class="td"><span class="mobile">Dueño</span> {{ empresa.propietario }}</td>
                         <td class="td"><span class="mobile">Cif</span> {{ empresa.cif }}</td>
                         <td class="td"><span class="mobile">Lugar</span> {{ empresa.ubicacion }}</td>
-                        
+
                         <td class="td"><span class="mobile">Eliminar</span>
                             <button @click="eliminarempresa(empresa.id)">
                                 <img src="../../img/icon/borrar.png" class="w-6 m-auto" alt="">
@@ -148,6 +148,7 @@ input::placeholder {
 <script>
 import { Link } from "@inertiajs/vue3";
 import NavLink from "../components/NavLink.vue";
+import Swal from 'sweetalert2';
 
 
 export default {
@@ -225,13 +226,61 @@ export default {
         enviarmusica() {
             const formData = new FormData();
             formData.append('nombre', this.nombreMusica);
+            if (this.nombreMusica == '' || (!/[A-Za-z]+$/.test(this.nombreMusica))) {
+                this.showAlertError()
+            } else {
+                axios.post('/crearmusica', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(response => {
+                    this.showAlertMusica()
+                    this.nombreMusica = ''
+                }).catch(error => {
+                });
+            }
+        },
+        enviartematica() {
+            const formData = new FormData();
+            if (this.nombreTematica == '' || (!/[A-Za-z]+$/.test(this.nombreTematica))) {
+                this.showAlertError()
 
-            axios.post('/crearmusica', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then(response => {
-            }).catch(error => {
+            } else {
+                formData.append('nombre', this.nombreTematica);
+
+                axios.post('/creartematica', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(response => {
+                    this.showAlertTematica()
+                    this.nombreTematica = ''
+                }).catch(error => {
+                });
+            }
+        },
+        showAlertError() {
+            Swal.fire({
+                title: 'Error de validacion',
+                text: 'El nombre solo puede contener letras.',
+                icon: 'error',
+                confirmButtonColor: '#1a202c'
+            });
+        },
+        showAlertMusica() {
+            Swal.fire({
+                title: 'Musica Creada!',
+                text: 'Tu musica se ha creado correctamente.',
+                icon: 'success',
+                confirmButtonColor: '#1a202c'
+            });
+        },
+        showAlertTematica() {
+            Swal.fire({
+                title: 'Tematica Creada!',
+                text: 'Tu tematica se ha creado correctamente.',
+                icon: 'success',
+                confirmButtonColor: '#1a202c'
             });
         },
         formatearFecha(fecha) {
@@ -241,18 +290,7 @@ export default {
             const anio = dateObj.getFullYear().toString();
             return `${dia}-${mes}-${anio}`;
         },
-        enviartematica() {
-            const formData = new FormData();
-            formData.append('nombre', this.nombreTematica);
 
-            axios.post('/creartematica', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then(response => {
-            }).catch(error => {
-            });
-        },
     },
     mounted() {
         axios.get('/listarcomentarios')

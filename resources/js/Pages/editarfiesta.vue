@@ -130,26 +130,35 @@ export default {
         },
         enviar() {
             const formData = new FormData();
-            formData.append('fiesta_elegida', this.fiesta_elegida.id);
-            formData.append('id_empresa', this.fiesta_elegida.id_empresa);
-            formData.append('id_musica', this.id_musica);
-            formData.append('id_tematica', this.id_tematica);
-            formData.append('foto', this.foto);
-            axios.post('/actualizafiesta', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then(response => {
-                // console.log(response);
-                this.showAlert()
-                this.fiesta_elegida = ''
-                this.id_musica = ''
-                this.id_empresa = ''
-            }).catch(error => {
-                // console.log(error);
-                this.showAlertError()
-            });
+            if (this.foto != null && this.fiesta_elegida != '' && this.id_tematica != '' && this.id_musica != '') {
+                formData.append('fiesta_elegida', this.fiesta_elegida.id);
+                formData.append('id_empresa', this.fiesta_elegida.id_empresa);
+                formData.append('id_musica', this.id_musica);
+                formData.append('id_tematica', this.id_tematica);
+                formData.append('foto', this.foto);
+                axios.post('/actualizafiesta', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(response => {
+                    // console.log(response);
+                    this.showAlert()
+                    this.fiesta_elegida = ''
+                    this.id_musica = ''
+                    this.id_empresa = ''
+                }).catch(error => {
+                    // console.log(error);
+                    this.showAlertError()
+                });
+
+            }else{
+                this.showAlertValidacion()
+            }
+
+
+
         },
+        
         showAlert() {
             Swal.fire({
                 title: 'Fiesta Actualizada!',
@@ -162,6 +171,14 @@ export default {
             Swal.fire({
                 title: 'Ha surgido un error',
                 text: 'Error inesperado. Intenta realizar esta operacion en unos minutos..',
+                icon: 'error',
+                confirmButtonColor: '#1a202c'
+            });
+        },
+        showAlertValidacion() {
+            Swal.fire({
+                title: 'Error de validación',
+                text: 'No puede haber campos vacios o incompletos',
                 icon: 'error',
                 confirmButtonColor: '#1a202c'
             });

@@ -34,20 +34,22 @@
                         </div>
                     </div>
                 </div>
-                
+
 
             </section>
 
-            <section >
+            <section>
                 <div class="divUno ">
                     <h1 class="text-white text-4xl mt-4 text-center">ENTRADAS</h1>
-                    <p v-if="fiestas.length == 0" class="text-white text-center p-4 mx-4">No hay fiestas disponibles para este local.
-                    Vuelva en otro momento</p>
+                    <p v-if="fiestas.length == 0" class="text-white text-center p-4 mx-4">No hay fiestas disponibles para
+                        este local.
+                        Vuelva en otro momento</p>
                     <div class="divDos ">
                         <div class="divFiesta shadow-animated" v-for="fiesta in  orderByDate(fiestas)" :key="fiesta.id">
                             <img v-bind:src="'https://pipartytime.com/storage/fiestas/' + fiesta.foto" class="imgFiesta"
                                 alt="">
-                            <h1 class="h1Fiesta text-pink-600 mb-8">{{ fiesta.empresa.nombre }} -> {{ formatdate(fiesta.fecha) }}
+                            <h1 class="h1Fiesta text-pink-600 mb-8">{{ fiesta.empresa.nombre }} -> {{
+                                formatdate(fiesta.fecha) }}
                             </h1>
                             <div class="contentFiesta ">
                                 <p>Musica:</p>
@@ -146,6 +148,14 @@ export default {
                 confirmButtonColor: '#1a202c'
             });
         },
+        showAlertError() {
+            Swal.fire({
+                title: 'Error de Validación!',
+                text: 'El comentario solo puede contener numeros y letras.',
+                icon: 'error',
+                confirmButtonColor: '#1a202c'
+            });
+        },
         showAlertComentario() {
             Swal.fire({
                 title: 'Comentario Realizada!',
@@ -156,18 +166,23 @@ export default {
         },
         comentar() {
             // console.log(this.empresa.id)
-            axios.post('/insertacomentario', {
-                'contenido': this.contcomentario,
-                'id_empresa': this.empresa.id
-            }).then(response => {
-                // console.log(response);
-                this.contcomentario = '';
-                this.showAlertComentario();
-                this.empresa.comentarios.push(response.data)
+            if (this.contcomentario != '' && (/[A-Za-z0-9]+$/.test(this.contcomentario))) {
+                axios.post('/insertacomentario', {
+                    'contenido': this.contcomentario,
+                    'id_empresa': this.empresa.id
+                }).then(response => {
+                    // console.log(response);
+                    this.contcomentario = '';
+                    this.showAlertComentario();
+                    this.empresa.comentarios.push(response.data)
 
-            }).catch(error => {
-                // console.log(error);
-            });
+                }).catch(error => {
+                    // console.log(error);
+                });
+            }else{
+                this.showAlertError()
+            }
+
         },
         formatdate(dateTimeString) {
             return this.formatearFecha(dateTimeString.slice(0, 10));
@@ -245,5 +260,6 @@ export default {
     100% {
         color: rgba(255, 0, 128, 0.514);
     }
-}</style>
+}
+</style>
 
