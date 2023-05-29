@@ -146,6 +146,8 @@ Route::post('/eliminarreserva',[ReservaController::class,'eliminar']);
 
 Route::post('/eliminarcomentario',[ComentarioController::class,'eliminar']);
 
+Route::post('/eliminarempresa',[EmpresaController::class,'eliminar']);
+
 
 
 

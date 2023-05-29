@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_entrada');
             $table->dateTime('fecha_reserva');
             $table->foreign('id_cliente')->references('id')->on('usuarios');
-            $table->foreign('id_entrada')->references('id')->on('entradas');
+            $table->foreign('id_entrada')->references('id')->on('entradas')->onDelete('cascade');
 
         });
     }

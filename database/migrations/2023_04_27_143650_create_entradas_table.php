@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('eliminado');
             $table->integer('aforo');
             $table->string('tipo',255);
-            $table->foreign('id_fiesta')->references('id')->on('fiestas');
+            $table->foreign('id_fiesta')->references('id')->on('fiestas')->onDelete('cascade');
 
         });
     }

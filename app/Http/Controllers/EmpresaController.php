@@ -93,8 +93,14 @@ class EmpresaController extends Controller
     
     public function getall()
     {
-        return Empresa::all();
+        $empresas = Empresa::all();
+        foreach ($empresas as $empresa){
+            $propietario = User::find($empresa->id_usuario);
+            $empresa->setAttribute('propietario',$propietario->nombre);
+        }
+        return $empresas;
     }
+
     public function getrandom()
     {
         return Empresa::inRandomOrder()->take(5)->get();
@@ -116,6 +122,12 @@ class EmpresaController extends Controller
             'fiestas'=> Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('id_empresa','=',$id)->where('eliminado', '=', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get()
 
         ]);
+    }
+
+    public function eliminar(Request $request){
+        $id=$request->input('id');
+        $empresa = Empresa::find($id);
+        $empresa->delete();
     }
 
 }

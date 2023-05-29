@@ -59,7 +59,9 @@ import Layout from '@/components/Layout.vue';
                     <tr>
                         <td class="td"><span class="mobile">Nombre</span> {{ comentario.nombre }}</td>
                         <td class="td"><span class="mobile">Fecha</span> {{ formatearFecha(comentario.fecha) }}</td>
-                        <td class="td"><span class="mobile">Contenido</span> <p>{{ comentario.contenido }}</p></td>
+                        <td class="td"><span class="mobile">Contenido</span>
+                            <p>{{ comentario.contenido }}</p>
+                        </td>
                         <td class="td"><span class="mobile">Eliminar</span>
                             <button @click="eliminarcomentario(comentario.id)">
                                 <img src="../../img/icon/borrar.png" class="w-6 m-auto" alt="">
@@ -84,6 +86,55 @@ import Layout from '@/components/Layout.vue';
                     </ul>
                 </nav>
             </div>
+
+            <h1 class="text-3xl text-black text-center my-8">Gestionar Empresas</h1>
+            <table class="min-[600px]:min-w-full border-collapse block md:table">
+                <thead class="block md:table-header-group">
+                    <tr
+                        class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
+                        <td class="th">Nombre</td>
+                        <td class="th">Propietario</td>
+                        <td class="th">Cif</td>
+                        <td class="th">Ubicacion</td>
+                        <td class="th">Eliminar</td>
+
+
+                    </tr>
+                </thead>
+                <tbody class="block md:table-row-group max-[765px]:border-2 border-black mb-1 "
+                    v-for="(empresa, index) in paginatedEmpresas" :key="empresa.id">
+                    <tr>
+                        <td class="td"><span class="mobile">Nombre</span> {{ empresa.nombre }}</td>
+                        <td class="td"><span class="mobile">Propietario</span> {{ empresa.propietario }}</td>
+                        <td class="td"><span class="mobile">Cif</span> {{ empresa.cif }}</td>
+                        <td class="td"><span class="mobile">Lugar</span> {{ empresa.ubicacion }}</td>
+                        
+                        <td class="td"><span class="mobile">Eliminar</span>
+                            <button @click="eliminarempresa(empresa.id)">
+                                <img src="../../img/icon/borrar.png" class="w-6 m-auto" alt="">
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="flex justify-center mt-4">
+                <nav>
+                    <ul class="flex justify-center list-none p-0">
+                        <li class="pageitem" :class="{ disabled: currentPageEmpresa === 1 }">
+                            <button class="pagelink" @click="previousPageEmpresa">Anterior</button>
+                        </li>
+                        <li class="pageitem" v-for="pageNumber in totalPagesEmpresa" :key="pageNumber"
+                            :class="{ active: pageNumber === currentPageEmpresa }">
+                            <button class="pagelink" @click="goToPageEmpresa(pageNumber)">{{ pageNumber }}</button>
+                        </li>
+                        <li class="pageitem" :class="{ disabled: currentPageEmpresa === totalPagesEmpresa }">
+                            <button class="pagelink" @click="nextPageEmpresa">Siguiente</button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+
         </Layout>
     </section>
 </template>
@@ -107,20 +158,36 @@ export default {
             nombreMusica: '',
             nombreTematica: '',
             comentarios: [],
+            empresas: [],
             currentPageComentario: 1,
+            currentPageEmpresa: 1,
+            itemsPerPageEmpresa: 5,
             itemsPerPage: 10,
-            id_comentario:'',
+            id_comentario: '',
+            id_empresa: '',
         };
     },
 
     methods: {
-        eliminarcomentario(id_comentario){
+        eliminarcomentario(id_comentario) {
             axios.post('/eliminarcomentario', {
                 'id': id_comentario
             }).then(response => {
                 for (var i = 0; i < this.comentarios.length; i++) {
                     if (this.comentarios[i].id == id_comentario) {
                         this.comentarios.splice(i, 1);
+                    }
+                }
+            }).catch(error => {
+            });
+        },
+        eliminarempresa(id_empresa) {
+            axios.post('/eliminarempresa', {
+                'id': id_empresa
+            }).then(response => {
+                for (var i = 0; i < this.empresas.length; i++) {
+                    if (this.empresas[i].id == id_empresa) {
+                        this.empresas.splice(i, 1);
                     }
                 }
             }).catch(error => {
@@ -139,6 +206,20 @@ export default {
         },
         goToPageComentario(pageNumber) {
             this.currentPageComentario = pageNumber;
+        },
+        previousPageEmpresa() {
+            if (this.currentPageEmpresa > 1) {
+                this.currentPageEmpresa--;
+            }
+        },
+        //boton siguiente de la paginacion tabla Empresas
+        nextPageEmpresa() {
+            if (this.currentPageEmpresa < this.totalPagesEmpresa) {
+                this.currentPageEmpresa++;
+            }
+        },
+        goToPageEmpresa(pageNumber) {
+            this.currentPageEmpresa = pageNumber;
         },
 
         enviarmusica() {
@@ -181,6 +262,13 @@ export default {
             .catch(error => {
                 // console.log(error);
             });
+        axios.get('/listarallempresas')
+            .then(response => {
+                this.empresas = response.data;
+            })
+            .catch(error => {
+                // console.log(error);
+            });
 
     },
     computed: {
@@ -192,6 +280,14 @@ export default {
         },
         totalPagesComentario() {
             return Math.ceil(this.comentarios.length / this.itemsPerPage);
+        },
+        paginatedEmpresas() {
+            const startIndex = (this.currentPageEmpresa - 1) * this.itemsPerPageEmpresa;
+            const endIndex = startIndex + this.itemsPerPageEmpresa;
+            return this.empresas.slice(startIndex, endIndex);
+        },
+        totalPagesEmpresa() {
+            return Math.ceil(this.empresas.length / this.itemsPerPageEmpresa);
         },
     }
 };

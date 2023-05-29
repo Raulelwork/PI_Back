@@ -22,7 +22,7 @@ return new class extends Migration
             $table->boolean('eliminado');
             $table->foreign('id_tematica')->references('id')->on('tematicas');
             $table->foreign('id_musica')->references('id')->on('musicas');
-            $table->foreign('id_empresa')->references('id')->on('empresas');
+            $table->foreign('id_empresa')->references('id')->on('empresas')->onDelete('cascade');
         });
     }
 
