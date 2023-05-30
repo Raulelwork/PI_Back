@@ -25,7 +25,7 @@ class EntradaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Funcion para guardar una entrada.
      */
     public function store(Request $request)
     {
@@ -38,7 +38,7 @@ class EntradaController extends Controller
         $Entrada->consumiciones = $request->input('consumiciones');
         $Entrada->tipo = $request->input('tipo');
         $Entrada->eliminado = false;
-       
+
         $Entrada->save();
     }
 
@@ -73,12 +73,19 @@ class EntradaController extends Controller
     {
         //
     }
+    /**
+     *.Funcion para mostrar las entradas
+     */
     public function mostrar()
     {
-        return Entrada::where('aforo','>',0)->get();
+        return Entrada::where('aforo', '>', 0)->get();
     }
-    public function eliminar(Request $request){
-        $id=$request->input('id_entrada');
+    /**
+     *.Funcion para eliminar una entrada
+     */
+    public function eliminar(Request $request)
+    {
+        $id = $request->input('id_entrada');
         $entrada = Entrada::find($id);
         $entrada->eliminado = 1;
         $entrada->save();

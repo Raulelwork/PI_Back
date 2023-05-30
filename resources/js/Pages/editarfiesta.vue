@@ -90,6 +90,7 @@ export default {
         };
     },
     mounted() {
+        // Funciones para mostrar los datos
         axios.get('/listarfiestas')
             .then(response => {
                 this.fiestas = response.data;
@@ -128,6 +129,7 @@ export default {
         formatdate(dateTimeString) {
             return dateTimeString.slice(0, 10);
         },
+        // Funicion para editar la fiesta
         enviar() {
             const formData = new FormData();
             if (this.foto != null && this.fiesta_elegida != '' && this.id_tematica != '' && this.id_musica != '') {
@@ -151,14 +153,15 @@ export default {
                     this.showAlertError()
                 });
 
-            }else{
+            } else {
                 this.showAlertValidacion()
             }
 
 
 
         },
-        
+        // Funciones con los alert que se muestran al realizar alguna accion
+
         showAlert() {
             Swal.fire({
                 title: 'Fiesta Actualizada!',

@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Auth;
 class FiestaController extends Controller
 {
 
-  
+    /**
+     *.Funcion para guardar una entrada
+     */
     public function store(Request $request)
     {
         $fechahora = substr($request->input('fecha'), 0, 10) . ' 23:00:00';
@@ -35,7 +37,7 @@ class FiestaController extends Controller
         return response()->json(['error' => 'No se encontró la foto'], 400);
     }
 
-   
+
     public function getall()
     // Se devuelven todas las fiestas .
     {
@@ -66,16 +68,17 @@ class FiestaController extends Controller
         foreach ($empresas as $empresa) {
             array_push($ids_empresas, $empresa->id);
         }
-        $fiestas =  Fiesta::whereIn('id_empresa', $ids_empresas)->where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '=', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada','Adentrada'])->get();
+        $fiestas =  Fiesta::whereIn('id_empresa', $ids_empresas)->where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '=', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada', 'Adentrada'])->get();
         $entradasfiltradas = [];
 
         foreach ($fiestas as $fiesta) {
             foreach ($fiesta->adentrada as $entrada)
                 if ($entrada->eliminado == 0) {
-                    $entrada->setAttribute('fecha',$fiesta->fecha);
-                    $entrada->setAttribute('empresa',$fiesta->empresa->nombre);
+                    $entrada->setAttribute('fecha', $fiesta->fecha);
+                    $entrada->setAttribute('empresa', $fiesta->empresa->nombre);
                     array_push($entradasfiltradas, $entrada);
-                }}
+                }
+        }
         return $entradasfiltradas;
     }
 
@@ -89,19 +92,19 @@ class FiestaController extends Controller
         $reservas = Reserva::where('id_cliente', $id)->get();
         $fiestas =  Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '=', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get();
         $entradasFiltradas = [];
-        
 
-        foreach ($fiestas as $fiesta){
-            foreach($fiesta->entrada as $entrada){
+
+        foreach ($fiestas as $fiesta) {
+            foreach ($fiesta->entrada as $entrada) {
                 foreach ($reservas as $reserva) {
-                    if($entrada->id == $reserva->id_entrada){
-                    $entrada->setAttribute('nombreempresa',$fiesta->empresa->nombre);
-                    $entrada->setAttribute('idreserva',$reserva->id);
-                    $entrada->setAttribute('fecha',$fiesta->fecha);
-                    $entrada->setAttribute('foto',$fiesta->foto);
-                    $entrada->setAttribute('musica',$fiesta->musica->nombre);
-                    $entrada->setAttribute('tematica',$fiesta->tematica->nombre);
-                    array_push($entradasFiltradas,$entrada);
+                    if ($entrada->id == $reserva->id_entrada) {
+                        $entrada->setAttribute('nombreempresa', $fiesta->empresa->nombre);
+                        $entrada->setAttribute('idreserva', $reserva->id);
+                        $entrada->setAttribute('fecha', $fiesta->fecha);
+                        $entrada->setAttribute('foto', $fiesta->foto);
+                        $entrada->setAttribute('musica', $fiesta->musica->nombre);
+                        $entrada->setAttribute('tematica', $fiesta->tematica->nombre);
+                        array_push($entradasFiltradas, $entrada);
                     }
                 }
             }
@@ -109,7 +112,9 @@ class FiestaController extends Controller
         return $entradasFiltradas;
     }
 
-
+    /**
+     *.Funcion para eliminar una fiesta
+     */
     public function eliminar(Request $request)
     {
         $id = $request->input('id_fiesta');
@@ -119,7 +124,9 @@ class FiestaController extends Controller
     }
 
 
-    
+    /**
+     *.Funcion para actualizar una fiesta 
+     */
     public function actualizar(Request $request)
     {
 

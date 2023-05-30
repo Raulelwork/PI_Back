@@ -10,7 +10,8 @@
                         class="bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg  m-7  max-[450px]:scale-75">
                         <img v-bind:src="'https://pipartytime.com/storage/fiestas/' + entrada.foto"
                             class="mb-4 w-full h-80 object-cover" alt="">
-                        <h1 class="text-lg text-center text-pink-600">{{ entrada.nombreempresa }} -> {{ formatdate(entrada.fecha)
+                        <h1 class="text-lg text-center text-pink-600">{{ entrada.nombreempresa }} -> {{
+                            formatdate(entrada.fecha)
                         }}</h1>
                         <div class=" grid grid-cols-2 text-left text-black justify-items-center items-center">
                             <p>Tipo Entrada:</p>
@@ -66,6 +67,8 @@ export default {
             });
     },
     methods: {
+        // Funciones con los alert que se muestran al realizar alguna accion
+
         showAlert() {
             Swal.fire({
                 title: 'Reserva Eliminada!',
@@ -74,6 +77,7 @@ export default {
                 confirmButtonColor: '#1a202c'
             });
         },
+        // Funcion para eliminar reserva
         eliminar(array) {
             const id = array[1];
             const id_entrada = array[0];
@@ -93,6 +97,7 @@ export default {
                 // console.log(error);
             });
         },
+        // Funciones para la fechas
         formatdate(dateTimeString) {
             return this.formatearFecha(dateTimeString.slice(0, 10));
         },

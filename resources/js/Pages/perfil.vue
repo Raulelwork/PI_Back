@@ -129,6 +129,7 @@ export default {
         fiestas: [],
     },
     methods: {
+        // Funcion para realizar reserva
         enviar(id_ent) {
             const id = id_ent
             axios.post('/hacerreserva', {
@@ -140,6 +141,8 @@ export default {
                 // console.log(error);
             });
         },
+        // Funciones con los alert que se muestran al realizar alguna accion
+
         showAlert() {
             Swal.fire({
                 title: 'Reserva Realizada!',
@@ -164,6 +167,7 @@ export default {
                 confirmButtonColor: '#1a202c'
             });
         },
+        // Funcion para realizar un comentario
         comentar() {
             // console.log(this.empresa.id)
             if (this.contcomentario != '' && (/^[A-Za-z0-9\s]+$/.test(this.contcomentario))) {
@@ -179,11 +183,12 @@ export default {
                 }).catch(error => {
                     // console.log(error);
                 });
-            }else{
+            } else {
                 this.showAlertError()
             }
 
         },
+        // Funciones de la fecha y ordenado de los elementos de la pagina
         formatdate(dateTimeString) {
             return this.formatearFecha(dateTimeString.slice(0, 10));
         },

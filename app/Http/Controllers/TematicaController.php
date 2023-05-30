@@ -25,14 +25,13 @@ class TematicaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Funcion para guardar tematicas
      */
     public function store(Request $request)
     {
         $tematica = new Tematica;
         $tematica->nombre = $request->input('nombre');
         $tematica->save();
-        
     }
 
     /**
@@ -66,11 +65,14 @@ class TematicaController extends Controller
     {
         //
     }
+    /**
+     *.Funcion para mostrar las tematicas
+     */
     public function mostrar()
     {
         $tematica = Tematica::all();
-        foreach($tematica as $tem){
-            $tem->setAttribute('filtrado',false);
+        foreach ($tematica as $tem) {
+            $tem->setAttribute('filtrado', false);
         }
         return $tematica;
     }

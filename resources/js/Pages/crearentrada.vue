@@ -59,7 +59,7 @@ import Layout from '@/components/Layout.vue';
                                 type="number" v-model="aforo">
                         </div>
                         <button
-                        class="decoration-0 m-4 px-3 py-2 border-2 border-black rounded-md bg-blue-300/70 hover:bg-blue-400/80 text-white hover:scale-110 duration-200"
+                            class="decoration-0 m-4 px-3 py-2 border-2 border-black rounded-md bg-blue-300/70 hover:bg-blue-400/80 text-white hover:scale-110 duration-200"
                             @click.prevent="enviar">Crear Entrada</button>
 
                     </form>
@@ -96,6 +96,7 @@ export default {
         };
     },
     mounted() {
+        // Funcion para mostrar los datos
         axios.get('/listarfiestas')
             .then(response => {
                 this.fiestas = response.data;
@@ -113,6 +114,7 @@ export default {
 
     },
     methods: {
+        // Funcion para realizar la validacion
         validacion() {
             if (this.precio < 0 || this.precio == '') {
                 return false
@@ -135,7 +137,7 @@ export default {
             return dateTimeString.slice(0, 10);
         },
         enviar() {
-
+            // Funcion para enviar entrada ya validada
             if (this.validacion()) {
                 const formData = new FormData();
                 formData.append('fiesta_elegida', this.fiesta_elegida);
@@ -151,18 +153,20 @@ export default {
                     // console.log(response);
                     this.showAlert()
                     this.fiesta_elegida = ''
-                    this.precio= ''
-                    this.aforo= ''
-                    this.consumiciones= ''
-                    this.tipo_entrada= ''
+                    this.precio = ''
+                    this.aforo = ''
+                    this.consumiciones = ''
+                    this.tipo_entrada = ''
                 }).catch(error => {
                     // console.log(error);
                     this.showAlertError()
                 });
-            }else{
+            } else {
                 this.showAlertValidacion()
             }
         },
+        // Funciones con los alert que se muestran al realizar alguna accion
+
         showAlert() {
             Swal.fire({
                 title: 'Entrada Creada',

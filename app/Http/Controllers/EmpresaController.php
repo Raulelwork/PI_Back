@@ -31,7 +31,7 @@ class EmpresaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Funcion para guardar la empresa
      */
     public function store(Request $request)
     {
@@ -90,51 +90,64 @@ class EmpresaController extends Controller
     {
         //
     }
-
+    /**
+     *.Funcion para listar las empresas de un determinado cliente
+     */
     public function getallid()
     {
         return Empresa::where('id_usuario', Auth::id())->get();
     }
-    
+    /**
+     *.Funcion para  listar todas las empresas 
+     */
     public function getall()
     {
         $empresas = Empresa::all();
-        foreach ($empresas as $empresa){
+        foreach ($empresas as $empresa) {
             $propietario = User::find($empresa->id_usuario);
-            $empresa->setAttribute('propietario',$propietario->nombre);
+            $empresa->setAttribute('propietario', $propietario->nombre);
         }
         return $empresas;
     }
-
+    /**
+     *.Funcion para listar 5 empresas de manera aleatoria
+     */
     public function getrandom()
     {
         return Empresa::inRandomOrder()->take(5)->get();
     }
-    public function cargaperfil($id){
-        $empresa = Empresa::where('id',$id)->first();
-        $comentarios = Comentario::where('id_empresa',$id)->get();
+
+    /**
+     *.Funcion para cargar un perfil de la empresa.
+     */
+    public function cargaperfil($id)
+    {
+        $empresa = Empresa::where('id', $id)->first();
+        $comentarios = Comentario::where('id_empresa', $id)->get();
         // $comentarios->setAttribute('nombre_usuario','');
-        foreach($comentarios as $comentario){
-            $userName = User::where('id',$comentario->id_usuario)->get('nombre');
-            $comentario->setAttribute('nombreusuario','');
+        foreach ($comentarios as $comentario) {
+            $userName = User::where('id', $comentario->id_usuario)->get('nombre');
+            $comentario->setAttribute('nombreusuario', '');
             $comentario->nombreusuario = $userName[0]->nombre;
         }
         // dd($comentarios[0]->contenido);
-        $empresa->setAttribute('comentarios',$comentarios);
+        $empresa->setAttribute('comentarios', $comentarios);
 
         return Inertia::render('perfil', [
             'empresa' => $empresa,
-            'fiestas'=> Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('id_empresa','=',$id)->where('eliminado', '=', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get()
+            'fiestas' => Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('id_empresa', '=', $id)->where('eliminado', '=', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get()
 
         ]);
     }
 
-    public function eliminar(Request $request){
-        $id=$request->input('id');
+    /**
+     *.Funcion para eliminar una empresa
+     */
+
+    public function eliminar(Request $request)
+    {
+        $id = $request->input('id');
         $empresa = Empresa::find($id);
         $empresa->delete();
     }
-
 }
-
-

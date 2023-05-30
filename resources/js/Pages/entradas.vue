@@ -177,7 +177,8 @@
                     <h1 class="text-white text-3xl text-center">ENTRADAS</h1>
 
                     <div class="divUno ">
-                        <p v-if="fiestasFiltradas.length == 0" class="text-white text-center text-xl p-4 mx-4">No hay fiestas disponibles
+                        <p v-if="fiestasFiltradas.length == 0" class="text-white text-center text-xl p-4 mx-4">No hay
+                            fiestas disponibles
                             con estos filtros.
                             Intentelo de nuevo mas tarde...</p>
                         <div class="divDos ">
@@ -296,7 +297,7 @@ export default {
             color: ['text-blue-600', 'text-pink-600', 'text-red-600', 'text-green-600', 'text-purple-600', 'text-violet-600'],
         };
     }, methods: {
-
+        // Paginacion
         previousPageFiesta() {
             if (this.currentPageFiesta > 1) {
                 this.currentPageFiesta--;
@@ -311,7 +312,7 @@ export default {
         goToPageFiesta(pageNumber) {
             this.currentPageFiesta = pageNumber;
         },
-
+        // Funcion para realizar una reserva
         enviar(id_ent) {
             const id = id_ent
             axios.post('/hacerreserva', {
@@ -323,6 +324,8 @@ export default {
                 // console.log(error);
             });
         },
+        // Funciones con los alert que se muestran al realizar alguna accion
+
         showAlert() {
             Swal.fire({
                 title: 'Reserva Realizada!',
@@ -331,6 +334,7 @@ export default {
                 confirmButtonColor: '#1a202c'
             });
         },
+        // Funciones  de la fecha
         formatdate(dateTimeString) {
             return this.formatearFecha(dateTimeString.slice(0, 10));
         },
@@ -346,7 +350,7 @@ export default {
                 return new Date(a.fecha) - new Date(b.fecha);
             });
         },
-
+        // Funcion para realizar todos los filtros
         filtrar() {
             this.fiestasFiltradas = [];
             this.filtrosciudad = [];
@@ -407,11 +411,13 @@ export default {
             modules: [Autoplay, Pagination, Navigation],
         };
     },
+    // Funcion para mostrar los datos 
     mounted() {
         axios.get('/listarfiestas')
             .then(response => {
                 this.fiestas = response.data;
                 this.fiestasFiltradas = response.data;
+                this.orderByDate(this.fiestas)
             })
             .catch(error => {
                 // console.log(error);
@@ -440,7 +446,7 @@ export default {
             });
     },
     computed: {
-
+        // Paginacion
         paginatedFiestas() {
             const startIndex = (this.currentPageFiesta - 1) * this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;
@@ -526,5 +532,5 @@ export default {
     100% {
         color: rgb(255, 129, 192);
     }
-    }
+}
 </style>

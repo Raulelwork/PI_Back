@@ -25,7 +25,7 @@ class MusicaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Funcino para guardar musica.
      */
     public function store(Request $request)
     {
@@ -65,7 +65,9 @@ class MusicaController extends Controller
     {
         //
     }
-
+    /**
+     *.Funcion para listar la musica
+     */
     public function mostrar()
     {
         $musica = Musica::all();

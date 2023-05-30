@@ -197,6 +197,7 @@ export default {
             });
     },
     methods: {
+        // Paginacion
         previousPageEmpresa() {
             if (this.currentPageEmpresa > 1) {
                 this.currentPageEmpresa--;
@@ -211,6 +212,7 @@ export default {
         goToPageEmpresa(pageNumber) {
             this.currentPageEmpresa = pageNumber;
         },
+        // Filtros
         filtrar() {
             this.empresasFiltradas = [];
             this.filtros = [];
@@ -234,7 +236,7 @@ export default {
     },
 
     computed: {
-
+        // Paginacion
         paginatedEmpresas() {
             const startIndex = (this.currentPageEmpresa - 1) * this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;

@@ -85,6 +85,7 @@ export default {
 
         };
     },
+    // Funciones para mostrar los datos
     mounted() {
         axios.get('/listarempresas')
             .then(response => {
@@ -113,6 +114,7 @@ export default {
             this.foto = this.$refs.fotoInput.files[0];
 
         },
+        // Funcion para enviar y crear la fiesta ya validada
         enviar() {
             const formData = new FormData();
             if (this.foto != null && this.fecha != '' && this.id_tematica != '' && this.id_musica != '' && this.id_empresa != '') {
@@ -144,6 +146,8 @@ export default {
                 this.showAlertValidacion()
             }
         },
+        // Funciones con los alert que se muestran al realizar alguna accion
+
         showAlert() {
             Swal.fire({
                 title: 'Fiesta Creada!',

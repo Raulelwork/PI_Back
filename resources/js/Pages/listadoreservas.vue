@@ -85,7 +85,7 @@ export default {
         fecha_fiesta: ''
     },
     methods: {
-
+        // Paginacion
         previousPageReserva() {
             if (this.currentPageReserva > 1) {
                 this.currentPageReserva--;
@@ -100,7 +100,7 @@ export default {
         goToPageReserva(pageNumber) {
             this.currentPageReserva = pageNumber;
         },
-
+        // Funciones para la fecha
         formatdate(dateTimeString) {
             return this.formatearFecha(dateTimeString.slice(0, 10));
         },
@@ -119,7 +119,7 @@ export default {
 
     }, 
     computed: {
-
+        // Paginacion
         paginatedReservas() {
             const startIndex = (this.currentPageReserva - 1) * this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;

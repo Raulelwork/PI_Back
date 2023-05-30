@@ -90,6 +90,7 @@ export default {
             this.foto = this.$refs.fotoInput.files[0];
 
         },
+        // Funcion para crear empresa ya validada
         enviar() {
             if (this.nombre != '' && (/^[A-Za-z\s]+$/.test(this.nombre)) && this.cif != '' && (/^[ABCDEFGHJKLMNPQRSUVWabcdefghjklmnpqrsuvw][0-9]{7}[0-9A-J]$/.test(this.cif)) && this.ubicacion != '' && this.foto != null && this.lugar != '' && (/^[/A-Za-z0-9\s]+$/.test(this.lugar))) {
                 if (this.nombre.length <= 13) {
@@ -125,6 +126,7 @@ export default {
 
 
         },
+        // Funciones con los alert que se muestran al realizar alguna accion
         showAlert() {
             Swal.fire({
                 title: 'Empresa creada!',

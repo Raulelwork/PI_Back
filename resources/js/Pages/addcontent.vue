@@ -170,6 +170,7 @@ export default {
     },
 
     methods: {
+        // Funcion para eliminar comentarios
         eliminarcomentario(id_comentario) {
             axios.post('/eliminarcomentario', {
                 'id': id_comentario
@@ -182,6 +183,9 @@ export default {
             }).catch(error => {
             });
         },
+
+
+        // Funcion para eliminar empresas
         eliminarempresa(id_empresa) {
             axios.post('/eliminarempresa', {
                 'id': id_empresa
@@ -194,6 +198,8 @@ export default {
             }).catch(error => {
             });
         },
+
+        // Paginacion de las tablas
         previousPageComentario() {
             if (this.currentPageComentario > 1) {
                 this.currentPageComentario--;
@@ -223,6 +229,7 @@ export default {
             this.currentPageEmpresa = pageNumber;
         },
 
+        // Formulario para crear musica
         enviarmusica() {
             const formData = new FormData();
             formData.append('nombre', this.nombreMusica);
@@ -240,6 +247,8 @@ export default {
                 });
             }
         },
+
+        // Formulario para crear tematica
         enviartematica() {
             const formData = new FormData();
             if (this.nombreTematica == '' || (!/^[A-Za-z\s]+$/.test(this.nombreTematica))) {
@@ -259,6 +268,9 @@ export default {
                 });
             }
         },
+
+
+        // Los showalert son los mensajes de confirmacion al realizar alguna accion.
         showAlertError() {
             Swal.fire({
                 title: 'Error de validacion',
@@ -283,6 +295,8 @@ export default {
                 confirmButtonColor: '#1a202c'
             });
         },
+
+        // Funcino para dar formato a la fecha
         formatearFecha(fecha) {
             const dateObj = new Date(fecha);
             const dia = dateObj.getDate().toString().padStart(2, '0');
@@ -292,6 +306,7 @@ export default {
         },
 
     },
+    // Peticiones para mostrar los datos
     mounted() {
         axios.get('/listarcomentarios')
             .then(response => {
@@ -309,8 +324,10 @@ export default {
             });
 
     },
-    computed: {
 
+
+    computed: {
+        // Funciones para paginacion
         paginatedComentarios() {
             const startIndex = (this.currentPageComentario - 1) * this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;

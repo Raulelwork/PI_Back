@@ -28,7 +28,8 @@
 
                         </tr>
                     </thead>
-                    <tbody class="block md:table-row-group max-[765px]:border-2 border-black mb-1" v-for="(empresa, index) in paginatedEmpresas" :key="empresa.id">
+                    <tbody class="block md:table-row-group max-[765px]:border-2 border-black mb-1"
+                        v-for="(empresa, index) in paginatedEmpresas" :key="empresa.id">
                         <tr>
                             <td class="td"><span class="mobile">Nombre</span> {{ empresa.nombre }}</td>
                             <td class="td"><span class="mobile">Ciudad</span> {{ empresa.ubicacion }}</td>
@@ -72,8 +73,9 @@
 
                         </tr>
                     </thead>
-                    <tbody class="block md:table-row-group max-[765px]:border-2 border-black mb-1" v-for="(f, index) in orderByDate(paginatedFiestas)" :key="f.id">
-                        <tr >
+                    <tbody class="block md:table-row-group max-[765px]:border-2 border-black mb-1"
+                        v-for="(f, index) in orderByDate(paginatedFiestas)" :key="f.id">
+                        <tr>
                             <td class="td"><span class="mobile">Nombre</span> {{ f.empresa.nombre }}</td>
                             <td class="td"><span class="mobile">Musica</span> {{ f.musica.nombre }}</td>
                             <td class="td"><span class="mobile">Tematica</span> {{ f.tematica.nombre }}</td>
@@ -128,7 +130,8 @@
                             <td class="th">Eliminar</td>
                         </tr>
                     </thead>
-                    <tbody class="block md:table-row-group max-[765px]:border-2 border-black mb-1 " v-for="(entrada, index) in paginatedEntradas" :key="entrada.id">
+                    <tbody class="block md:table-row-group max-[765px]:border-2 border-black mb-1 "
+                        v-for="(entrada, index) in paginatedEntradas" :key="entrada.id">
                         <tr>
                             <td class="td"><span class="mobile">Tipo</span> {{ entrada.tipo }}</td>
                             <td class="td"><span class="mobile">Precio</span> {{ entrada.precio }}</td>
@@ -196,11 +199,13 @@ export default {
     },
 
     methods: {
+        // Funcion para ordenar las fiestas por fechas
         orderByDate: function (fiestas) {
             return fiestas.sort(function (a, b) {
                 return new Date(a.fecha) - new Date(b.fecha);
             });
         },
+        // Paginacion
         previousPage() {
             if (this.currentPage > 1) {
                 this.currentPage--;
@@ -246,7 +251,7 @@ export default {
             this.currentPageEmpresa = pageNumber;
         },
 
-
+        // Funcion para eliminar entradas
         eliminarentrada(id_entrada) {
             axios.post('/eliminarentrada', {
                 'id_entrada': id_entrada
@@ -259,6 +264,7 @@ export default {
             }).catch(error => {
             });
         },
+        // Funcion para eliminar fiestas
         eliminarfiesta(id_fiesta) {
             axios.post('/eliminarfiesta', {
                 'id_fiesta': id_fiesta
@@ -273,7 +279,7 @@ export default {
         },
     },
     computed: {
-
+        // Paginacion
         paginatedFiestas() {
             const startIndex = (this.currentPage - 1) * this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;
@@ -301,6 +307,7 @@ export default {
         },
     },
     setup() {
+        // Funcion para mostrar datos
         const fiestas = ref([])
         const entradas = ref([])
         const empresas = ref([])

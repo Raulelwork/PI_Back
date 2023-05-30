@@ -31,7 +31,7 @@ class ReservaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Funcion para guardar reservas.
      */
     public function store(Request $request)
     {
@@ -84,7 +84,9 @@ class ReservaController extends Controller
     {
         //
     }
-
+    /**
+     *.Se devuelven las reservas de un usuario
+     */
     public function mostrar()
     {
         return Reserva::where('id_cliente', '=', Auth::id())->get();

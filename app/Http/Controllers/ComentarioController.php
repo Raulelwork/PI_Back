@@ -28,10 +28,11 @@ class ComentarioController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Funcion para guardar comentarios.
      */
     public function store(Request $request)
     {
+
 
         $validacion = $request->validate([
             'contenido' => ['required', 'regex:/^[A-Za-z0-9]+$/'],
@@ -77,13 +78,15 @@ class ComentarioController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     *.
      */
     public function destroy(Comentario $comentario)
     {
         //
     }
-
+    /**
+     * Funcion para listar los comentarios
+     */
     public function listar()
     {
         $comentarios = Comentario::all();
@@ -94,7 +97,9 @@ class ComentarioController extends Controller
         }
         return $comentarios;
     }
-
+    /**
+     *.Funcion para eliminar comentarios
+     */
     public function eliminar(Request $request)
     {
         $id = $request->input('id');
