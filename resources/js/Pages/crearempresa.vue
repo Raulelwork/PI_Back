@@ -17,7 +17,7 @@
                             <br>
                             <input
                                 class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200"
-                                type="text" v-model="cif">
+                                type="text" v-model="cif" placeholder="X 00000000">
                         </div>
                         <div>
                             <label for="ubicacion">Ubicacion</label>
@@ -78,7 +78,7 @@ export default {
     data() {
         return {
             showMenu: false,
-            nombree: '',
+            nombre: '',
             cif: '',
             ubicacion: '',
             lugar: '',
@@ -91,28 +91,39 @@ export default {
 
         },
         enviar() {
-            const formData = new FormData();
-            formData.append('foto', this.foto);
-            formData.append('nombre', this.nombre);
-            formData.append('cif', this.cif);
-            formData.append('ubicacion', this.ubicacion);
-            formData.append('lugar', this.lugar);
-            axios.post('/crearempresa', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+            if (this.nombre != '' && (/^[A-Za-z\s]+$/.test(this.nombre)) && this.cif != '' && (/^[ABCDEFGHJKLMNPQRSUVWabcdefghjklmnpqrsuvw][0-9]{7}[0-9A-J]$/.test(this.cif)) && this.ubicacion != '' && this.foto != null && this.lugar != '' && (/^[/A-Za-z0-9\s]+$/.test(this.lugar))) {
+                if (this.nombre.length <= 13) {
+                    const formData = new FormData();
+                    formData.append('foto', this.foto);
+                    formData.append('nombre', this.nombre);
+                    formData.append('cif', this.cif);
+                    formData.append('ubicacion', this.ubicacion);
+                    formData.append('lugar', this.lugar);
+                    axios.post('/crearempresa', formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }).then(response => {
+                        // console.log(response);
+                        this.showAlert()
+                        this.nombre = ''
+                        this.foto = null
+                        this.cif = ''
+                        this.ubicacion = ''
+                        this.lugar = ''
+                    }).catch(error => {
+                        // console.log(error);
+                        this.showAlertError()
+                    });
+                }else{
+                    this.showAlertNombre()
                 }
-            }).then(response => {
-                // console.log(response);
-                this.showAlert()
-                this.nombre = ''
-                this.foto = null
-                this.cif = ''
-                this.ubicacion = ''
-                this.lugar = ''
-            }).catch(error => {
-                // console.log(error);
-                this.showAlertError()
-            });
+            } else {
+                this.showAlertValidacion()
+            }
+
+
+
         },
         showAlert() {
             Swal.fire({
@@ -126,6 +137,22 @@ export default {
             Swal.fire({
                 title: 'Ha surgido un error',
                 text: 'Error inesperado. Intenta realizar esta operacion en unos minutos..',
+                icon: 'error',
+                confirmButtonColor: '#1a202c'
+            });
+        },
+        showAlertValidacion() {
+            Swal.fire({
+                title: 'Error de Validacion',
+                text: 'No puede haber ningún campo incompleto o vacio.',
+                icon: 'error',
+                confirmButtonColor: '#1a202c'
+            });
+        },
+        showAlertNombre() {
+            Swal.fire({
+                title: 'Error de nombre',
+                text: 'La longitud del nombre debe ser inferior a 14 caracteres.',
                 icon: 'error',
                 confirmButtonColor: '#1a202c'
             });

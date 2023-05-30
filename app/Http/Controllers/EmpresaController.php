@@ -35,7 +35,12 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-
+        $validacion = $request->validate([
+            'nombre' => ['required', 'regex:/[A-Za-z]+$/'],
+            'cif' => ['required', 'regex:/[ABCDEFGHJKLMNPQRSUVWabcdefghjklmnpqrsuvw][0-9]{7}[0-9A-J]$/'],
+            'ubicacion' => ['required'],
+            'foto' => ['required'],
+        ]);
         $userid = Auth::id();
         $empresa = new Empresa;
         $empresa->id_usuario = $userid;

@@ -226,7 +226,7 @@ export default {
         enviarmusica() {
             const formData = new FormData();
             formData.append('nombre', this.nombreMusica);
-            if (this.nombreMusica == '' || (!/[A-Za-z]+$/.test(this.nombreMusica))) {
+            if (this.nombreMusica == '' || (!/^[A-Za-z\s]+$/.test(this.nombreMusica))) {
                 this.showAlertError()
             } else {
                 axios.post('/crearmusica', formData, {
@@ -242,7 +242,7 @@ export default {
         },
         enviartematica() {
             const formData = new FormData();
-            if (this.nombreTematica == '' || (!/[A-Za-z]+$/.test(this.nombreTematica))) {
+            if (this.nombreTematica == '' || (!/^[A-Za-z\s]+$/.test(this.nombreTematica))) {
                 this.showAlertError()
 
             } else {

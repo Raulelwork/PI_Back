@@ -166,7 +166,7 @@ export default {
         },
         comentar() {
             // console.log(this.empresa.id)
-            if (this.contcomentario != '' && (/[A-Za-z0-9]+$/.test(this.contcomentario))) {
+            if (this.contcomentario != '' && (/^[A-Za-z0-9\s]+$/.test(this.contcomentario))) {
                 axios.post('/insertacomentario', {
                     'contenido': this.contcomentario,
                     'id_empresa': this.empresa.id
@@ -254,7 +254,7 @@ export default {
     }
 
     50% {
-        color: rgba(0, 174, 255, 0.699);
+        color: rgba(0, 89, 255, 0.699);
     }
 
     100% {
