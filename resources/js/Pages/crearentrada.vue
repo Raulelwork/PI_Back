@@ -25,21 +25,21 @@ import Layout from '@/components/Layout.vue';
                             </div>
 
                         </div>
-                        <div>
+                        <div class="mt-4">
                             <label for="precio">Precio</label>
                             <br>
                             <input
                                 class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200"
                                 type="number" v-model="precio">
                         </div>
-                        <div>
+                        <div class="mt-4">
                             <label for="consumiciones">Consumiciones</label>
                             <br>
                             <input
                                 class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200"
                                 type="number" v-model="consumiciones">
                         </div>
-                        <div class="mt-8">
+                        <div class="mt-4">
                             <label for="tipo_entrada">Tipo</label>
                             <br>
                             <select name="tipo_entrada" required v-model="tipo_entrada" id="tipo_entrada"
@@ -51,7 +51,7 @@ import Layout from '@/components/Layout.vue';
                                 <option value="Especial">Especial</option>
                             </select>
                         </div>
-                        <div>
+                        <div class="mt-4">
                             <label for="precio">Entradas</label>
                             <br>
                             <input

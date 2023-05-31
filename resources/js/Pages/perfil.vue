@@ -170,7 +170,7 @@ export default {
         // Funcion para realizar un comentario
         comentar() {
             // console.log(this.empresa.id)
-            if (this.contcomentario != '' && (/^[A-Za-z0-9\s]+$/.test(this.contcomentario))) {
+            if (this.contcomentario != '' && (/^[A-Za-z0-9.,!\s]+$/.test(this.contcomentario))) {
                 axios.post('/insertacomentario', {
                     'contenido': this.contcomentario,
                     'id_empresa': this.empresa.id

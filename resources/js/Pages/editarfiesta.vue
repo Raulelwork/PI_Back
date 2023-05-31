@@ -41,7 +41,7 @@ import Layout from '@/components/Layout.vue';
 
                             </select>
                         </div>
-                        <div>
+                        <div class="mt-4">
                             <label for="foto">Foto:</label>
                             <br>
                             <input type="file"
@@ -50,7 +50,7 @@ import Layout from '@/components/Layout.vue';
                         </div>
 
                         <button
-                            class="decoration-0 m-4 px-3 py-2 border-2 rounded-md bg-pink-900/80 hover:bg-pink-800/80 text-white hover:scale-110 duration-200"
+                        class="decoration-0 m-4 px-3 py-2 border-2 border-black rounded-md bg-blue-300/70 hover:bg-blue-400/80 text-white hover:scale-110 duration-200"
                             @click.prevent="enviar">Actualizar</button>
 
                     </form>

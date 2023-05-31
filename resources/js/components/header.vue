@@ -106,7 +106,7 @@
 
                                 <template #content>
                                     <DropdownLink :href="route('logout')" method="post" as="button">
-                                        Log Out
+                                        Cerrar Sesion
                                     </DropdownLink>
                                 </template>
                             </Dropdown>

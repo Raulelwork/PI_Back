@@ -4,7 +4,7 @@
 
         <div class="flex flex-col sm:justify-between pb-6 pt-8">
             <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400 ml-6">© 2023 <a href="https://pipartytime.com/"
-                    class="hover:underline">PartyTime™</a>. Todos los derechos reservados.
+                    class="hover:underline">PartyTime™</a>. Todos los derechos reservados. <br> Contacto:  <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=GTvVlcSGLCJDmRQqqDmBthrpRlDZqdscrHclnjJKcNDphNLhsGbRTQctDrKrjSbXQLQNVCNwDMqCR">admin@pipartytime.com</a> 
             </span>
             <div class="flex justify-center mt-4 space-x-6 sm:justify-center sm:mt-0 mr-6">
                 <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">

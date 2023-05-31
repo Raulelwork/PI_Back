@@ -12,14 +12,14 @@
                                 class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200"
                                 type="text" v-model="nombre">
                         </div>
-                        <div>
+                        <div class="mt-4">
                             <label for="cif">Cif</label>
                             <br>
                             <input
                                 class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200"
                                 type="text" v-model="cif" placeholder="X 00000000">
                         </div>
-                        <div>
+                        <div class="mt-4">
                             <label for="ubicacion">Ubicacion</label>
                             <br>
                             <select name="ubicacion" v-model="ubicacion" id="ubicacion"
@@ -35,14 +35,14 @@
 
                             </select>
                         </div>
-                        <div>
+                        <div class="mt-4">
                             <label for="lugar">Lugar</label>
                             <br>
                             <input
                                 class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200"
                                 type="text" v-model="lugar">
                         </div>
-                        <div>
+                        <div class="mt-4">
                             <label for="foto">Foto:</label>
                             <br>
                             <input type="file"

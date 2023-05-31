@@ -35,7 +35,7 @@ class ComentarioController extends Controller
 
 
         $validacion = $request->validate([
-            'contenido' => ['required', 'regex:/^[A-Za-z0-9]+$/'],
+            'contenido' => ['required', 'regex:/^[A-Za-z0-9.,!\s]+$/'],
 
         ]);
         // Guarda el comentario
