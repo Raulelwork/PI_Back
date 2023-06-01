@@ -134,6 +134,8 @@ Route::get('/reservasdeusuario',[FiestaController::class,'reservasUsuario']);
 
 Route::get('/listarcomentarios',[ComentarioController::class,'listar']);
 
+Route::get('/reservasusuario',[ReservaController::class,'idsreservas']);
+
 
 
 // Eliminar Datos

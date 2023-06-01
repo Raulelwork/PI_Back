@@ -121,6 +121,8 @@ export default {
             showMenu: false,
             color: ['text-blue-600', 'text-pink-600', 'text-red-600', 'text-green-600', 'text-orange-600', 'text-yellow-600', 'text-violet-600'],
             contcomentario: '',
+            reservas: [],
+
         };
     },
 
@@ -131,15 +133,20 @@ export default {
     methods: {
         // Funcion para realizar reserva
         enviar(id_ent) {
-            const id = id_ent
-            axios.post('/hacerreserva', {
-                'id_entrada': id
-            }).then(response => {
-                // console.log(response);
-                this.showAlert()
-            }).catch(error => {
-                // console.log(error);
-            });
+            if (this.reservas.includes(id_ent)) {
+                this.showAlertContiene()
+            } else {
+                const id = id_ent
+                axios.post('/hacerreserva', {
+                    'id_entrada': id
+                }).then(response => {
+                    // console.log(response);
+                    this.showAlert()
+                    this.reservas.push(id_ent)
+                }).catch(error => {
+                    // console.log(error);
+                });
+            }
         },
         // Funciones con los alert que se muestran al realizar alguna accion
 
@@ -155,6 +162,14 @@ export default {
             Swal.fire({
                 title: 'Error de Validación!',
                 text: 'El comentario solo puede contener numeros y letras.',
+                icon: 'error',
+                confirmButtonColor: '#1a202c'
+            });
+        },
+        showAlertContiene() {
+            Swal.fire({
+                title: 'Entrada ya reservada!',
+                text: 'No se ha realizado la reserva debido a que ya se encontraba reservada.',
                 icon: 'error',
                 confirmButtonColor: '#1a202c'
             });
@@ -215,6 +230,15 @@ export default {
             modules: [Autoplay, Pagination, Navigation],
         };
     },
+    mounted(){
+        axios.get('/reservasusuario')
+            .then(response => {
+                this.reservas = response.data;
+            })
+            .catch(error => {
+                // console.log(error);
+            });
+    }
 };
 </script>
 

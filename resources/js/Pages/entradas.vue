@@ -240,7 +240,6 @@
                         </nav>
                     </div>
                 </section>
-
             </section>
         </Layout>
     </section>
@@ -282,6 +281,7 @@ export default {
             filtrosciudad: [],
             filtrosmusica: [],
             filtrostematica: [],
+            reservas: [],
             ciudades: {
                 almeria: false,
                 granada: false,
@@ -314,15 +314,21 @@ export default {
         },
         // Funcion para realizar una reserva
         enviar(id_ent) {
-            const id = id_ent
-            axios.post('/hacerreserva', {
-                'id_entrada': id
-            }).then(response => {
-                // console.log(response);
-                this.showAlert()
-            }).catch(error => {
-                // console.log(error);
-            });
+            if (this.reservas.includes(id_ent)) {
+                this.showAlertContiene()
+            } else {
+                const id = id_ent
+                axios.post('/hacerreserva', {
+                    'id_entrada': id
+                }).then(response => {
+                    // console.log(response);
+                    this.showAlert()
+                    this.reservas.push(id_ent)
+                }).catch(error => {
+                    // console.log(error);
+                });
+            }
+
         },
         // Funciones con los alert que se muestran al realizar alguna accion
 
@@ -331,6 +337,14 @@ export default {
                 title: 'Reserva Realizada!',
                 text: 'Puedes visualizar la reserva en MIS RESERVAS.',
                 icon: 'success',
+                confirmButtonColor: '#1a202c'
+            });
+        },
+        showAlertContiene() {
+            Swal.fire({
+                title: 'Entrada ya reservada!',
+                text: 'No se ha realizado la reserva debido a que ya se encontraba reservada.',
+                icon: 'error',
                 confirmButtonColor: '#1a202c'
             });
         },
@@ -444,6 +458,14 @@ export default {
             .catch(error => {
                 // console.log(error);
             });
+        axios.get('/reservasusuario')
+            .then(response => {
+                this.reservas = response.data;
+            })
+            .catch(error => {
+                // console.log(error);
+            });
+
     },
     computed: {
         // Paginacion

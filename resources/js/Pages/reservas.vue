@@ -7,7 +7,7 @@
             <div class=" min-[450px]:grid place-items-center border-t-black">
                 <div class=" flex flex-wrap justify-center min-[1400px]:grid min-[1400px]:grid-cols-4">
                     <div v-for="entrada in  orderByDate(entradas)" :key="entrada.id"
-                        class="bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg  m-7  max-[450px]:scale-75">
+                        class="bg-white/90 max-w-sm rounded-t-xl overflow-hidden shadow-lg  m-7">
                         <img v-bind:src="'https://pipartytime.com/storage/fiestas/' + entrada.foto"
                             class="mb-4 w-full h-80 object-cover" alt="">
                         <h1 class="text-lg text-center text-pink-600">{{ entrada.nombreempresa }} -> {{

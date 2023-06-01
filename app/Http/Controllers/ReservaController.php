@@ -135,4 +135,16 @@ class ReservaController extends Controller
         $entrada->aforo = ($entrada->aforo + 1);
         $entrada->save();
     }
+
+    // Devuelven las ids de las entradas a las cuales pertenecen las reservas.
+    public function idsreservas(){
+        // $id = Auth::id();
+        $reservas = Reserva::where('id_cliente', Auth::id())->get();
+
+        $id_entradas = []; 
+        foreach ($reservas as $reserva){
+            array_push($id_entradas,$reserva->id_entrada);
+        }
+        return $id_entradas;
+    }
 }

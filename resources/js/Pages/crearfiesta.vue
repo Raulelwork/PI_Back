@@ -82,7 +82,6 @@ export default {
             id_musica: '',
             id_empresa: '',
             foto: null,
-
         };
     },
     // Funciones para mostrar los datos
@@ -116,8 +115,13 @@ export default {
         },
         // Funcion para enviar y crear la fiesta ya validada
         enviar() {
+            const fechaActual = new Date();
+            fechaActual.setHours(1, 0, 0, 0); // Establecer la hora a las 1 a.m.
+
+            const fechaActualISO = fechaActual.toISOString().split('T')[0];
             const formData = new FormData();
-            if (this.foto != null && this.fecha != '' && this.id_tematica != '' && this.id_musica != '' && this.id_empresa != '') {
+            
+            if (this.foto != null && this.fecha != '' && this.fecha > fechaActualISO && this.id_tematica != '' && this.id_musica != '' && this.id_empresa != '') {
                 formData.append('foto', this.foto);
                 formData.append('fecha', this.fecha);
                 formData.append('id_tematica', this.id_tematica);
