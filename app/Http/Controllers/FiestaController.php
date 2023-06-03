@@ -90,12 +90,12 @@ class FiestaController extends Controller
     {
         $id = Auth::id();
         $reservas = Reserva::where('id_cliente', $id)->get();
-        $fiestas =  Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '=', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entrada'])->get();
+        $fiestas =  Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '=', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entradareserva'])->get();
         $entradasFiltradas = [];
 
 
         foreach ($fiestas as $fiesta) {
-            foreach ($fiesta->entrada as $entrada) {
+            foreach ($fiesta->entradareserva as $entrada) {
                 foreach ($reservas as $reserva) {
                     if ($entrada->id == $reserva->id_entrada) {
                         $entrada->setAttribute('nombreempresa', $fiesta->empresa->nombre);

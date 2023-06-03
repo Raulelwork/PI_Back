@@ -23,6 +23,12 @@ class Fiesta extends Model
     public function entrada(){
         return $this->hasMany(Entrada::class, 'id_fiesta','id')->where('aforo','>',0);
     }
+    // Se utiliza para mostrar las entradas independientemente del aforo para la seccion de reservas
+    public function entradareserva(){
+        return $this->hasMany(Entrada::class, 'id_fiesta','id');
+    }
+
+
     public function adentrada(){
         return $this->hasMany(Entrada::class, 'id_fiesta','id');
     }

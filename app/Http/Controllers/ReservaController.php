@@ -136,7 +136,7 @@ class ReservaController extends Controller
         $entrada->save();
     }
 
-    // Devuelven las ids de las entradas a las cuales pertenecen las reservas.
+    // Devuelven las ids de las entradas a las cuales pertenecen las reservas para comprobar si puede realizar las reservas en Entradas y en Perfil.
     public function idsreservas(){
         // $id = Auth::id();
         $reservas = Reserva::where('id_cliente', Auth::id())->get();
