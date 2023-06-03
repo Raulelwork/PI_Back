@@ -11,11 +11,11 @@
                         LOCALES DESTACADOS
                     </h1>
                     <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
-                        delay: 3000,
-                        disableOnInteraction: false,
-                    }" :pagination="{
-    clickable: true,
-}" :navigation="false" :modules="modules" class="mySwiper">
+                            delay: 3000,
+                            disableOnInteraction: false,
+                        }" :pagination="{
+            clickable: true,
+        }" :navigation="false" :modules="modules" class="mySwiper">
                         <swiper-slide class="mySwiper" v-for="empresa in empresas" :key="empresa.id">
                             <nav-link :href="'perfil/' + empresa.id">
                                 <div
@@ -200,9 +200,9 @@
                                         <nav-link class="linkEntrada" href="/login">Inicia Sesion</nav-link> para reservar
                                     </p>
                                     <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
-                                        delay: 4500,
-                                        disableOnInteraction: false,
-                                    }" :pagination="false" :navigation="false" :modules="modules"
+                                            delay: 4500,
+                                            disableOnInteraction: false,
+                                        }" :pagination="false" :navigation="false" :modules="modules"
                                         v-else-if="fiesta.entrada.length > 0">
 
                                         <swiper-slide v-for="e in fiesta.entrada" class="mySwiper swiperEntrada"
