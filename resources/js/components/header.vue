@@ -105,6 +105,7 @@
                                 </template>
 
                                 <template #content>
+                                    <DropdownLink :href="route('profile.edit')"> Perfil </DropdownLink>
                                     <DropdownLink :href="route('logout')" method="post" as="button">
                                         Cerrar Sesion
                                     </DropdownLink>
