@@ -103,6 +103,7 @@ class ReservaController extends Controller
             foreach($reservas as $reserva){
                 $usuario = User::find($reserva->id_cliente);
                 $reserva->setAttribute('nombre',$usuario->nombre);
+                $reserva->setAttribute('dni',$usuario->dni);
                 $reserva->setAttribute('apellidos',$usuario->apellidos);
                 $reserva->setAttribute('email',$usuario->email);
                 $reserva->setAttribute('telefono',$usuario->telefono);    
@@ -110,7 +111,6 @@ class ReservaController extends Controller
                 array_push($totalReservas,$reserva);
 
             }
-
         }
 
         return Inertia::render('listadoreservas', [

@@ -147,7 +147,6 @@
                     </ul>
                 </nav>
             </div>
-            <button class="text-white" @click="descargarPDF">Descargar PDF</button>
 
         </Layout>
     </section>
@@ -200,20 +199,7 @@ export default {
             });
     },
     methods: {
-        descargarPDF() {
-            axios.get('/pdfreserva/44', { responseType: 'blob' })
-                .then(response => {
-                    const url = window.URL.createObjectURL(new Blob([response.data]));
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.setAttribute('download', 'reservaPartyTime.pdf');
-                    document.body.appendChild(link);
-                    link.click();
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        },
+
         // Paginacion
         previousPageEmpresa() {
             if (this.currentPageEmpresa > 1) {

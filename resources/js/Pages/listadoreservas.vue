@@ -16,6 +16,7 @@
                         <tr
                             class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
                             <td class="th">Tipo Entrada</td>
+                            <td class="th">DNI</td>
                             <td class="th">Nombre</td>
                             <td class="th">Apellidos</td>
                             <td class="th">Telefono</td>
@@ -27,6 +28,7 @@
                         v-for="(reserva, index) in paginatedReservas" :key="reserva.nombre">
                         <tr>
                             <td class="td"><span class="mobile">Tipo</span> {{ reserva.tipo_entrada }}</td>
+                            <td class="td"><span class="mobile">DNI</span> {{ reserva.dni }}</td>
                             <td class="td"><span class="mobile">Nombre</span> {{ reserva.nombre }}</td>
                             <td class="td"><span class="mobile">Apellidos</span> {{ reserva.apellidos }}</td>
                             <td class="td"><span class="mobile">Telefono</span> {{ reserva.telefono }}</td>

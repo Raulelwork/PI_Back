@@ -31,6 +31,10 @@
                                 class="  rounded-md transition duration-300 hover:scale-125">
                                 <img src="../../img/icon/no.png" class="w-12  m-4" alt="Cancelar">
                             </button>
+                            <button @click="descargarPDF(entrada.idreserva)"
+                                class="  rounded-md transition duration-300 hover:scale-125">
+                                <img src="../../img/icon/descargar.png" class="w-12  m-4" alt="Cancelar">
+                            </button>
                         </div>
 
                     </div>
@@ -68,7 +72,20 @@ export default {
     },
     methods: {
         // Funciones con los alert que se muestran al realizar alguna accion
-
+        descargarPDF(id_reserva) {
+            axios.get('/pdfreserva/'+id_reserva, { responseType: 'blob' })
+                .then(response => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'reservaPartyTime.pdf');
+                    document.body.appendChild(link);
+                    link.click();
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
         showAlert() {
             Swal.fire({
                 title: 'Reserva Eliminada!',
