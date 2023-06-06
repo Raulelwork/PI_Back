@@ -9,7 +9,7 @@ class Fiesta extends Model
 {
     public $timestamps = false;
     use HasFactory;
-    protected $fillable = ['id_tematica', 'id_musica', 'id_empresa', 'fecha','foto'];
+    protected $fillable = ['id_tematica', 'id_musica', 'id_empresa', 'fecha','foto','eliminado'];
 
     public function empresa(){
         return $this->hasOne(Empresa::class, 'id', 'id_empresa');

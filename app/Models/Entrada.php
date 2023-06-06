@@ -9,5 +9,5 @@ class Entrada extends Model
 {
     public $timestamps = false;
     use HasFactory;
-    protected $fillable = ['id_fiesta', 'precio', 'consumiciones', 'tipo', 'eliminado'];
+    protected $fillable = ['id_fiesta', 'precio', 'consumiciones', 'tipo', 'eliminado','aforo','aforoinicial'];
 }

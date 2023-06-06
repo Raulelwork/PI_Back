@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TematicaController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\PDFController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -151,6 +152,9 @@ Route::post('/eliminarcomentario',[ComentarioController::class,'eliminar']);
 Route::post('/eliminarempresa',[EmpresaController::class,'eliminar']);
 
 
+// pdf
+
+Route::get('/pdfreserva/{id_reserva}', [PDFController::class,'pdfreserva']);
 
 
 

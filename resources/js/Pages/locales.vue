@@ -114,8 +114,9 @@
                 </div>
             </div>
             <div class=" min-[450px]:grid place-items-center">
-                <p v-if="empresasFiltradas.length == 0" class="text-white text-center text-xl p-4 mx-4">No hay locales en este lugar.
-                        Intentelo de nuevo mas tarde...</p>
+                <p v-if="empresasFiltradas.length == 0" class="text-white text-center text-xl p-4 mx-4">No hay locales en
+                    este lugar.
+                    Intentelo de nuevo mas tarde...</p>
                 <div class=" flex flex-wrap justify-center min-[1400px]:grid min-[1400px]:grid-cols-4">
                     <div v-for="empresa in paginatedEmpresas" :key="empresa.id">
                         <nav-link :href="'perfil/' + empresa.id" class="no-underline">
@@ -146,6 +147,8 @@
                     </ul>
                 </nav>
             </div>
+            <button class="text-white" @click="descargarPDF">Descargar PDF</button>
+
         </Layout>
     </section>
 </template>
@@ -197,6 +200,20 @@ export default {
             });
     },
     methods: {
+        descargarPDF() {
+            axios.get('/pdfreserva/44', { responseType: 'blob' })
+                .then(response => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'reservaPartyTime.pdf');
+                    document.body.appendChild(link);
+                    link.click();
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
         // Paginacion
         previousPageEmpresa() {
             if (this.currentPageEmpresa > 1) {
@@ -271,6 +288,7 @@ export default {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
 .animated-name {
     animation: colorAnimation 10s infinite;
 }
@@ -287,6 +305,6 @@ export default {
     100% {
         color: rgb(255, 129, 192);
     }
-    }
+}
 </style>
 

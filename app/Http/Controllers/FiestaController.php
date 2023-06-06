@@ -112,6 +112,28 @@ class FiestaController extends Controller
         return $entradasFiltradas;
     }
 
+    public static function pdfreserva($id_reserva)
+    // Se devuelven el contenido de la reserva lal cual queremos imprimir en pdf.
+    {
+        $reserva = Reserva::find($id_reserva);
+        $fiestas =  Fiesta::where('fecha', '>', now()->format('Y-m-d'))->where('eliminado', '=', 0)->with(['Empresa', 'Musica', 'Tematica', 'Entradareserva'])->get();
+
+
+        foreach ($fiestas as $fiesta) {
+            foreach ($fiesta->entradareserva as $entrada) {
+                if ($entrada->id == $reserva->id_entrada) {
+
+                    $entrada->setAttribute('nombreempresa', $fiesta->empresa->nombre);
+                    $entrada->setAttribute('fecha', $fiesta->fecha);
+                    $entrada->setAttribute('musica', $fiesta->musica->nombre);
+                    $entrada->setAttribute('tematica', $fiesta->tematica->nombre);
+                    $entrada->setAttribute('id_cliente', $reserva->id_cliente);
+                    return $entrada;
+                }
+            }
+        }
+    }
+
     /**
      *.Funcion para eliminar una fiesta
      */

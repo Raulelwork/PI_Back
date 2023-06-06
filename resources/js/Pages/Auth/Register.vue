@@ -11,6 +11,7 @@ const form = useForm({
     apellidos: '',
     email: '',
     password: '',
+    dni: '',
     telefono: '',
     tipo: 'Cliente',
     password_confirmation: '',
@@ -56,7 +57,14 @@ const submit = () => {
 
                 <InputError class="mt-2" :message="form.errors.apellidos" />
             </div>
+            <div class="mt-4">
+                <InputLabel for="dni" value="DNI" />
 
+                <TextInput id="dni" type="text" class="mt-1 block w-full" v-model="form.dni" required
+                    autocomplete="new-dni" />
+
+                <InputError class="mt-2" :message="form.errors.dni" />
+            </div>
             <div class="mt-4">
                 <InputLabel for="email" value="Email" />
 

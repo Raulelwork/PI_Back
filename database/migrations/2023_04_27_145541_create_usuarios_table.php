@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre',255);
             $table->string('apellidos', 255);
             $table->string('email')->unique();
+            $table->string('dni')->unique();
             $table->timestamp('verificar_email')->nullable();
             $table->string('password', 255);
             $table->rememberToken();
