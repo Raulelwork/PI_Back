@@ -120,38 +120,32 @@ export default {
 
             const fechaActualISO = fechaActual.toISOString().split('T')[0];
             const formData = new FormData();
-
-            if (this.foto != null && this.fecha != '' && this.id_tematica != '' && this.id_musica != '' && this.id_empresa != '') {
-                if (this.fecha > fechaActualISO) {
-                    formData.append('foto', this.foto);
-                    formData.append('fecha', this.fecha);
-                    formData.append('id_tematica', this.id_tematica);
-                    formData.append('id_musica', this.id_musica);
-                    formData.append('id_empresa', this.id_empresa);
-
+            
+            if (this.foto != null && this.fecha != '' && this.fecha > fechaActualISO && this.id_tematica != '' && this.id_musica != '' && this.id_empresa != '') {
+                formData.append('foto', this.foto);
+                formData.append('fecha', this.fecha);
+                formData.append('id_tematica', this.id_tematica);
+                formData.append('id_musica', this.id_musica);
+                formData.append('id_empresa', this.id_empresa);
 
 
-                    axios.post('/crearfiestas', formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    }).then(response => {
-                        // console.log(response);
-                        this.showAlert()
-                        this.foto = null
-                        this.fecha = ''
-                        this.id_tematica = ''
-                        this.id_musica = ''
-                        this.id_empresa = ''
-                    }).catch(error => {
-                        // console.log(error);
-                        this.showAlertError()
-                    });
-                }else{
-                    this.showAlertFecha()
 
-                }
-
+                axios.post('/crearfiestas', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(response => {
+                    // console.log(response);
+                    this.showAlert()
+                    this.foto = null
+                    this.fecha = ''
+                    this.id_tematica = ''
+                    this.id_musica = ''
+                    this.id_empresa = ''
+                }).catch(error => {
+                    // console.log(error);
+                    this.showAlertError()
+                });
             } else {
                 this.showAlertValidacion()
             }
@@ -178,14 +172,6 @@ export default {
             Swal.fire({
                 title: 'Error de Validacion',
                 text: 'No se permiten campos vacios o incompletos!',
-                icon: 'error',
-                confirmButtonColor: '#1a202c'
-            });
-        },
-        showAlertFecha() {
-            Swal.fire({
-                title: 'Error de Fecha',
-                text: 'La fecha debe de ser posterior o igual a la actual.',
                 icon: 'error',
                 confirmButtonColor: '#1a202c'
             });
