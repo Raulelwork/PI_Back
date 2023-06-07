@@ -2,8 +2,14 @@
 <template>
     <section class="fondoreserva">
         <Layout>
-            <h1 class="text-3xl text-center text-white my-10">MIS RESERVAS</h1>
-
+            <h1 class="text-3xl text-center text-white mt-10 mb-4">MIS RESERVAS</h1>
+            <div class="text-center text-gray-400">
+                <p class="mb-1"> ¡Aviso!</p>
+                <p class="w-minh">
+                    Para comprobar una reserva es necesario tenerla
+                     descargada en PDF a la hora de acceder al local
+                </p>
+            </div>
             <div class=" min-[450px]:grid place-items-center border-t-black">
                 <div class=" flex flex-wrap justify-center min-[1400px]:grid min-[1400px]:grid-cols-4">
                     <div v-for="entrada in  orderByDate(entradas)" :key="entrada.id"

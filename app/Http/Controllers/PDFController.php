@@ -102,15 +102,16 @@ class PDFController extends Controller
         </table>
         </body>
         </html>';
-
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml($html);
-        $dompdf->render();
-        $pdfContent = $dompdf->output();
-
-        return new Response($pdfContent, 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'attachment; filename="reservaPartyTime.pdf"'
-        ]);
+        if ($reserva->id_cliente == Auth::id()){
+            $dompdf = new Dompdf();
+            $dompdf->loadHtml($html);
+            $dompdf->render();
+            $pdfContent = $dompdf->output();
+    
+            return new Response($pdfContent, 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="reservaPartyTime.pdf"'
+            ]);
+        }
     }
 }

@@ -29,9 +29,11 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+
+
     public function store(Request $request): RedirectResponse
     {
-        
+
         // $request->validate([
         //     'nombre' => 'required|string|max:255',
         //     'apellidos' => 'required|string|max:255',
@@ -39,14 +41,16 @@ class RegisteredUserController extends Controller
         //     'email' => 'required|string|email|max:255|unique:'.User::class,
         //     'password' => ['required', 'confirmed', Rules\Password::defaults()],
         // ]);
+
         $request->validate([
             'nombre' => 'required|string|max:40|regex:/[A-Za-z]+$/',
             'apellidos' => 'required|string|max:255|regex:/[A-Za-z]+$/',
             'dni' => 'required|min:9|max:9|regex:/^[0-9]{8}[A-Za-z]$/',
             'telefono' => 'required|max:9|min:9',
-            'email' => 'required|string|email|max:255|unique:'.User::class,
+            'email' => 'required|string|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+        
         $user = User::create([
             'tipo' => $request->tipo,
             'nombre' => $request->nombre,
