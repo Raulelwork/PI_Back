@@ -17,7 +17,7 @@
                             <br>
                             <input
                                 class=" w-48 h-8 rounded-md  text-gray-300 bg-gray-600 text-center placeholder:text-gray-400 hover:scale-105 duration-200"
-                                type="text" v-model="cif" placeholder="X 00000000">
+                                type="text" v-model="cif" placeholder="X00000000">
                         </div>
                         <div class="mt-4">
                             <label for="ubicacion">Ubicacion</label>
